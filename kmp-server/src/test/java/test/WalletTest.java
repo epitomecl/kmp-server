@@ -50,9 +50,9 @@ public class WalletTest {
     private final String hdWalletBchFileName = HomeConfigurator.getTmpDir() + "/hdWalletBch.json";
     private final String hdWalletEthFileName = HomeConfigurator.getTmpDir() + "/hdWalletEth.json";
 
-    private walletkey keyBtc;
-    private walletkey keyBch;
-    private walletkey keyEth;
+    private static walletkey keyBtc;
+    private static walletkey keyBch;
+    private static walletkey keyEth;
 
     @BeforeClass
     public static void beforeClass() {
@@ -66,11 +66,12 @@ public class WalletTest {
     }
 
     /**
-     * 1 테스트 준비
+     * 1 테스트 준비(사전에 1회 수동 생성후 json으로 저장. 테스트시 로드)
      * 1.1 테스트넷 비트코인 지갑A 생성 / 백업 (최초 1회, 수동)
      * 1.2 테스트용 지갑A에 코인 전송 (수시로, 틈날때)
      * <p>
      * 2. 테스팅 - 자동 (매번 실행)
+     * 2.0 지갑A json 으로부터 로드.
      * 2.1 지갑B 생성
      * 2.2 지갑B 백업
      * 2.3 지갑A → 지갑B에 코인 전송 (
@@ -101,11 +102,11 @@ public class WalletTest {
 
         cryptoType = CryptoType.BITCOIN;
         HDWallet hdWallet_bitcoin = create(CryptoType.BITCOIN);
-        getInfo(label, cryptoType, hdWallet_ethereum);
+        getInfo(label, cryptoType, hdWallet_bitcoin);
 
         cryptoType = CryptoType.BITCOIN_CASH;
         HDWallet hdWallet_bitcoin_cash = create(CryptoType.BITCOIN_CASH);
-        getInfo(label, cryptoType, hdWallet_ethereum);
+        getInfo(label, cryptoType, hdWallet_bitcoin_cash);
     }
 
     private NetworkParameters getParams(CryptoType cryptoType) {
@@ -146,12 +147,13 @@ public class WalletTest {
         String changeAddr = "";
         switch (coinType) {
             case BITCOIN:
-                receiveAddr = wallet.getAccounts().get(0).getReceive().getAddressAt(0).getAddressBase58();
-                changeAddr = wallet.getAccounts().get(0).getChange().getAddressAt(0).getAddressBase58();
-                break;
             case BITCOIN_CASH:
                 receiveAddr = wallet.getAccounts().get(0).getReceive().getAddressAt(0).getAddressBase58();
                 changeAddr = wallet.getAccounts().get(0).getChange().getAddressAt(0).getAddressBase58();
+
+                //address length check
+                Assert.assertEquals(receiveAddr.length(), 34);
+                Assert.assertEquals(changeAddr.length(), 34);
                 break;
             case ETHEREUM:
                 //Create etherium wallet code from <== EthereumWalletTest.java
@@ -159,7 +161,7 @@ public class WalletTest {
 
                 //etherium wallet has single account and one address
                 receiveAddr = subject.getAccount().getAddress();
-                changeAddr = subject.getAccount().getAddress();
+                Assert.assertEquals(receiveAddr.length(), 42);
                 break;
         }
     }
