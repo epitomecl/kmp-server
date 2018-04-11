@@ -9,7 +9,7 @@ import java.lang.invoke.MethodHandles;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class RpcTest {
+public class BitcoinJSONRPCClientTest {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     private static final String host = "epitome.iptime.org";
