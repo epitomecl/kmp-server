@@ -33,7 +33,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateWalletTest {
+public class WalletTest {
 
     class walletkey {
         String seed;
