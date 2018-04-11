@@ -5,7 +5,6 @@ import com.epitomecl.kmp.main.KmpApp;
 import com.epitomecl.kmp.wallet.CryptoType;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import info.blockchain.wallet.api.PersistentUrls;
 import info.blockchain.wallet.bip44.HDAccount;
 import info.blockchain.wallet.bip44.HDWallet;
 import info.blockchain.wallet.bip44.HDWalletFactory;
@@ -22,7 +21,6 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.web3j.crypto.WalletFile;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,6 +66,21 @@ public class WalletTest {
         kmpApp.stop();
     }
 
+    /**
+     * 1 테스트 준비
+     * 1.1 테스트넷 비트코인 지갑A 생성 / 백업 (최초 1회, 수동)
+     * 1.2 테스트용 지갑A에 코인 전송 (수시로, 틈날때)
+     * <p>
+     * 2. 테스팅 - 자동 (매번 실행)
+     * 2.1 지갑B 생성
+     * 2.2 지갑B 백업
+     * 2.3 지갑A → 지갑B에 코인 전송 (
+     * 2.4 지갑B 밸런스 확인
+     * 2.5 지갑B 삭제
+     * 2.6 지갑B 복구
+     * 2.7 지갑B → 지갑A에 코인 전송
+     * 2.8 지갑B 삭제
+     */
     @Test
     public void test() {
         test_create();
@@ -83,21 +96,20 @@ public class WalletTest {
 
     private void test_create() {
         CryptoType cryptoType = CryptoType.ETHEREUM;
-        HDWallet hdWallet_ethereum =  create(cryptoType);
+        HDWallet hdWallet_ethereum = create(cryptoType);
         String label = "";
         getInfo(label, cryptoType, hdWallet_ethereum);
 
         cryptoType = CryptoType.BITCOIN;
-        HDWallet hdWallet_bitcoin =  create(CryptoType.BITCOIN);
+        HDWallet hdWallet_bitcoin = create(CryptoType.BITCOIN);
         getInfo(label, cryptoType, hdWallet_ethereum);
 
         cryptoType = CryptoType.BITCOIN_CASH;
-        HDWallet hdWallet_bitcoin_cash =  create(CryptoType.BITCOIN_CASH);
+        HDWallet hdWallet_bitcoin_cash = create(CryptoType.BITCOIN_CASH);
         getInfo(label, cryptoType, hdWallet_ethereum);
     }
 
-    private NetworkParameters getParams(CryptoType cryptoType)
-    {
+    private NetworkParameters getParams(CryptoType cryptoType) {
         NetworkParameters param = null;
         switch (cryptoType) {
             case ETHEREUM:
@@ -155,20 +167,19 @@ public class WalletTest {
 
     private void test_backup() {
         CryptoType cryptoType = CryptoType.ETHEREUM;
-        HDWallet hdWallet_ethereum =  create(cryptoType);
+        HDWallet hdWallet_ethereum = create(cryptoType);
         doBackup(cryptoType, hdWallet_ethereum, hdWalletEthFileName);
 
         cryptoType = CryptoType.BITCOIN;
-        HDWallet hdWallet_bitcoin =  create(CryptoType.BITCOIN);
+        HDWallet hdWallet_bitcoin = create(CryptoType.BITCOIN);
         doBackup(cryptoType, hdWallet_bitcoin, hdWalletBtcFileName);
 
         cryptoType = CryptoType.BITCOIN_CASH;
-        HDWallet hdWallet_bitcoin_cash =  create(CryptoType.BITCOIN_CASH);
+        HDWallet hdWallet_bitcoin_cash = create(CryptoType.BITCOIN_CASH);
         doBackup(cryptoType, hdWallet_bitcoin_cash, hdWalletBchFileName);
     }
 
-    private void doBackup(CryptoType cryptoType, HDWallet wallet, String filePath)
-    {
+    private void doBackup(CryptoType cryptoType, HDWallet wallet, String filePath) {
         info.blockchain.wallet.payload.data.HDWallet dataHDWallet = new info.blockchain.wallet.payload.data.HDWallet();
 
         String seedHex = wallet.getSeedHex();
@@ -194,8 +205,7 @@ public class WalletTest {
 
             accountNumber++;
 
-            switch (cryptoType)
-            {
+            switch (cryptoType) {
                 case ETHEREUM:
                     keyEth = new walletkey();
                     keyEth.seed = seedHex;
@@ -242,14 +252,13 @@ public class WalletTest {
         HDWallet hdWallet_ethereum = doRecovery(cryptoType, hdWalletEthFileName);
 
         cryptoType = CryptoType.BITCOIN;
-        HDWallet hdWallet_bitcoin =  doRecovery(cryptoType, hdWalletBtcFileName);
+        HDWallet hdWallet_bitcoin = doRecovery(cryptoType, hdWalletBtcFileName);
 
         cryptoType = CryptoType.BITCOIN_CASH;
-        HDWallet hdWallet_bitcoin_cash =  doRecovery(cryptoType, hdWalletBchFileName);
+        HDWallet hdWallet_bitcoin_cash = doRecovery(cryptoType, hdWalletBchFileName);
     }
 
-    private HDWallet doRecovery(CryptoType cryptoType, String filePath)
-    {
+    private HDWallet doRecovery(CryptoType cryptoType, String filePath) {
         NetworkParameters param = getParams(cryptoType);
         HDWallet wallet = null;
 
@@ -280,8 +289,7 @@ public class WalletTest {
             String xpriv = wallet.getAccounts().get(0).getXPriv();
             String xpub = wallet.getAccounts().get(0).getXpub();
 
-            switch (cryptoType)
-            {
+            switch (cryptoType) {
                 case ETHEREUM:
                     Assert.assertEquals(keyEth.seed, seedHex);
                     Assert.assertEquals(keyEth.xpriv, xpriv);
