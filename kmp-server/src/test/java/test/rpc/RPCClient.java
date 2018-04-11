@@ -1,4 +1,4 @@
-package test;
+package test.rpc;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

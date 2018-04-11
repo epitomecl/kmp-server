@@ -1,4 +1,4 @@
-package test;
+package test.rpc;
 
 import org.json.simple.JSONObject;
 import org.junit.Test;
