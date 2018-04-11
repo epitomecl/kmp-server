@@ -17,10 +17,8 @@ import org.bitcoinj.core.NetworkParameters;
 import org.bitcoinj.crypto.MnemonicException;
 import org.bitcoinj.params.BitcoinCashMainNetParams;
 import org.bitcoinj.params.BitcoinMainNetParams;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.runners.MethodSorters;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +29,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WalletTest {
 
     class walletkey {
@@ -81,20 +80,20 @@ public class WalletTest {
      * 2.7 지갑B → 지갑A에 코인 전송
      * 2.8 지갑B 삭제
      */
-    @Test
     public void test() {
-        test_create();
+        test_01_create();
 
-        test_backup();
+        test_02_backup();
 
-        test_recovery();
+        test_03_recovery();
 
 //        test_balance();
 //
 //        test_transfer();
     }
 
-    private void test_create() {
+    @Test
+    public void test_01_create() {
         CryptoType cryptoType = CryptoType.ETHEREUM;
         HDWallet hdWallet_ethereum = create(cryptoType);
         String label = "";
@@ -165,7 +164,8 @@ public class WalletTest {
         }
     }
 
-    private void test_backup() {
+    @Test
+    public void test_02_backup() {
         CryptoType cryptoType = CryptoType.ETHEREUM;
         HDWallet hdWallet_ethereum = create(cryptoType);
         doBackup(cryptoType, hdWallet_ethereum, hdWalletEthFileName);
@@ -247,7 +247,8 @@ public class WalletTest {
         }
     }
 
-    private void test_recovery() {
+    @Test
+    public void test_03_recovery() {
         CryptoType cryptoType = CryptoType.ETHEREUM;
         HDWallet hdWallet_ethereum = doRecovery(cryptoType, hdWalletEthFileName);
 
