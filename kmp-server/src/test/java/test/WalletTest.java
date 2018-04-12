@@ -34,15 +34,15 @@ import java.util.List;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WalletTest {
+
+    //region private static final part
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    class WalletKey {
+    private static final class WalletKey {
         String seed;
         String xpriv;
         String xpub;
     }
-
-    private static KmpApp kmpApp;
 
     private static final int DEFAULT_MNEMONIC_LENGTH = 12;
     private static final int DEFAULT_NEW_WALLET_SIZE = 1;
@@ -50,10 +50,14 @@ public class WalletTest {
 
     private static final String defaultAccountName = "My wallet";
 
-    private final String hdWalletBtcFileName = HomeConfigurator.getTmpDir() + "/hdWalletBtc.json";
-    private final String hdWalletBchFileName = HomeConfigurator.getTmpDir() + "/hdWalletBch.json";
-    private final String hdWalletEthFileName = HomeConfigurator.getTmpDir() + "/hdWalletEth.json";
+    private static final String hdWalletBtcFileName = HomeConfigurator.getTmpDir() + "/hdWalletBtc.json";
+    private static final String hdWalletBchFileName = HomeConfigurator.getTmpDir() + "/hdWalletBch.json";
+    private static final String hdWalletEthFileName = HomeConfigurator.getTmpDir() + "/hdWalletEth.json";
+    //endregion
 
+
+    //region private/public static part
+    private static KmpApp kmpApp;
     private static WalletKey keyBtc;
     private static WalletKey keyBch;
     private static WalletKey keyEth;
@@ -68,6 +72,10 @@ public class WalletTest {
     public static void afterClass() {
         kmpApp.stop();
     }
+    //endregion
+
+
+    //region public part
 
     /**
      * 1 테스트 준비(사전에 1회 수동 생성후 json으로 저장. 테스트시 로드)
@@ -139,7 +147,10 @@ public class WalletTest {
         cryptoType = CryptoType.BITCOIN_CASH;
         HDWallet hdWallet_bitcoin_cash = doRecovery(cryptoType, hdWalletBchFileName);
     }
+    //endregion
 
+
+    //region private part
     private NetworkParameters getParams(CryptoType cryptoType) {
         NetworkParameters param = null;
         switch (cryptoType) {
@@ -183,8 +194,8 @@ public class WalletTest {
                 changeAddr = wallet.getAccounts().get(0).getChange().getAddressAt(0).getAddressBase58();
 
                 //address length check
-                Assert.assertEquals(receiveAddr.length(), 34);
-                Assert.assertEquals(changeAddr.length(), 34);
+                Assert.assertEquals(receiveAddr, receiveAddr.length(), 34);
+                Assert.assertEquals(changeAddr, changeAddr.length(), 34);
                 break;
             case ETHEREUM:
                 //Create etherium wallet code from <== EthereumWalletTest.java
@@ -320,4 +331,5 @@ public class WalletTest {
 
         return wallet;
     }
+    //endregion
 }
