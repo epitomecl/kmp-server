@@ -3,7 +3,6 @@ package test;
 import com.epitomecl.kmp.common.HomeConfigurator;
 import com.epitomecl.kmp.main.KmpApp;
 import com.epitomecl.kmp.wallet.CryptoType;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import info.blockchain.wallet.bip44.HDAccount;
 import info.blockchain.wallet.bip44.HDWallet;
@@ -13,15 +12,19 @@ import info.blockchain.wallet.exceptions.HDWalletException;
 import info.blockchain.wallet.payload.data.Account;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.bitcoinj.core.NetworkParameters;
 import org.bitcoinj.crypto.MnemonicException;
 import org.bitcoinj.params.BitcoinCashMainNetParams;
 import org.bitcoinj.params.BitcoinMainNetParams;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.invoke.MethodHandles;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -31,8 +34,9 @@ import java.util.List;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WalletTest {
+    private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    class walletkey {
+    class WalletKey {
         String seed;
         String xpriv;
         String xpub;
@@ -50,9 +54,9 @@ public class WalletTest {
     private final String hdWalletBchFileName = HomeConfigurator.getTmpDir() + "/hdWalletBch.json";
     private final String hdWalletEthFileName = HomeConfigurator.getTmpDir() + "/hdWalletEth.json";
 
-    private static walletkey keyBtc;
-    private static walletkey keyBch;
-    private static walletkey keyEth;
+    private static WalletKey keyBtc;
+    private static WalletKey keyBch;
+    private static WalletKey keyEth;
 
     @BeforeClass
     public static void beforeClass() {
@@ -88,9 +92,9 @@ public class WalletTest {
 
         test_03_recovery();
 
-//        test_balance();
+//        test_04_balance();
 //
-//        test_transfer();
+//        test_05_transfer();
     }
 
     @Test
@@ -107,6 +111,33 @@ public class WalletTest {
         cryptoType = CryptoType.BITCOIN_CASH;
         HDWallet hdWallet_bitcoin_cash = create(CryptoType.BITCOIN_CASH);
         getInfo(label, cryptoType, hdWallet_bitcoin_cash);
+    }
+
+    @Test
+    public void test_02_backup() {
+        CryptoType cryptoType = CryptoType.ETHEREUM;
+        HDWallet hdWallet_ethereum = create(cryptoType);
+        doBackup(cryptoType, hdWallet_ethereum, hdWalletEthFileName);
+
+        cryptoType = CryptoType.BITCOIN;
+        HDWallet hdWallet_bitcoin = create(CryptoType.BITCOIN);
+        doBackup(cryptoType, hdWallet_bitcoin, hdWalletBtcFileName);
+
+        cryptoType = CryptoType.BITCOIN_CASH;
+        HDWallet hdWallet_bitcoin_cash = create(CryptoType.BITCOIN_CASH);
+        doBackup(cryptoType, hdWallet_bitcoin_cash, hdWalletBchFileName);
+    }
+
+    @Test
+    public void test_03_recovery() {
+        CryptoType cryptoType = CryptoType.ETHEREUM;
+        HDWallet hdWallet_ethereum = doRecovery(cryptoType, hdWalletEthFileName);
+
+        cryptoType = CryptoType.BITCOIN;
+        HDWallet hdWallet_bitcoin = doRecovery(cryptoType, hdWalletBtcFileName);
+
+        cryptoType = CryptoType.BITCOIN_CASH;
+        HDWallet hdWallet_bitcoin_cash = doRecovery(cryptoType, hdWalletBchFileName);
     }
 
     private NetworkParameters getParams(CryptoType cryptoType) {
@@ -136,13 +167,13 @@ public class WalletTest {
                     .createWallet(param, HDWalletFactory.Language.US,
                             DEFAULT_MNEMONIC_LENGTH, DEFAULT_PASSPHRASE, DEFAULT_NEW_WALLET_SIZE);
         } catch (IOException | MnemonicException.MnemonicLengthException e) {
-            e.printStackTrace();
+            ExceptionUtils.getStackTrace(e);
         }
 
         return wallet;
     }
 
-    public void getInfo(String label, CryptoType coinType, HDWallet wallet) {
+    private void getInfo(String label, CryptoType coinType, HDWallet wallet) {
         String receiveAddr = "";
         String changeAddr = "";
         switch (coinType) {
@@ -164,21 +195,6 @@ public class WalletTest {
                 Assert.assertEquals(receiveAddr.length(), 42);
                 break;
         }
-    }
-
-    @Test
-    public void test_02_backup() {
-        CryptoType cryptoType = CryptoType.ETHEREUM;
-        HDWallet hdWallet_ethereum = create(cryptoType);
-        doBackup(cryptoType, hdWallet_ethereum, hdWalletEthFileName);
-
-        cryptoType = CryptoType.BITCOIN;
-        HDWallet hdWallet_bitcoin = create(CryptoType.BITCOIN);
-        doBackup(cryptoType, hdWallet_bitcoin, hdWalletBtcFileName);
-
-        cryptoType = CryptoType.BITCOIN_CASH;
-        HDWallet hdWallet_bitcoin_cash = create(CryptoType.BITCOIN_CASH);
-        doBackup(cryptoType, hdWallet_bitcoin_cash, hdWalletBchFileName);
     }
 
     private void doBackup(CryptoType cryptoType, HDWallet wallet, String filePath) {
@@ -209,21 +225,21 @@ public class WalletTest {
 
             switch (cryptoType) {
                 case ETHEREUM:
-                    keyEth = new walletkey();
+                    keyEth = new WalletKey();
                     keyEth.seed = seedHex;
                     keyEth.xpriv = xpriv;
                     keyEth.xpub = xpub;
                     break;
 
                 case BITCOIN:
-                    keyBtc = new walletkey();
+                    keyBtc = new WalletKey();
                     keyBtc.seed = seedHex;
                     keyBtc.xpriv = xpriv;
                     keyBtc.xpub = xpub;
                     break;
 
                 case BITCOIN_CASH:
-                    keyBch = new walletkey();
+                    keyBch = new WalletKey();
                     keyBch.seed = seedHex;
                     keyBch.xpriv = xpriv;
                     keyBch.xpub = xpub;
@@ -242,23 +258,9 @@ public class WalletTest {
             String json = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(dataHDWallet);
             Files.write(Paths.get(filePath), json.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
 
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            ExceptionUtils.getStackTrace(e);
         }
-    }
-
-    @Test
-    public void test_03_recovery() {
-        CryptoType cryptoType = CryptoType.ETHEREUM;
-        HDWallet hdWallet_ethereum = doRecovery(cryptoType, hdWalletEthFileName);
-
-        cryptoType = CryptoType.BITCOIN;
-        HDWallet hdWallet_bitcoin = doRecovery(cryptoType, hdWalletBtcFileName);
-
-        cryptoType = CryptoType.BITCOIN_CASH;
-        HDWallet hdWallet_bitcoin_cash = doRecovery(cryptoType, hdWalletBchFileName);
     }
 
     private HDWallet doRecovery(CryptoType cryptoType, String filePath) {
@@ -312,18 +314,8 @@ public class WalletTest {
                     break;
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (HDWalletException e) {
-            e.printStackTrace();
-        } catch (MnemonicException.MnemonicChecksumException e) {
-            e.printStackTrace();
-        } catch (MnemonicException.MnemonicWordException e) {
-            e.printStackTrace();
-        } catch (MnemonicException.MnemonicLengthException e) {
-            e.printStackTrace();
-        } catch (DecoderException e) {
-            e.printStackTrace();
+        } catch (IOException | HDWalletException | MnemonicException.MnemonicChecksumException | MnemonicException.MnemonicWordException | MnemonicException.MnemonicLengthException | DecoderException e) {
+            logger.error(ExceptionUtils.getStackTrace(e));
         }
 
         return wallet;
