@@ -26,6 +26,8 @@
 
         <module>kmp-client</module>
         <module>kmp-server</module>
+
+        <module>waferthin</module>
     </modules>
 
     <dependencyManagement>

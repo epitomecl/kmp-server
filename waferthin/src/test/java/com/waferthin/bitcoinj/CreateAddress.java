@@ -1,9 +1,9 @@
 package com.waferthin.bitcoinj;
 
 import com.epitomecl.kmp.common.HomeConfigurator;
+import org.bitcoinj.core.Address;
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.NetworkParameters;
-import org.bitcoinj.core.Address;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
