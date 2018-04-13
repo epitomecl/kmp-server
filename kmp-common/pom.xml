@@ -2,23 +2,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <dependencies>
-        <dependency>
-            <groupId>info.blockchain</groupId>
-            <artifactId>MyWalletHD</artifactId>
-            <version>6.10.0-rc1</version>
-        </dependency>
-    </dependencies>
-
-    <parent>
-        <groupId>com.epitomecl.kmp</groupId>
-        <artifactId>kmp</artifactId>
-        <version>2.0.0</version>
-    </parent>
-    <artifactId>kmp-common</artifactId>
-    <packaging>jar</packaging>
-
-    <dependencies>
-
 
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -30,8 +13,6 @@
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
         </dependency>
-
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -43,7 +24,30 @@
             <version>1.2.3</version>
         </dependency>
 
+        <dependency>
+            <groupId>info.blockchain</groupId>
+            <artifactId>MyWalletHD</artifactId>
+            <version>6.10.0-rc1</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>RELEASE</version>
+        </dependency>
 
     </dependencies>
+
+    <parent>
+        <groupId>com.epitomecl.kmp</groupId>
+        <artifactId>kmp</artifactId>
+        <version>2.0.0</version>
+    </parent>
+    <artifactId>kmp-common</artifactId>
+    <packaging>jar</packaging>
 
 </project>
