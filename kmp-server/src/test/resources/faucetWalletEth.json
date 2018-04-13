@@ -1,0 +1,14 @@
+{
+  "crypto_type" : "ETHEREUM_TESTNET",
+  "accounts" : [ {
+    "label" : "My ETHEREUM_TESTNET wallet",
+    "archived" : false,
+    "xpriv" : "xprv9yRHTdqthGr7cKUQVzjzTsAz8xwwvk3fnkgMCGk23eZUqQuDLJ4Xgu7HmpFM8rAzac6QFo6tTr5GVogtJ85haCt6ZUQuZWNhMESwMMszzTq",
+    "xpub" : "xpub6CQds9NnXeQQpoYsc2Gzq17igznSLCmX9ybwzf9dbz6TiDEMsqNnEhRmd5mjCSDkf4sQfwXiy6wdyK9AdfYhqJ6jmzS1t8wVEiNDaWct6dq",
+    "address_labels" : [ ]
+  } ],
+  "seed_hex" : "63e9376a910ca2e19d860905cf092377",
+  "passphrase" : "",
+  "mnemonic_verified" : false,
+  "default_account_idx" : 0
+}

@@ -1,0 +1,14 @@
+{
+  "crypto_type" : "BITCOIN_TESTNET",
+  "accounts" : [ {
+    "label" : "My BITCOIN_TESTNET wallet",
+    "archived" : false,
+    "xpriv" : "tprv8gXNt4Nsnp9LHW6zWCxV1Gp53iNquhETHhmVzQeKuhJD8aaFJdXcbNyjbfXneX73sVLtMGk3zJyqx9vap4eeLyB32v8wjRfq8J5uU7YzZsJ",
+    "xpub" : "tpubDDDR2UR7wBq1Ay8nPrd5QgUBcjtn52RMs1NHGvgdKy6by4q1w2MCmsbbmoW8qannPLWmhYx9CrT83UgW2VCadindereM3nom6UsFQCM2vtS",
+    "address_labels" : [ ]
+  } ],
+  "seed_hex" : "6ebb39384fde1fdab50582ef49e5af07",
+  "passphrase" : "",
+  "mnemonic_verified" : false,
+  "default_account_idx" : 0
+}

@@ -2,21 +2,18 @@ package test;
 
 import com.epitomecl.kmp.common.HomeConfigurator;
 import com.epitomecl.kmp.main.KmpApp;
+import com.epitomecl.kmp.wallet.AccountData;
 import com.epitomecl.kmp.wallet.CryptoType;
+import com.epitomecl.kmp.wallet.HDWalletData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import info.blockchain.wallet.bip44.HDAccount;
 import info.blockchain.wallet.bip44.HDWallet;
 import info.blockchain.wallet.bip44.HDWalletFactory;
 import info.blockchain.wallet.ethereum.EthereumWallet;
 import info.blockchain.wallet.exceptions.HDWalletException;
-import info.blockchain.wallet.payload.data.Account;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.io.FileUtils;
-import org.bitcoinj.core.NetworkParameters;
 import org.bitcoinj.crypto.MnemonicException;
-import org.bitcoinj.params.BitcoinCashMainNetParams;
-import org.bitcoinj.params.BitcoinMainNetParams;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
@@ -38,8 +35,6 @@ public class WalletTest {
         String xpub;
     }
 
-    private static KmpApp kmpApp;
-
     private static final int DEFAULT_MNEMONIC_LENGTH = 12;
     private static final int DEFAULT_NEW_WALLET_SIZE = 1;
     private static final String DEFAULT_PASSPHRASE = "";
@@ -56,13 +51,12 @@ public class WalletTest {
 
     @BeforeClass
     public static void beforeClass() {
-        kmpApp = new KmpApp();
-        kmpApp.start(new String[0]);
+        loadFaucetWallts();
     }
 
-    @AfterClass
-    public static void afterClass() {
-        kmpApp.stop();
+    private static void loadFaucetWallts()
+    {
+        //todo. load faucet wallets
     }
 
     /**
@@ -95,51 +89,29 @@ public class WalletTest {
 
     @Test
     public void test_01_create() {
-        CryptoType cryptoType = CryptoType.ETHEREUM;
-        HDWallet hdWallet_ethereum = create(cryptoType);
+        CryptoType cryptoType = CryptoType.ETHEREUM_TESTNET;
+        HDWalletData hdWallet_ethereum = create(cryptoType);
         String label = "";
-        getInfo(label, cryptoType, hdWallet_ethereum);
+        getInfo(label, cryptoType, hdWallet_ethereum.getHDWallet());
 
-        cryptoType = CryptoType.BITCOIN;
-        HDWallet hdWallet_bitcoin = create(CryptoType.BITCOIN);
-        getInfo(label, cryptoType, hdWallet_bitcoin);
+        cryptoType = CryptoType.BITCOIN_TESTNET;
+        HDWalletData hdWallet_bitcoin = create(cryptoType);
+        getInfo(label, cryptoType, hdWallet_bitcoin.getHDWallet());
 
-        cryptoType = CryptoType.BITCOIN_CASH;
-        HDWallet hdWallet_bitcoin_cash = create(CryptoType.BITCOIN_CASH);
-        getInfo(label, cryptoType, hdWallet_bitcoin_cash);
+        cryptoType = CryptoType.BITCOIN_CASH_TESTNET;
+        HDWalletData hdWallet_bitcoin_cash = create(cryptoType);
+        getInfo(label, cryptoType, hdWallet_bitcoin_cash.getHDWallet());
     }
 
-    private NetworkParameters getParams(CryptoType cryptoType) {
-        NetworkParameters param = null;
-        switch (cryptoType) {
-            case ETHEREUM:
-                //Create etherium wallet code from <== EthereumWalletTest.java
-                param = BitcoinMainNetParams.get();
-                break;
-            case BITCOIN:
-                param = BitcoinMainNetParams.get();
-                break;
-            case BITCOIN_CASH:
-                param = BitcoinCashMainNetParams.get();
-                break;
-        }
-
-        return param;
-    }
-
-    private HDWallet create(CryptoType cryptoType) {
-        NetworkParameters param = getParams(cryptoType);
-
-        HDWallet wallet = null;
+    private HDWalletData create(CryptoType cryptoType) {
+        HDWalletData hdWalletData = null;
         try {
-            wallet = HDWalletFactory
-                    .createWallet(param, HDWalletFactory.Language.US,
-                            DEFAULT_MNEMONIC_LENGTH, DEFAULT_PASSPHRASE, DEFAULT_NEW_WALLET_SIZE);
-        } catch (IOException | MnemonicException.MnemonicLengthException e) {
+            hdWalletData = new HDWalletData(cryptoType, String.format("My %s wallet", cryptoType.toString()));
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return wallet;
+        return hdWalletData;
     }
 
     public void getInfo(String label, CryptoType coinType, HDWallet wallet) {
@@ -168,47 +140,40 @@ public class WalletTest {
 
     @Test
     public void test_02_backup() {
-        CryptoType cryptoType = CryptoType.ETHEREUM;
-        HDWallet hdWallet_ethereum = create(cryptoType);
+        CryptoType cryptoType = CryptoType.ETHEREUM_TESTNET;
+        HDWalletData hdWallet_ethereum = create(cryptoType);
         doBackup(cryptoType, hdWallet_ethereum, hdWalletEthFileName);
 
-        cryptoType = CryptoType.BITCOIN;
-        HDWallet hdWallet_bitcoin = create(CryptoType.BITCOIN);
+        cryptoType = CryptoType.BITCOIN_TESTNET;
+        HDWalletData hdWallet_bitcoin = create(cryptoType);
         doBackup(cryptoType, hdWallet_bitcoin, hdWalletBtcFileName);
 
-        cryptoType = CryptoType.BITCOIN_CASH;
-        HDWallet hdWallet_bitcoin_cash = create(CryptoType.BITCOIN_CASH);
+        cryptoType = CryptoType.BITCOIN_CASH_TESTNET;
+        HDWalletData hdWallet_bitcoin_cash = create(cryptoType);
         doBackup(cryptoType, hdWallet_bitcoin_cash, hdWalletBchFileName);
     }
 
-    private void doBackup(CryptoType cryptoType, HDWallet wallet, String filePath) {
-        info.blockchain.wallet.payload.data.HDWallet dataHDWallet = new info.blockchain.wallet.payload.data.HDWallet();
+    private void doBackup(CryptoType cryptoType, HDWalletData walletData, String filePath) {
 
-        String seedHex = wallet.getSeedHex();
+        String seedHex = walletData.getSeedHex();
 
-        List<HDAccount> hdAccounts = wallet.getAccounts();
-        List<Account> accountBodyList = new ArrayList<>();
+        List<AccountData> AccountsData = walletData.getAccounts();
         int accountNumber = 1;
-        for (int i = 0; i < hdAccounts.size(); i++) {
+        for (int i = 0; i < AccountsData.size(); i++) {
 
             String label = defaultAccountName;
             if (accountNumber > 1) {
                 label = defaultAccountName + " " + accountNumber;
             }
 
-            String xpriv = wallet.getAccount(0).getXPriv();
-            String xpub = wallet.getAccount(0).getXpub();
-
-            Account accountBody = new Account();
-            accountBody.setLabel(label);
-            accountBody.setXpriv(xpriv);
-            accountBody.setXpub(xpub);
-            accountBodyList.add(accountBody);
+            String xpriv = AccountsData.get(0).getXpriv();
+            String xpub = AccountsData.get(0).getXpub();
 
             accountNumber++;
 
             switch (cryptoType) {
                 case ETHEREUM:
+                case ETHEREUM_TESTNET:
                     keyEth = new walletkey();
                     keyEth.seed = seedHex;
                     keyEth.xpriv = xpriv;
@@ -216,6 +181,7 @@ public class WalletTest {
                     break;
 
                 case BITCOIN:
+                case BITCOIN_TESTNET:
                     keyBtc = new walletkey();
                     keyBtc.seed = seedHex;
                     keyBtc.xpriv = xpriv;
@@ -223,6 +189,7 @@ public class WalletTest {
                     break;
 
                 case BITCOIN_CASH:
+                case BITCOIN_CASH_TESTNET:
                     keyBch = new walletkey();
                     keyBch.seed = seedHex;
                     keyBch.xpriv = xpriv;
@@ -231,15 +198,9 @@ public class WalletTest {
             }
         }
 
-        dataHDWallet.setSeedHex(seedHex);
-        dataHDWallet.setDefaultAccountIdx(0);
-        dataHDWallet.setMnemonicVerified(false);
-        dataHDWallet.setPassphrase(DEFAULT_PASSPHRASE);
-        dataHDWallet.setAccounts(accountBodyList);
-
         try {
             FileUtils.forceMkdir(new File(HomeConfigurator.getTmpDir()));
-            String json = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(dataHDWallet);
+            String json = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(walletData);
             Files.write(Paths.get(filePath), json.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
 
         } catch (JsonProcessingException e) {
@@ -252,60 +213,64 @@ public class WalletTest {
     @Test
     public void test_03_recovery() {
         CryptoType cryptoType = CryptoType.ETHEREUM;
-        HDWallet hdWallet_ethereum = doRecovery(cryptoType, hdWalletEthFileName);
+        HDWalletData hdWallet_ethereum = doRecovery(hdWalletEthFileName);
 
         cryptoType = CryptoType.BITCOIN;
-        HDWallet hdWallet_bitcoin = doRecovery(cryptoType, hdWalletBtcFileName);
+        HDWalletData hdWallet_bitcoin = doRecovery(hdWalletBtcFileName);
 
         cryptoType = CryptoType.BITCOIN_CASH;
-        HDWallet hdWallet_bitcoin_cash = doRecovery(cryptoType, hdWalletBchFileName);
+        HDWalletData hdWallet_bitcoin_cash = doRecovery(hdWalletBchFileName);
     }
 
-    private HDWallet doRecovery(CryptoType cryptoType, String filePath) {
-        NetworkParameters param = getParams(cryptoType);
-        HDWallet wallet = null;
+    private HDWalletData doRecovery(String filePath) {
+
+        HDWalletData walletData = null;
+
+        HDWallet hdWallet = null;
 
         try {
             String json = String.join(" ", Files.readAllLines(Paths.get(filePath)));
-            info.blockchain.wallet.payload.data.HDWallet dataHDWallet
-                    = info.blockchain.wallet.payload.data.HDWallet.fromJson(json);
+            HDWalletData dataHDWallet = HDWalletData.fromJson(json);
 
             //from code <== instantiateBip44Wallet()
             try {
                 int walletSize = DEFAULT_NEW_WALLET_SIZE;
                 if (dataHDWallet.getAccounts() != null) walletSize = dataHDWallet.getAccounts().size();
-                wallet = HDWalletFactory
-                        .restoreWallet(param, HDWalletFactory.Language.US,
+                hdWallet = HDWalletFactory
+                        .restoreWallet(dataHDWallet.getNetworkParameters(), HDWalletFactory.Language.US,
                                 dataHDWallet.getSeedHex(), dataHDWallet.getPassphrase(), walletSize);
             } catch (Exception e) {
 
                 ArrayList<String> xpubList = new ArrayList<>();
-                for (Account account : dataHDWallet.getAccounts()) {
+                for (AccountData account : dataHDWallet.getAccounts()) {
                     xpubList.add(account.getXpub());
                 }
 
-                wallet = HDWalletFactory
-                        .restoreWatchOnlyWallet(param, xpubList);
+                hdWallet = HDWalletFactory
+                        .restoreWatchOnlyWallet(dataHDWallet.getNetworkParameters(), xpubList);
             }
 
-            String seedHex = wallet.getSeedHex();
-            String xpriv = wallet.getAccounts().get(0).getXPriv();
-            String xpub = wallet.getAccounts().get(0).getXpub();
+            String seedHex = hdWallet.getSeedHex();
+            String xpriv = hdWallet.getAccounts().get(0).getXPriv();
+            String xpub = hdWallet.getAccounts().get(0).getXpub();
 
-            switch (cryptoType) {
+            switch (dataHDWallet.getCryptoType()) {
                 case ETHEREUM:
+                case ETHEREUM_TESTNET:
                     Assert.assertEquals(keyEth.seed, seedHex);
                     Assert.assertEquals(keyEth.xpriv, xpriv);
                     Assert.assertEquals(keyEth.xpub, xpub);
                     break;
 
                 case BITCOIN:
+                case BITCOIN_TESTNET:
                     Assert.assertEquals(keyBtc.seed, seedHex);
                     Assert.assertEquals(keyBtc.xpriv, xpriv);
                     Assert.assertEquals(keyBtc.xpub, xpub);
                     break;
 
                 case BITCOIN_CASH:
+                case BITCOIN_CASH_TESTNET:
                     Assert.assertEquals(keyBch.seed, seedHex);
                     Assert.assertEquals(keyBch.xpriv, xpriv);
                     Assert.assertEquals(keyBch.xpub, xpub);
@@ -326,6 +291,6 @@ public class WalletTest {
             e.printStackTrace();
         }
 
-        return wallet;
+        return walletData;
     }
 }
