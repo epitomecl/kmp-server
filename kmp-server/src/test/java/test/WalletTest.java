@@ -1,7 +1,6 @@
 package test;
 
 import com.epitomecl.kmp.common.HomeConfigurator;
-import com.epitomecl.kmp.main.KmpApp;
 import com.epitomecl.kmp.wallet.AccountData;
 import com.epitomecl.kmp.wallet.CryptoType;
 import com.epitomecl.kmp.wallet.HDWalletData;
@@ -16,9 +15,12 @@ import org.apache.commons.io.FileUtils;
 import org.bitcoinj.crypto.MnemonicException;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.invoke.MethodHandles;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -29,25 +31,28 @@ import java.util.List;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WalletTest {
 
-    class walletkey {
+    //region private static final part
+    private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+
+    private static final class WalletKey {
         String seed;
         String xpriv;
         String xpub;
     }
 
-    private static final int DEFAULT_MNEMONIC_LENGTH = 12;
     private static final int DEFAULT_NEW_WALLET_SIZE = 1;
-    private static final String DEFAULT_PASSPHRASE = "";
 
     private static final String defaultAccountName = "My wallet";
 
-    private final String hdWalletBtcFileName = HomeConfigurator.getTmpDir() + "/hdWalletBtc.json";
-    private final String hdWalletBchFileName = HomeConfigurator.getTmpDir() + "/hdWalletBch.json";
-    private final String hdWalletEthFileName = HomeConfigurator.getTmpDir() + "/hdWalletEth.json";
+    private static final String hdWalletBtcFileName = HomeConfigurator.getTmpDir() + "/hdWalletBtc.json";
+    private static final String hdWalletBchFileName = HomeConfigurator.getTmpDir() + "/hdWalletBch.json";
+    private static final String hdWalletEthFileName = HomeConfigurator.getTmpDir() + "/hdWalletEth.json";
 
-    private static walletkey keyBtc;
-    private static walletkey keyBch;
-    private static walletkey keyEth;
+    //region private/public static part
+
+    private static WalletKey keyBtc;
+    private static WalletKey keyBch;
+    private static WalletKey keyEth;
 
     @BeforeClass
     public static void beforeClass() {
@@ -58,7 +63,9 @@ public class WalletTest {
     {
         //todo. load faucet wallets
     }
+    //endregion
 
+    //region public part
     /**
      * 1 테스트 준비(사전에 1회 수동 생성후 json으로 저장. 테스트시 로드)
      * 1.1 테스트넷 비트코인 지갑A 생성 / 백업 (최초 1회, 수동)
@@ -103,41 +110,6 @@ public class WalletTest {
         getInfo(label, cryptoType, hdWallet_bitcoin_cash.getHDWallet());
     }
 
-    private HDWalletData create(CryptoType cryptoType) {
-        HDWalletData hdWalletData = null;
-        try {
-            hdWalletData = new HDWalletData(cryptoType, String.format("My %s wallet", cryptoType.toString()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return hdWalletData;
-    }
-
-    public void getInfo(String label, CryptoType coinType, HDWallet wallet) {
-        String receiveAddr = "";
-        String changeAddr = "";
-        switch (coinType) {
-            case BITCOIN:
-            case BITCOIN_CASH:
-                receiveAddr = wallet.getAccounts().get(0).getReceive().getAddressAt(0).getAddressBase58();
-                changeAddr = wallet.getAccounts().get(0).getChange().getAddressAt(0).getAddressBase58();
-
-                //address length check
-                Assert.assertEquals(receiveAddr.length(), 34);
-                Assert.assertEquals(changeAddr.length(), 34);
-                break;
-            case ETHEREUM:
-                //Create etherium wallet code from <== EthereumWalletTest.java
-                EthereumWallet subject = new EthereumWallet(wallet.getMasterKey(), label);
-
-                //etherium wallet has single account and one address
-                receiveAddr = subject.getAccount().getAddress();
-                Assert.assertEquals(receiveAddr.length(), 42);
-                break;
-        }
-    }
-
     @Test
     public void test_02_backup() {
         CryptoType cryptoType = CryptoType.ETHEREUM_TESTNET;
@@ -151,6 +123,56 @@ public class WalletTest {
         cryptoType = CryptoType.BITCOIN_CASH_TESTNET;
         HDWalletData hdWallet_bitcoin_cash = create(cryptoType);
         doBackup(cryptoType, hdWallet_bitcoin_cash, hdWalletBchFileName);
+    }
+
+    @Test
+    public void test_03_recovery() {
+        CryptoType cryptoType = CryptoType.ETHEREUM;
+        HDWalletData hdWallet_ethereum = doRecovery(hdWalletEthFileName);
+
+        cryptoType = CryptoType.BITCOIN;
+        HDWalletData hdWallet_bitcoin = doRecovery(hdWalletBtcFileName);
+
+        cryptoType = CryptoType.BITCOIN_CASH;
+        HDWalletData hdWallet_bitcoin_cash = doRecovery(hdWalletBchFileName);
+    }
+    //endregion
+
+    //region private part
+    private HDWalletData create(CryptoType cryptoType) {
+        HDWalletData hdWalletData = null;
+        try {
+            hdWalletData = new HDWalletData(cryptoType, String.format("My %s wallet", cryptoType.toString()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return hdWalletData;
+    }
+
+    private void getInfo(String label, CryptoType coinType, HDWallet wallet) {
+        String receiveAddr = "";
+        String changeAddr = "";
+        switch (coinType) {
+            case BITCOIN:
+            case BITCOIN_CASH:
+                receiveAddr = wallet.getAccounts().get(0).getReceive().getAddressAt(0).getAddressBase58();
+                changeAddr = wallet.getAccounts().get(0).getChange().getAddressAt(0).getAddressBase58();
+
+                //address length check
+                Assert.assertEquals(receiveAddr, receiveAddr.length(), 34);
+                Assert.assertEquals(changeAddr, changeAddr.length(), 34);
+
+                break;
+            case ETHEREUM:
+                //Create etherium wallet code from <== EthereumWalletTest.java
+                EthereumWallet subject = new EthereumWallet(wallet.getMasterKey(), label);
+
+                //etherium wallet has single account and one address
+                receiveAddr = subject.getAccount().getAddress();
+                Assert.assertEquals(receiveAddr.length(), 42);
+                break;
+        }
     }
 
     private void doBackup(CryptoType cryptoType, HDWalletData walletData, String filePath) {
@@ -174,7 +196,7 @@ public class WalletTest {
             switch (cryptoType) {
                 case ETHEREUM:
                 case ETHEREUM_TESTNET:
-                    keyEth = new walletkey();
+                    keyEth = new WalletKey();
                     keyEth.seed = seedHex;
                     keyEth.xpriv = xpriv;
                     keyEth.xpub = xpub;
@@ -182,7 +204,7 @@ public class WalletTest {
 
                 case BITCOIN:
                 case BITCOIN_TESTNET:
-                    keyBtc = new walletkey();
+                    keyBtc = new WalletKey();
                     keyBtc.seed = seedHex;
                     keyBtc.xpriv = xpriv;
                     keyBtc.xpub = xpub;
@@ -190,7 +212,7 @@ public class WalletTest {
 
                 case BITCOIN_CASH:
                 case BITCOIN_CASH_TESTNET:
-                    keyBch = new walletkey();
+                    keyBch = new WalletKey();
                     keyBch.seed = seedHex;
                     keyBch.xpriv = xpriv;
                     keyBch.xpub = xpub;
@@ -208,18 +230,6 @@ public class WalletTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Test
-    public void test_03_recovery() {
-        CryptoType cryptoType = CryptoType.ETHEREUM;
-        HDWalletData hdWallet_ethereum = doRecovery(hdWalletEthFileName);
-
-        cryptoType = CryptoType.BITCOIN;
-        HDWalletData hdWallet_bitcoin = doRecovery(hdWalletBtcFileName);
-
-        cryptoType = CryptoType.BITCOIN_CASH;
-        HDWalletData hdWallet_bitcoin_cash = doRecovery(hdWalletBchFileName);
     }
 
     private HDWalletData doRecovery(String filePath) {
@@ -293,4 +303,5 @@ public class WalletTest {
 
         return walletData;
     }
+    //endregion
 }
