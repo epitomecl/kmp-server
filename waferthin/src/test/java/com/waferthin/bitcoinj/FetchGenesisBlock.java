@@ -35,8 +35,13 @@
 //            // initialize BlockChain object
 //            chain = new BlockChain(netParams, blockStore);
 //
+//            //copy from => https://github.com/bitcoinj/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/PeerGroupTest.java
+//            VersionMessage versionMessage = new VersionMessage(netParams, 2);
+//            versionMessage.clientVersion = NetworkParameters.ProtocolVersion.BLOOM_FILTER.getBitcoinProtocolVersion();
+//            versionMessage.localServices = VersionMessage.NODE_NETWORK;
+//
 //            // instantiate Peer object to handle connections
-//            final Peer peer = new Peer(netParams, new PeerAddress(InetAddress.getLocalHost()), chain);
+//            final Peer peer = new Peer(netParams, versionMessage, new PeerAddress(InetAddress.getLocalHost()), chain);
 //
 //            // connect to peer node on localhost
 //            peer.connect();
