@@ -25,7 +25,7 @@ public class JschTest {
 
         // stop
         jschLib.doExec(session, "kmp/bin/linux/stop.sh");
-        jschLib.doExec(session, "ps -ef | grep java | grep kmp | grep -v grep | awk '{print $2}' | xargs kill -9");
+        jschLib.doExec(session, "pkill kmp");
 
         // remove
         jschLib.doExec(session, "rm -rf kmp* epitomecl-kmp*");
