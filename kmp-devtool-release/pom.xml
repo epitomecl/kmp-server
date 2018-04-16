@@ -24,7 +24,7 @@
                             <goal>single</goal>
                         </goals>
                         <configuration>
-                            <finalName>kmp</finalName>
+                            <finalName>epitomecl-kmp</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
                             <attach>false</attach>
                             <descriptors>
