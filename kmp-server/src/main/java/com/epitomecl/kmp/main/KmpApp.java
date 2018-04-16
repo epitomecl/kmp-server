@@ -51,7 +51,7 @@ public class KmpApp {
             protocol = "https";
         }
         String spring_application_name = ""; // env.getProperty("spring.application.name");
-        String server_port = "8080"; // env.getProperty("server.port");
+        String server_port = env.getProperty("server.port");
         String[] activeProfiles = env.getActiveProfiles();
 
         String hostAddress = "localhost";
