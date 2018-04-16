@@ -8,7 +8,7 @@
         <version>2.0.0</version>
     </parent>
     <artifactId>kmp-server</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <properties>
         <org.springframework.boot.version>2.0.0.RELEASE</org.springframework.boot.version>
@@ -156,6 +156,15 @@
 
     <build>
         <plugins>
+
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <archiveClasses>true</archiveClasses>
+                    <attachClasses>true</attachClasses>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>

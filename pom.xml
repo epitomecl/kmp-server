@@ -28,15 +28,24 @@
         <module>kmp-server</module>
 
         <module>waferthin</module>
+
+        <module>kmp-devtool-release</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>kmp-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>kmp-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>
