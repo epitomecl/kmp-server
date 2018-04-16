@@ -32,7 +32,7 @@ public class JschTest {
         jschLib.doExec(session, "ls -1");
 
         // copy
-        jschLib.doScpTo(session, "../kmp-devtool-release/target/epitomecl-kmp.tar.gz", "/home/epitome");
+        jschLib.doScpTo(session, "./kmp-devtool-release/target/epitomecl-kmp.tar.gz", "/home/epitome");
         jschLib.doExec(session, "ls -1");
 
         // install
