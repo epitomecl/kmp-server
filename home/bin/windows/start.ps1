@@ -17,7 +17,7 @@ $EPITOMECL_KMP_HOME=(get-item (split-path -parent $MyInvocation.MyCommand.Defini
 # start
 #########################
 $LOGFILE="start.log"
-$CMD_OPTS="-Dserver.port=9080"
+$CMD_OPTS="--server.port=9080"
 
 $cmd="java ${JVM_OPTS} -jar ${UBER_JAR} ${CMD_OPTS} 2>&1 | Tee-Object ${SERVER_LOG}/${LOGFILE}"
 Write-Host ${cmd} -ForegroundColor Green
