@@ -23,9 +23,6 @@
         <module>kmp-libs</module>
         <module>kmp-common</module>
 
-        <module>api-client</module>
-        <module>MyWalletHD</module>
-
         <module>kmp-client</module>
         <module>kmp-server</module>
 
