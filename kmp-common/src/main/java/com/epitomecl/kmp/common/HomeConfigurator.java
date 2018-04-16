@@ -85,6 +85,11 @@ public class HomeConfigurator {
                 else if (current_dir.endsWith(FS("/target/classes"))) {
                     relative_path = current_dir + "/../../../home";
                 }
+                // 5. 이 클래스가 개발 환경의 target에 존재
+                // ${CONFIG_PAPRIKA_HOME}/../"+projname/target/dcl-05-service-1.0-jar-with-dependencies.jar
+                else if (current_dir.endsWith(FS("/target"))) {
+                    relative_path = current_dir + "/../../home";
+                }
                 // 6. 이 클래스가 M2 환경에 존재
                 // mvn verify 수행시 ~/.m2/repository 아래
                 else if (current_dir.contains(FS("/.m2/repository/"))) {
