@@ -10,7 +10,7 @@ SERVER_HOME=$( cd "$( dirname "$0" )" && cd .. && cd .. && pwd )
 # start
 #########################
 LOGFILE="start.log"
-CMD_OPTS="-Dserver.port=9999"
+CMD_OPTS="-Dserver.port=9080"
 
 cmd="nohup java ${JVM_OPTS} -jar "'"'"${UBER_JAR}"'"'" ${CMD_OPTS} 2>&1 | tee ${SERVER_LOG}/${LOGFILE} &"
 echo ${cmd}
