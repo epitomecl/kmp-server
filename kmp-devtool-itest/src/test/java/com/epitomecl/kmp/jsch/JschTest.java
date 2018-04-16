@@ -24,7 +24,7 @@ public class JschTest {
         jschLib.doExec(session, "ls -1");
 
         // stop
-        jschLib.doExec(session, "kmp/bin/linux/stop.sh");
+//        jschLib.doExec(session, "kmp/bin/linux/stop.sh");
         jschLib.doExec(session, "pkill -9 -ef kmp-server");
 
         // remove
