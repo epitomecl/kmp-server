@@ -86,7 +86,7 @@ public class HomeConfigurator {
                     relative_path = current_dir + "/../../../home";
                 }
                 // 5. 이 클래스가 개발 환경의 target에 존재
-                // ${CONFIG_PAPRIKA_HOME}/../"+projname/target/dcl-05-service-1.0-jar-with-dependencies.jar
+                // ${CONFIG_EPITOMECL_KMP_HOME}/../"+projname/target/dcl-05-service-1.0-jar-with-dependencies.jar
                 else if (current_dir.endsWith(FS("/target"))) {
                     relative_path = current_dir + "/../../home";
                 }

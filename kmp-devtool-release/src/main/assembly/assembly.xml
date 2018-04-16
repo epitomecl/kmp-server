@@ -15,6 +15,22 @@
     <fileSets>
 
         <fileSet>
+            <outputDirectory>bin/linux</outputDirectory>
+            <fileMode>755</fileMode>
+            <filtered>false</filtered>
+            <directory>../home/bin/linux</directory>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+
+        <fileSet>
+            <outputDirectory>bin/windows</outputDirectory>
+            <fileMode>755</fileMode>
+            <filtered>false</filtered>
+            <directory>../home/bin/windows</directory>
+            <lineEnding>windows</lineEnding>
+        </fileSet>
+
+        <fileSet>
             <outputDirectory>conf</outputDirectory>
             <filtered>false</filtered>
             <directory>../home/conf</directory>
