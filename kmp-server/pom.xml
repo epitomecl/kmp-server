@@ -165,6 +165,7 @@
 
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.0</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <archiveClasses>true</archiveClasses>
@@ -175,6 +176,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${org.springframework.boot.version}</version>
                 <configuration>
                     <mainClass>com.epitomecl.kmp.main.KmpApp</mainClass>
                 </configuration>
