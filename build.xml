@@ -8,6 +8,7 @@
     <dirname property="epitomecl-kmp.basedir" file="${ant.file.epitomecl-kmp}"/>
     <property environment="env"/>
     <property name="epitomecl-kmp-base-dir" value="${epitomecl-kmp.basedir}"/>
+    <property name="epitomecl-kmp-home-dir" value="${epitomecl-kmp-base-dir}/home"/>
 
     <condition property="java_home" value="${env.JAVA_HOME}" else="/usr/lib/jvm/java-8-oracle">
         <isset property="env.JAVA_HOME"/>
@@ -27,6 +28,7 @@
         <sequential>
             <exec executable="${mvn.executable}" dir="@{dir}" failonerror="true">
                 <env key="JAVA_HOME" value="${java_home}"/>
+                <env key="EPITOMECL_KMP_HOME" value="${epitomecl-kmp-home-dir}"/>
                 <arg line="@{cmd}"/>
             </exec>
         </sequential>
