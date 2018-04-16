@@ -3,6 +3,7 @@ package com.epitomecl.kmp.jsch;
 import com.epitomecl.kmp.common.HomeConfigurator;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +14,7 @@ import java.lang.invoke.MethodHandles;
 public class JschTest {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    @Test
-    public void test() throws JSchException, IOException {
+    public static void main(String[] args) throws JSchException, IOException {
         HomeConfigurator.changeLogConfiguration();
 
         JschLib jschLib = new JschLib();
