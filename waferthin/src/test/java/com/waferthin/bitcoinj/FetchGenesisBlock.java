@@ -54,12 +54,12 @@ public class FetchGenesisBlock {
             peerGroup.waitForPeers(4).get();
 
             //testnet genesisblock info from
-            //https://testnet.blockchain.info/ko/block-height/1
-            //hash: 00000000b873e79784647a6c82962c70d228557d24a747ea4d1b8bbe878e1206
+            //https://testnet.blockchain.info/ko/block-height/0
+            //hash: 000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943
 
             // we found the hash of the genesis block on Bitcoin Block Explorer
             //Sha256Hash blockHash = new Sha256Hash("00000007199508e34a9ff81e6ec0c477a4cccff2a4767a8eee39c11db367b008"); //mainnet
-            Sha256Hash blockHash = new Sha256Hash("00000000b873e79784647a6c82962c70d228557d24a747ea4d1b8bbe878e1206"); //testnet3
+            Sha256Hash blockHash = new Sha256Hash("000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943"); //testnet3
 
             // ask the node to which we're connected for the block
             // and wait for a response
