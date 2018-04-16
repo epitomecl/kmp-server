@@ -82,7 +82,7 @@ public class HomeConfigurator {
                 }
                 // 2. 이 클래스가 spring-boot 환경에 존재
                 // file:/home/epitome/kmp/webapps/kmp-server-2.0.0.war!/WEB-INF/lib/kmp-common-2.0.0.jar!/
-                else if (current_dir.contains(FS("kmp-server-2.0.0.war!"))) {
+                else if (current_dir.contains("kmp-server-2.0.0.war!")) {
                     relative_path = current_file.getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getPath().replaceFirst("^file:", "");
                 }
                 // 2. 이 클래스가 개발 환경의 target/classes에 존재
