@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="epitomecl-kmp" default="all" xmlns:my="urn:mytasks">
+
+    <!-- ########################## -->
+    <!-- # properties -->
+    <!-- ########################## -->
+    <dirname property="epitomecl-kmp.basedir" file="${ant.file.epitomecl-kmp}"/>
+    <property environment="env"/>
+    <property name="epitomecl-kmp-base-dir" value="${epitomecl-kmp.basedir}"/>
+
+    <condition property="java_home" value="${env.JAVA_HOME}" else="/usr/lib/jvm/java-8-oracle">
+        <isset property="env.JAVA_HOME"/>
+    </condition>
+
+    <condition property="mvn.executable" value="mvnw.cmd" else="./mvnw">
+        <os family="windows"/>
+    </condition>
+
+
+    <!-- ########################## -->
+    <!-- # targets of mvn -->
+    <!-- ########################## -->
+    <macrodef name="mvn" uri="urn:mytasks">
+        <attribute name="dir"/>
+        <attribute name="cmd"/>
+        <sequential>
+            <exec executable="${mvn.executable}" dir="@{dir}" failonerror="true">
+                <env key="JAVA_HOME" value="${java_home}"/>
+                <arg line="@{cmd}"/>
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <target name="all" depends="compile, deploy">
+    </target>
+
+    <target name="compile">
+        <echo message="${epitomecl-kmp.basedir}"/>
+        <my:mvn dir="${epitomecl-kmp.basedir}" cmd="clean install -DskipTests -Dfailsafe.skipTests=true"/>
+    </target>
+
+    <target name="deploy">
+        <my:mvn dir="${epitomecl-kmp.basedir}" cmd="-pl kmp-devtool-itest test -Dtest=JschTest"/>
+    </target>
+
+</project>

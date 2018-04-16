@@ -32,6 +32,7 @@
         <module>waferthin</module>
 
         <module>kmp-devtool-release</module>
+        <module>kmp-devtool-itest</module>
     </modules>
 
 
