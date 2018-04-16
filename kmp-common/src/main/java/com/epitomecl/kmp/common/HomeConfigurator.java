@@ -81,7 +81,7 @@ public class HomeConfigurator {
                     }
                 }
                 // 2. 이 클래스가 spring-boot 환경에 존재
-                // file:/mnt/d/mnt/work/com.saladweek/paprika/paprika/home/webapps/worker-41-webapp-0.0.1-SNAPSHOT.war!/WEB-INF/lib/paprika-01-common-0.0.1-SNAPSHOT.jar!/
+                // file:/home/epitome/kmp/webapps/kmp-server-2.0.0.war!/WEB-INF/lib/kmp-common-2.0.0.jar!/
                 else if (current_dir.contains(FS("kmp-server-2.0.0.war!"))) {
                     relative_path = current_file.getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getPath().replaceFirst("^file:", "");
                 }
