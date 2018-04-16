@@ -25,7 +25,7 @@ public class JschTest {
 
         // stop
         jschLib.doExec(session, "kmp/bin/linux/stop.sh");
-        jschLib.doExec(session, "pkill kmp");
+        jschLib.doExec(session, "pkill -9 -ef kmp-server");
 
         // remove
         jschLib.doExec(session, "rm -rf kmp* epitomecl-kmp*");
