@@ -24,28 +24,27 @@ public class JschTest {
         jschLib.doExec(session, "ls -1");
 
         // stop
-        jschLib.doExec(session, "coinvest/bin/linux/stop.sh");
-        jschLib.doExec(session, "ps -ef | grep java | grep coinvest | grep -v grep | awk '{print $2}' | xargs kill -9");
+        jschLib.doExec(session, "kmp/bin/linux/stop.sh");
+        jschLib.doExec(session, "ps -ef | grep java | grep kmp | grep -v grep | awk '{print $2}' | xargs kill -9");
 
         // remove
-        jschLib.doExec(session, "rm -rf coinvest* paprika*");
+        jschLib.doExec(session, "rm -rf kmp* epitomecl-kmp*");
         jschLib.doExec(session, "ls -1");
 
         // copy
-        jschLib.doScpTo(session, "../worker-92-devtool-release/target/paprika.tar.gz", "/home/jdlee");
+        jschLib.doScpTo(session, "../kmp-devtool-release/target/epitomecl-kmp.tar.gz", "/home/epitome");
         jschLib.doExec(session, "ls -1");
 
         // install
-        jschLib.doExec(session, "mkdir coinvest");
-        jschLib.doExec(session, "tar -C coinvest -xzvf paprika.tar.gz");
+        jschLib.doExec(session, "mkdir kmp");
+        jschLib.doExec(session, "tar -C kmp -xzvf epitomecl-kmp.tar.gz");
         jschLib.doExec(session, "ls -1");
 
         // init
-        jschLib.doExec(session, "coinvest/bin/linux/init.sh");
-        jschLib.doExec(session, "coinvest/bin/linux/keytool.sh");
+//        jschLib.doExec(session, "kmp/bin/linux/init.sh");
 
         // start
         // redirect to /dev/null for ssh with nohup
-        jschLib.doExec(session, "coinvest/bin/linux/start.sh > /dev/null 2>&1");
+        jschLib.doExec(session, "kmp/bin/linux/start.sh > /dev/null 2>&1");
     }
 }
