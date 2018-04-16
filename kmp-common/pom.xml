@@ -28,6 +28,12 @@
             <groupId>info.blockchain</groupId>
             <artifactId>MyWalletHD</artifactId>
             <version>6.10.0-rc1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-jdk14</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
