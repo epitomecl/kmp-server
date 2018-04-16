@@ -86,6 +86,7 @@ public class SendCoins {
             // recipient address provided by official Bitcoin client
             Address recipientAddress = new Address(netParams, recipient);
 
+            //reference from => https://bitcoinj.github.io/working-with-the-wallet
             // tell peer to send amountToSend to recipientAddress. send test coin amount
             Wallet.SendResult sendTxn = wallet.sendCoins(peerGroup, recipientAddress, coin);
 
