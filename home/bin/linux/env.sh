@@ -12,7 +12,7 @@ JVM_OPTS_MSIZ="-Xmx1g"
 # JVM_OPTS_STOP="-DSTOP_PORT=10959 -DSTOP_KEY=stop_engine"
 JVM_OPTS="${JVM_OPTS_JDWP} ${JVM_OPTS_MSIZ} ${JVM_OPTS_JAVA9} ${JVM_OPTS_LOG} ${JVM_OPTS_HOME} ${JVM_OPTS_STOP}"
 
-UBER_JAR="${SERVER_HOME}/webapps/worker-41-webapp-0.0.1-SNAPSHOT.war"
+UBER_JAR="${SERVER_HOME}/webapps/kmp-server-2.0.0.war"
 
 SERVER_LOG=${SERVER_HOME}/data/logs
 if [ ! -d "${SERVER_LOG}" ]; then
