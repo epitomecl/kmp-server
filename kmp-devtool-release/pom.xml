@@ -46,6 +46,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>kmp-server</artifactId>
+            <classifier>${webClassifier}</classifier>
         </dependency>
 
     </dependencies>

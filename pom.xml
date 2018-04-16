@@ -8,6 +8,8 @@
     <packaging>pom</packaging>
 
     <properties>
+        <webClassifier>classes</webClassifier>
+
         <org.springframework.boot.version>2.0.0.RELEASE</org.springframework.boot.version>
         <io.springfox.version>2.8.0</io.springfox.version>
 
@@ -32,6 +34,19 @@
         <module>kmp-devtool-release</module>
     </modules>
 
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
     <dependencyManagement>
         <dependencies>
 
@@ -44,6 +59,7 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>kmp-server</artifactId>
                 <version>${project.version}</version>
+                <classifier>${webClassifier}</classifier>
             </dependency>
 
         </dependencies>
