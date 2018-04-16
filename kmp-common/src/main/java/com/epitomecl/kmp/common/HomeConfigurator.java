@@ -69,8 +69,6 @@ public class HomeConfigurator {
                 String relative_path = null;
 
                 // 1. 이 클래스가 lib에 존재
-                System.out.println("checking.. endsWith" + FS("/lib"));
-                System.out.println("checking.. contains" + FS("kmp-server-2.0.0.war!"));
                 if (current_dir.endsWith(FS("/lib"))) {
                     // 이 클래스가 설치 환경의 WEB-INF/lib에 존재 (
                     // ${CONFIG_SERVER_HOME}/webapps/"+projname+"/WEB-INF/lib/iaam-02-model-1.0.jar
