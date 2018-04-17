@@ -25,6 +25,7 @@
 
         <module>kmp-client</module>
         <module>kmp-server</module>
+        <module>kmp-ui-angular</module>
 
         <module>waferthin</module>
 
