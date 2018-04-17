@@ -26,7 +26,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WalletTest {
@@ -48,11 +50,15 @@ public class WalletTest {
     private static final String hdWalletBchFileName = HomeConfigurator.getTmpDir() + "/hdWalletBch.json";
     private static final String hdWalletEthFileName = HomeConfigurator.getTmpDir() + "/hdWalletEth.json";
 
+    private static final String faucetWalletBtcFileName = HomeConfigurator.getWalletDir() + "/faucetWalletBtc.json";
+    private static final String faucetWalletBchFileName = HomeConfigurator.getWalletDir() + "/faucetWalletBch.json";
+    private static final String faucetWalletEthFileName = HomeConfigurator.getWalletDir() + "/faucetWalletEth.json";
+
     //region private/public static part
 
-    private static WalletKey keyBtc;
-    private static WalletKey keyBch;
-    private static WalletKey keyEth;
+    private static Map<CryptoType,HDWalletData> faucetWallets = new HashMap<>();
+
+    private static Map<CryptoType,WalletKey> keys = new HashMap<>();
 
     @BeforeClass
     public static void beforeClass() {
@@ -61,7 +67,31 @@ public class WalletTest {
 
     private static void loadFaucetWallts()
     {
-        //todo. load faucet wallets
+        //load faucet wallets
+        String json = null;
+        try {
+            json = String.join("", Files.readAllLines(Paths.get(faucetWalletBtcFileName)));
+            faucetWallets.put(CryptoType.BITCOIN_TESTNET, HDWalletData.fromJson(json));
+
+            json = String.join("", Files.readAllLines(Paths.get(faucetWalletBchFileName)));
+            faucetWallets.put(CryptoType.BITCOIN_CASH_TESTNET, HDWalletData.fromJson(json));
+
+            json = String.join("", Files.readAllLines(Paths.get(faucetWalletEthFileName)));
+            faucetWallets.put(CryptoType.ETHEREUM_TESTNET, HDWalletData.fromJson(json));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (MnemonicException.MnemonicWordException e) {
+            e.printStackTrace();
+        } catch (DecoderException e) {
+            e.printStackTrace();
+        } catch (MnemonicException.MnemonicChecksumException e) {
+            e.printStackTrace();
+        } catch (MnemonicException.MnemonicLengthException e) {
+            e.printStackTrace();
+        } catch (HDWalletException e) {
+            e.printStackTrace();
+        }
     }
     //endregion
 
@@ -146,7 +176,6 @@ public class WalletTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return hdWalletData;
     }
 
@@ -176,7 +205,6 @@ public class WalletTest {
     }
 
     private void doBackup(CryptoType cryptoType, HDWalletData walletData, String filePath) {
-
         String seedHex = walletData.getSeedHex();
 
         List<AccountData> AccountsData = walletData.getAccounts();
@@ -193,31 +221,11 @@ public class WalletTest {
 
             accountNumber++;
 
-            switch (cryptoType) {
-                case ETHEREUM:
-                case ETHEREUM_TESTNET:
-                    keyEth = new WalletKey();
-                    keyEth.seed = seedHex;
-                    keyEth.xpriv = xpriv;
-                    keyEth.xpub = xpub;
-                    break;
-
-                case BITCOIN:
-                case BITCOIN_TESTNET:
-                    keyBtc = new WalletKey();
-                    keyBtc.seed = seedHex;
-                    keyBtc.xpriv = xpriv;
-                    keyBtc.xpub = xpub;
-                    break;
-
-                case BITCOIN_CASH:
-                case BITCOIN_CASH_TESTNET:
-                    keyBch = new WalletKey();
-                    keyBch.seed = seedHex;
-                    keyBch.xpriv = xpriv;
-                    keyBch.xpub = xpub;
-                    break;
-            }
+            WalletKey key = new WalletKey();
+            key.seed = seedHex;
+            key.xpriv = xpriv;
+            key.xpub = xpub;
+            keys.put(cryptoType,key);
         }
 
         try {
@@ -233,13 +241,11 @@ public class WalletTest {
     }
 
     private HDWalletData doRecovery(String filePath) {
-
         HDWalletData walletData = null;
-
         HDWallet hdWallet = null;
 
         try {
-            String json = String.join(" ", Files.readAllLines(Paths.get(filePath)));
+            String json = String.join("", Files.readAllLines(Paths.get(filePath)));
             HDWalletData dataHDWallet = HDWalletData.fromJson(json);
 
             //from code <== instantiateBip44Wallet()
@@ -264,28 +270,10 @@ public class WalletTest {
             String xpriv = hdWallet.getAccounts().get(0).getXPriv();
             String xpub = hdWallet.getAccounts().get(0).getXpub();
 
-            switch (dataHDWallet.getCryptoType()) {
-                case ETHEREUM:
-                case ETHEREUM_TESTNET:
-                    Assert.assertEquals(keyEth.seed, seedHex);
-                    Assert.assertEquals(keyEth.xpriv, xpriv);
-                    Assert.assertEquals(keyEth.xpub, xpub);
-                    break;
-
-                case BITCOIN:
-                case BITCOIN_TESTNET:
-                    Assert.assertEquals(keyBtc.seed, seedHex);
-                    Assert.assertEquals(keyBtc.xpriv, xpriv);
-                    Assert.assertEquals(keyBtc.xpub, xpub);
-                    break;
-
-                case BITCOIN_CASH:
-                case BITCOIN_CASH_TESTNET:
-                    Assert.assertEquals(keyBch.seed, seedHex);
-                    Assert.assertEquals(keyBch.xpriv, xpriv);
-                    Assert.assertEquals(keyBch.xpub, xpub);
-                    break;
-            }
+            WalletKey key = keys.get(dataHDWallet.getCryptoType());
+            Assert.assertEquals(key.seed, seedHex);
+            Assert.assertEquals(key.xpriv, xpriv);
+            Assert.assertEquals(key.xpub, xpub);
 
         } catch (IOException e) {
             e.printStackTrace();

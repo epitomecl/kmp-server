@@ -169,10 +169,9 @@ public class HomeConfigurator {
         return getHomeDir() + "/data/activemq-data";
     }
 
-    public static String getTmpDir() {
-        return getHomeDir() + "/data/tmp";
-    }
+    public static String getTmpDir() { return getHomeDir() + "/data/tmp"; }
 
+    public static String getWalletDir() { return getHomeDir() + "/data/wallet"; }
 
     // for logback
     public static void changeLogConfiguration() {

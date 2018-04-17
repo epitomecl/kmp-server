@@ -2,5 +2,6 @@ target/
 .idea/
 *.iml
 
-home/data/
+home/data/logs/
+home/data/tmp/
 kmp-client/out/
