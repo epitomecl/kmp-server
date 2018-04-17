@@ -49,6 +49,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>kmp-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>kmp-ui-angular</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

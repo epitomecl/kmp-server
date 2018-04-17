@@ -56,6 +56,11 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
+                <artifactId>kmp-ui-angular</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>kmp-server</artifactId>
                 <version>${project.version}</version>
                 <classifier>${webClassifier}</classifier>
