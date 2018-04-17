@@ -8,7 +8,7 @@
         <version>2.0.0</version>
     </parent>
     <artifactId>kmp-ui-angular</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <build>
         <plugins>
@@ -16,6 +16,7 @@
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.6</version>
 
                 <configuration>
                     <workingDirectory>myfrontend</workingDirectory>
@@ -63,7 +64,8 @@
                             <goal>karma</goal>
                         </goals>
                         <configuration>
-                            <karmaConfPath>src/test/javascript/karma.conf.ci.js</karmaConfPath>
+                            <skipTests>true</skipTests>
+                            <karmaConfPath>karma.conf.js</karmaConfPath>
                         </configuration>
                     </execution>
 
@@ -74,6 +76,7 @@
                             <goal>npm</goal>
                         </goals>
                         <configuration>
+                            <skipTests>true</skipTests>
                             <arguments>run test</arguments>
                             <testFailureIgnore>true</testFailureIgnore>
                         </configuration>
@@ -94,6 +97,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <skip>true</skip>
                             <inputSpec>http://localhost:8080/v2/api-docs?group=api</inputSpec>
                             <language>typescript-angular</language>
                             <output>./myfrontend/src/app/module/api_client</output>
