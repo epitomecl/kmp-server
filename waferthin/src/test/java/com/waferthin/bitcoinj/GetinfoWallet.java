@@ -1,6 +1,6 @@
 package com.waferthin.bitcoinj;
 
-import com.epitomecl.kmp.common.HomeConfigurator;
+import com.epitomecl.kmp.cc.common.HomeConfigurator;
 import org.bitcoinj.core.Address;
 import org.bitcoinj.core.Coin;
 import org.bitcoinj.core.ECKey;
