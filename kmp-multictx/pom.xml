@@ -7,7 +7,8 @@
         <artifactId>kmp</artifactId>
         <version>2.0.0</version>
     </parent>
-    <artifactId>kmp-server</artifactId>
+    <artifactId>kmp-multictx</artifactId>
+    <packaging>war</packaging>
 
     <properties>
         <org.springframework.boot.version>2.0.0.RELEASE</org.springframework.boot.version>
@@ -38,11 +39,11 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>kmp-common</artifactId>
+            <artifactId>kmp-oauth-as</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>kmp-ui-angular</artifactId>
+            <artifactId>kmp-server</artifactId>
         </dependency>
 
         <!-- This is a must have during your application migration: -->
