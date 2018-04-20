@@ -1,10 +1,8 @@
 package com.epitomecl.kmp.jsch;
 
-import com.epitomecl.kmp.common.HomeConfigurator;
+import com.epitomecl.kmp.cc.common.HomeConfigurator;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
-import org.junit.Ignore;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

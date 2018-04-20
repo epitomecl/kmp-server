@@ -1,6 +1,6 @@
 package test;
 
-import com.epitomecl.kmp.main.KmpApp;
+import com.epitomecl.kmp.cc.main.KmpApp;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import info.blockchain.api.data.*;
 import info.blockchain.api.wallet.Wallet;

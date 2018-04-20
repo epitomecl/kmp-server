@@ -1,6 +1,6 @@
 package test;
 
-import com.epitomecl.kmp.common.HomeConfigurator;
+import com.epitomecl.kmp.cc.common.HomeConfigurator;
 import com.epitomecl.kmp.wallet.AccountData;
 import com.epitomecl.kmp.wallet.CryptoType;
 import com.epitomecl.kmp.wallet.HDWalletData;
@@ -13,7 +13,10 @@ import info.blockchain.wallet.exceptions.HDWalletException;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.io.FileUtils;
 import org.bitcoinj.crypto.MnemonicException;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,17 +59,16 @@ public class WalletTest {
 
     //region private/public static part
 
-    private static Map<CryptoType,HDWalletData> faucetWallets = new HashMap<>();
+    private static Map<CryptoType, HDWalletData> faucetWallets = new HashMap<>();
 
-    private static Map<CryptoType,WalletKey> keys = new HashMap<>();
+    private static Map<CryptoType, WalletKey> keys = new HashMap<>();
 
     @BeforeClass
     public static void beforeClass() {
         loadFaucetWallts();
     }
 
-    private static void loadFaucetWallts()
-    {
+    private static void loadFaucetWallts() {
         //load faucet wallets
         String json = null;
         try {
@@ -79,23 +81,14 @@ public class WalletTest {
             json = String.join("", Files.readAllLines(Paths.get(faucetWalletEthFileName)));
             faucetWallets.put(CryptoType.ETHEREUM_TESTNET, HDWalletData.fromJson(json));
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (MnemonicException.MnemonicWordException e) {
-            e.printStackTrace();
-        } catch (DecoderException e) {
-            e.printStackTrace();
-        } catch (MnemonicException.MnemonicChecksumException e) {
-            e.printStackTrace();
-        } catch (MnemonicException.MnemonicLengthException e) {
-            e.printStackTrace();
-        } catch (HDWalletException e) {
+        } catch (IOException | MnemonicException.MnemonicWordException | DecoderException | MnemonicException.MnemonicLengthException | MnemonicException.MnemonicChecksumException | HDWalletException e) {
             e.printStackTrace();
         }
     }
     //endregion
 
     //region public part
+
     /**
      * 1 테스트 준비(사전에 1회 수동 생성후 json으로 저장. 테스트시 로드)
      * 1.1 테스트넷 비트코인 지갑A 생성 / 백업 (최초 1회, 수동)
@@ -225,7 +218,7 @@ public class WalletTest {
             key.seed = seedHex;
             key.xpriv = xpriv;
             key.xpub = xpub;
-            keys.put(cryptoType,key);
+            keys.put(cryptoType, key);
         }
 
         try {
@@ -233,8 +226,6 @@ public class WalletTest {
             String json = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(walletData);
             Files.write(Paths.get(filePath), json.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
 
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -275,17 +266,7 @@ public class WalletTest {
             Assert.assertEquals(key.xpriv, xpriv);
             Assert.assertEquals(key.xpub, xpub);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (HDWalletException e) {
-            e.printStackTrace();
-        } catch (MnemonicException.MnemonicChecksumException e) {
-            e.printStackTrace();
-        } catch (MnemonicException.MnemonicWordException e) {
-            e.printStackTrace();
-        } catch (MnemonicException.MnemonicLengthException e) {
-            e.printStackTrace();
-        } catch (DecoderException e) {
+        } catch (IOException | HDWalletException | MnemonicException.MnemonicChecksumException | MnemonicException.MnemonicWordException | MnemonicException.MnemonicLengthException | DecoderException e) {
             e.printStackTrace();
         }
 

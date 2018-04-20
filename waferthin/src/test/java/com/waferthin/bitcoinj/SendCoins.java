@@ -1,6 +1,6 @@
 package com.waferthin.bitcoinj;
 
-import com.epitomecl.kmp.common.HomeConfigurator;
+import com.epitomecl.kmp.cc.common.HomeConfigurator;
 import org.bitcoinj.core.*;
 import org.bitcoinj.net.discovery.DnsDiscovery;
 import org.bitcoinj.store.BlockStore;
@@ -14,8 +14,6 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
-import java.math.BigInteger;
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.concurrent.ExecutionException;
 

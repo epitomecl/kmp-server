@@ -1,17 +1,7 @@
 package com.waferthin.bitcoinj;
 
-import java.io.IOException;
-import java.lang.invoke.MethodHandles;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-
-import com.epitomecl.kmp.common.HomeConfigurator;
+import com.epitomecl.kmp.cc.common.HomeConfigurator;
 import org.bitcoinj.core.*;
-import org.bitcoinj.core.listeners.DownloadProgressTracker;
 import org.bitcoinj.net.discovery.DnsDiscovery;
 import org.bitcoinj.store.BlockStore;
 import org.bitcoinj.store.BlockStoreException;
@@ -19,7 +9,9 @@ import org.bitcoinj.store.MemoryBlockStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nullable;
+import java.lang.invoke.MethodHandles;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 public class FetchGenesisBlock {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
