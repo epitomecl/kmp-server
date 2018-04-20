@@ -102,6 +102,14 @@
                 <version>3.9.5</version>
             </dependency>
 
+
+            <!-- HikariCP connection pool -->
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>3.1.0</version>
+            </dependency>
+
             <!---->
             <!-- derby -->
             <!---->
