@@ -1,20 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>com.epitomecl.kmp</groupId>
-        <artifactId>kmp</artifactId>
+        <artifactId>kmp-99-example-oauth</artifactId>
         <version>2.0.0</version>
     </parent>
-    <artifactId>kmp-41-multictx</artifactId>
+    <artifactId>example-41-multictx</artifactId>
     <packaging>war</packaging>
 
     <dependencies>
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>kmp-31-resource-server</artifactId>
+            <artifactId>example-31-authz-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>example-32-resource-server</artifactId>
         </dependency>
 
     </dependencies>
