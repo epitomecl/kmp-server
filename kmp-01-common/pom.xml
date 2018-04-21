@@ -6,7 +6,7 @@
         <artifactId>kmp</artifactId>
         <version>2.0.0</version>
     </parent>
-    <artifactId>kmp-common</artifactId>
+    <artifactId>kmp-01-common</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
