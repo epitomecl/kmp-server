@@ -44,7 +44,7 @@
         <file>
             <outputDirectory>webapps</outputDirectory>
             <filtered>false</filtered>
-            <source>../kmp-server/target/kmp-server-${project.version}.war</source>
+            <source>../kmp-multictx/target/kmp-multictx-${project.version}.war</source>
         </file>
 
     </files>
