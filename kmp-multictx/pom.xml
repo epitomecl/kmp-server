@@ -39,10 +39,6 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>kmp-oauth-as</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>kmp-server</artifactId>
         </dependency>
 
