@@ -33,8 +33,7 @@
         <module>kmp-35-ui-angular</module>
         <module>kmp-41-multictx</module>
 
-        <module>waferthin</module>
-
+        <module>kmp-91-devtool-test</module>
         <module>kmp-92-devtool-release</module>
         <module>kmp-93-devtool-itest</module>
     </modules>
