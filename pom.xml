@@ -30,7 +30,7 @@
         <module>kmp-server</module>
         <module>kmp-client</module>
         <module>kmp-ui-angular</module>
-        <module>kmp-multictx</module>
+        <!--<module>kmp-multictx</module>-->
 
         <module>waferthin</module>
 
