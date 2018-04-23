@@ -19,6 +19,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>example-32-resource-server</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>example-33-ui-server</artifactId>
+        </dependency>
 
     </dependencies>
 

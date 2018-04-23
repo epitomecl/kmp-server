@@ -1,12 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.epitomecl.kmp</groupId>
-        <artifactId>kmp</artifactId>
-        <version>2.0.0</version>
-    </parent>
+
+    <groupId>com.epitomecl.kmp</groupId>
     <artifactId>kmp-99-example-oauth</artifactId>
+    <version>2.0.0</version>
     <packaging>pom</packaging>
 
 
@@ -24,12 +22,29 @@
         <maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>
         <cargo-maven2-plugin.version>1.6.5</cargo-maven2-plugin.version>
 
+
+
+
+        <webClassifier>classes</webClassifier>
+
+        <org.hsqldb.classifier></org.hsqldb.classifier>
+        <!--<org.hsqldb.classifier>jdk8debug</org.hsqldb.classifier>-->
+
+        <org.springframework.boot.version>1.5.6.RELEASE</org.springframework.boot.version>
+        <io.springfox.version>2.8.0</io.springfox.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <github.global.server>github</github.global.server>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
     </properties>
 
 
     <modules>
-        <module>example-32-resource-server</module>
         <module>example-31-authz-server</module>
+        <module>example-32-resource-server</module>
+        <module>example-33-ui-server</module>
         <!--<module>example-35-ui-angular</module>-->
         <module>example-41-multictx</module>
     </modules>
@@ -38,6 +53,36 @@
     <build>
         <pluginManagement>
             <plugins>
+
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.2.0</version>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                        <archiveClasses>true</archiveClasses>
+                        <attachClasses>true</attachClasses>
+                    </configuration>
+                </plugin>
+
+                <!-- Package as an executable jar/war -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${org.springframework.boot.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -72,8 +117,43 @@
                 <artifactId>example-32-resource-server</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>example-33-ui-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+            <!-- -->
+            <!-- springframework boot BOM -->
+            <!-- -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${org.springframework.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- this project exists as a bridge between the old Spring Security OAuth support and Spring Boot 2.x. -->
+            <dependency>
+                <groupId>org.springframework.security.oauth.boot</groupId>
+                <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+                <version>${org.springframework.boot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-webmvc</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
+
+
+
+
 
 </project>
