@@ -23,8 +23,6 @@
         <cargo-maven2-plugin.version>1.6.5</cargo-maven2-plugin.version>
 
 
-
-
         <webClassifier>classes</webClassifier>
 
         <org.hsqldb.classifier></org.hsqldb.classifier>
@@ -44,8 +42,8 @@
     <modules>
         <module>example-31-authz-server</module>
         <module>example-32-resource-server</module>
+        <module>example-35-ui-angular</module>
         <module>example-33-ui-server</module>
-        <!--<module>example-35-ui-angular</module>-->
         <module>example-41-multictx</module>
     </modules>
 
@@ -122,6 +120,11 @@
                 <artifactId>example-33-ui-server</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>example-35-ui-angular</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
 
             <!-- -->
@@ -151,9 +154,6 @@
 
         </dependencies>
     </dependencyManagement>
-
-
-
 
 
 </project>
