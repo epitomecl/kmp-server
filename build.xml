@@ -43,7 +43,7 @@
     </target>
 
     <target name="deploy">
-        <my:mvn dir="${epitomecl-kmp.basedir}" cmd="-pl kmp-devtool-itest exec:java -Dexec.classpathScope=test -Dexec.mainClass=com.epitomecl.kmp.jsch.JschTest" />
+        <my:mvn dir="${epitomecl-kmp.basedir}" cmd="-pl kmp-93-devtool-itest exec:java -Dexec.classpathScope=test -Dexec.mainClass=com.epitomecl.kmp.jsch.JschTest" />
     </target>
 
 </project>

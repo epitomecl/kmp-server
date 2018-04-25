@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+    <!-- 콘솔에 출력하는 Appender -->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- On Windows machines setting withJansi to true enables ANSI
+                 color code interpretation by the Jansi library. This requires
+                 org.fusesource.jansi:jansi:1.8 on the class path.  Note that
+                 Unix-based operating systems such as Linux and Mac OS X
+                 support ANSI color codes by default. -->
+        <withJansi>true</withJansi>
+        <!--<filter class="paprika.common.config.SampleFilter" />-->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %highlight(%5p) %cyan(%40.40c{1}:%4L) - [%10.10t] %m%n</pattern>
+        </encoder>
+    </appender>
+    <!-- 매일 새로운 파일로 출력하는 Appender -->
+    <appender name="dailyRollingFileAppender"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>data/logs/api.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <!--<filter class="paprika.common.config.SampleFilter" />-->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %5p %40.40c{1}:%4L - [%10.10t] %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <root>
+        <level value="info"/>
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="dailyRollingFileAppender"/>
+    </root>
+
+</configuration>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly
+        xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+
+    <id>epitomecl-kmp</id>
+
+    <formats>
+        <format>dir</format>
+        <format>tar.gz</format>
+    </formats>
+
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <fileSets>
+
+        <fileSet>
+            <outputDirectory>bin/linux</outputDirectory>
+            <fileMode>755</fileMode>
+            <filtered>false</filtered>
+            <directory>../home/bin/linux</directory>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
+
+        <fileSet>
+            <outputDirectory>bin/windows</outputDirectory>
+            <fileMode>755</fileMode>
+            <filtered>false</filtered>
+            <directory>../home/bin/windows</directory>
+            <lineEnding>windows</lineEnding>
+        </fileSet>
+
+        <fileSet>
+            <outputDirectory>conf</outputDirectory>
+            <filtered>false</filtered>
+            <directory>../home/conf</directory>
+        </fileSet>
+
+    </fileSets>
+
+    <files>
+
+        <file>
+            <outputDirectory>webapps</outputDirectory>
+            <filtered>false</filtered>
+            <source>../kmp-41-multictx/target/kmp-41-multictx-${project.version}.war</source>
+        </file>
+
+    </files>
+
+</assembly>
