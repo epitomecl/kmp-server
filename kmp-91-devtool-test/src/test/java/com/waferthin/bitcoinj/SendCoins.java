@@ -1,11 +1,17 @@
 package com.waferthin.bitcoinj;
 
 import com.epitomecl.kmp.cc.common.HomeConfigurator;
+import info.blockchain.wallet.bip44.HDChain;
 import org.bitcoinj.core.*;
+import org.bitcoinj.crypto.DeterministicKey;
+import org.bitcoinj.crypto.HDKeyDerivation;
 import org.bitcoinj.net.discovery.DnsDiscovery;
 import org.bitcoinj.store.BlockStore;
 import org.bitcoinj.store.BlockStoreException;
 import org.bitcoinj.store.MemoryBlockStore;
+import org.bitcoinj.store.SPVBlockStore;
+import org.bitcoinj.wallet.DefaultKeyChainFactory;
+import org.bitcoinj.wallet.DeterministicKeyChain;
 import org.bitcoinj.wallet.UnreadableWalletException;
 import org.bitcoinj.wallet.Wallet;
 import org.slf4j.Logger;
@@ -32,8 +38,11 @@ public class SendCoins {
         // (this is not secure - needs validation)
         String network = "test";//args[0];  // "test" or "prod"
         String walletFileName = "test.wallet";//args[1];  // wallet file name
-        String amountToSend = "10";//args[2];  // milli-BTC. satoshis
+        String amountToSend = "800000";//args[2];  // milli-BTC. satoshis. 0.008BTC
         String recipient = "mrY35stqZEtUoym2UQpYsHowNHc3Krzudr";//args[3];  // Bitcoin address(testnet)
+
+        //BlockChain file
+        File blockchain = new File("btc_testnet_blockchain.dat");
 
         // the Bitcoin network to use
         final NetworkParameters netParams;
@@ -47,7 +56,12 @@ public class SendCoins {
         }
 
         // data structure for block chain storage
-        BlockStore blockStore = new MemoryBlockStore(netParams);
+        BlockStore blockStore = null;//new MemoryBlockStore(netParams);
+        try {
+            blockStore = new SPVBlockStore(netParams, blockchain);
+        } catch (BlockStoreException e) {
+            e.printStackTrace();
+        }
 
         // declare object to store and understand block chain
         BlockChain chain;
@@ -57,11 +71,16 @@ public class SendCoins {
 
         try {
 
-            // wallet file that contains Bitcoins we can send
-            final File walletFile = new File(walletFileName);
+            //prefare receive key and address
+            String xpriv = "tprv8gXNt4Nsnp9LHW6zWCxV1Gp53iNquhETHhmVzQeKuhJD8aaFJdXcbNyjbfXneX73sVLtMGk3zJyqx9vap4eeLyB32v8wjRfq8J5uU7YzZsJ";
+            DeterministicKey btc_key = DeterministicKey.deserializeB58(xpriv, NetworkParameters.testNet());
+            DeterministicKey btc_receive_key = HDKeyDerivation.deriveChildKey(btc_key, HDChain.RECEIVE_CHAIN);
+            String receive_address = btc_receive_key.toAddress(NetworkParameters.testNet()).toBase58();
 
-            // load wallet from file
-            wallet = Wallet.loadFromFile(walletFile);
+            wallet = new Wallet(netParams);
+            DumpedPrivateKey dumpedPrivateKey = btc_receive_key.getPrivateKeyEncoded(NetworkParameters.testNet());
+            ECKey key = dumpedPrivateKey.getKey();
+            wallet.addKey(key);
 
             // how man milli-Bitcoins(satoshis) to send
             Coin coin = Coin.valueOf(Long.valueOf(amountToSend));
@@ -80,6 +99,11 @@ public class SendCoins {
             peerGroup.start();
 
             peerGroup.waitForPeers(4).get();
+
+            peerGroup.downloadBlockChain();
+
+            Coin myBalance = wallet.getBalance();
+            logger.info("Coin myBalance: " + myBalance.toFriendlyString());
 
             // recipient address provided by official Bitcoin client
             Address recipientAddress = new Address(netParams, recipient);
@@ -101,20 +125,23 @@ public class SendCoins {
             }
 
             // save wallet with new transaction(s)
-            wallet.saveToFile(walletFile);
+            //wallet.saveToFile(walletFile);
+
+            peerGroup.stop();
+            blockStore.close();
 
             // handle the various exceptions; this needs more work
         } catch (BlockStoreException e) {
             e.printStackTrace();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
         } catch (AddressFormatException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+//        } catch (UnknownHostException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (UnreadableWalletException e) {
+//            e.printStackTrace();
         } catch (InsufficientMoneyException e) {
-            e.printStackTrace();
-        } catch (UnreadableWalletException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
