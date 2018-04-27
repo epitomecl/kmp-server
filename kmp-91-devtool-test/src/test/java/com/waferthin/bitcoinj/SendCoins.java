@@ -8,19 +8,13 @@ import org.bitcoinj.crypto.HDKeyDerivation;
 import org.bitcoinj.net.discovery.DnsDiscovery;
 import org.bitcoinj.store.BlockStore;
 import org.bitcoinj.store.BlockStoreException;
-import org.bitcoinj.store.MemoryBlockStore;
 import org.bitcoinj.store.SPVBlockStore;
-import org.bitcoinj.wallet.DefaultKeyChainFactory;
-import org.bitcoinj.wallet.DeterministicKeyChain;
-import org.bitcoinj.wallet.UnreadableWalletException;
 import org.bitcoinj.wallet.Wallet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.invoke.MethodHandles;
-import java.net.UnknownHostException;
 import java.util.concurrent.ExecutionException;
 
 public class SendCoins {
@@ -28,11 +22,6 @@ public class SendCoins {
 
     public static void main(String[] args) {
         HomeConfigurator.changeLogConfiguration();
-
-        //if (args.length != 4) {
-        //    logger.info("Usage: java SendCoins prod|test wallet amount recipient");
-        //    System.exit(1);
-        //}
 
         // we get the following from the command line ...
         // (this is not secure - needs validation)
@@ -135,12 +124,6 @@ public class SendCoins {
             e.printStackTrace();
         } catch (AddressFormatException e) {
             e.printStackTrace();
-//        } catch (UnknownHostException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (UnreadableWalletException e) {
-//            e.printStackTrace();
         } catch (InsufficientMoneyException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
