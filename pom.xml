@@ -37,7 +37,6 @@
         <module>kmp-92-devtool-release</module>
         <module>kmp-93-devtool-itest</module>
 
-        <!--<module>kmp-99-example-oauth</module>-->
     </modules>
 
 
