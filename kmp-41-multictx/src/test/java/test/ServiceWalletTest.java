@@ -1,6 +1,6 @@
 package test;
 
-import com.epitomecl.kmp.cc.main.KmpApp;
+import com.epitomecl.kmp.cc.main.MainApp;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import info.blockchain.api.data.*;
 import info.blockchain.api.wallet.Wallet;
@@ -30,7 +30,7 @@ public class ServiceWalletTest {
     private static final String _priv = "PRIV";
     private static final String _email = "aaa@aaa.com";
 
-    private static KmpApp kmpApp;
+    private static MainApp mainApp;
 
     private static String _guid = null;//"d0899765-baf2-4c60-80c4-154a59c2e622";  //created Wallet identifier
     private static String _address = null;//"1Mi4eKxgdNR5PCPfWZit2jVx7RFN59ULVY"; //created Wallet default bitcoin wallet address
@@ -57,13 +57,13 @@ public class ServiceWalletTest {
 
     @BeforeClass
     public static void beforeClass() {
-        kmpApp = new KmpApp();
-        kmpApp.start(new String[0]);
+        mainApp = new MainApp();
+        mainApp.start(new String[0]);
     }
 
     @AfterClass
     public static void afterClass() {
-        kmpApp.stop();
+        mainApp.stop();
     }
 
     @Test
