@@ -130,6 +130,10 @@ public class HomeConfigurator {
         return getHomeDir() + "/conf";
     }
 
+    public static String getWalletDir() {
+        return getHomeDir() + "/conf/wallet";
+    }
+
     public static String getLibDir() {
         return getHomeDir() + "/lib";
     }
@@ -171,10 +175,6 @@ public class HomeConfigurator {
 
     public static String getTmpDir() {
         return getHomeDir() + "/data/tmp";
-    }
-
-    public static String getWalletDir() {
-        return getHomeDir() + "/data/wallet";
     }
 
     // for logback
