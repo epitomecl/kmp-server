@@ -1,6 +1,7 @@
 package test;
 
 import com.codahale.shamir.Scheme;
+import com.epitomecl.kmp.cc.common.SharingData;
 import com.epitomecl.kmp.wallet.CryptoType;
 import com.epitomecl.kmp.wallet.HDWalletData;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -42,27 +43,22 @@ public class SecretSharingTest {
     }
 
     @Test
-    public void test2_CreateWallet()
+    public void test2_Wallet()
     {
-        HDWalletData hdWallet_bitcoin = create(CryptoType.BITCOIN_TESTNET);
         try {
-            String json = hdWallet_bitcoin.toJson();
+            HDWalletData hdWallet_bitcoin = new HDWalletData(CryptoType.BITCOIN_TESTNET, "My test wallet");
+            String mnemonics = String.join(" ", hdWallet_bitcoin.getMnemonic());
 
+            SharingData sharing = new SharingData(mnemonics);
 
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+            Map<Integer, byte[]> parts = sharing.getSharingParts();
 
-    }
+            String source = sharing.getJoinData();
 
-    private HDWalletData create(CryptoType cryptoType) {
-        HDWalletData hdWalletData = null;
-        try {
-            hdWalletData = new HDWalletData(cryptoType, String.format("My %s wallet", cryptoType.toString()));
+            logger.info("Source data: " + source);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return hdWalletData;
     }
-
 }
