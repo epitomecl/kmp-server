@@ -19,11 +19,11 @@ import java.lang.invoke.MethodHandles;
 public class WalletController implements IWallet {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    @Autowired
-    SharedBackupRepository sharedBackupRepository;
+    //@Autowired
+    //SharedBackupRepository sharedBackupRepository;
 
-    @Autowired
-    ThirdPartyBackupRepository thirdPartyBackupRepository;
+    //@Autowired
+    //ThirdPartyBackupRepository thirdPartyBackupRepository;
 
     public WalletController() {
 
