@@ -1,8 +1,8 @@
 package com.epitomecl.kmp.cc.main;
 
 import com.epitomecl.kmp.cc.config.SwaggerConfig;
-import com.epitomecl.kmp.dc.entity.hello.Customer;
-import com.epitomecl.kmp.dc.repository.hello.CustomerRepository;
+import com.epitomecl.kmp.dc.entity.Customer;
+import com.epitomecl.kmp.dc.repository.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

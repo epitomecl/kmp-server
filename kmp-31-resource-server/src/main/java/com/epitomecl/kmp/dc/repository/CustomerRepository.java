@@ -1,6 +1,6 @@
-package com.epitomecl.kmp.dc.repository.hello;
+package com.epitomecl.kmp.dc.repository;
 
-import com.epitomecl.kmp.dc.entity.hello.Customer;
+import com.epitomecl.kmp.dc.entity.Customer;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

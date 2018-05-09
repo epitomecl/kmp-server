@@ -12,6 +12,17 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 public interface IWallet {
 
+    @PostMapping("/backup/share")
+    String sharingBackup(
+            @RequestParam("method") String method,
+            @RequestParam("guid") String guid,
+            @RequestParam("payload") String payload,
+            @RequestParam("api_code") String apiCode);
+
+    @PostMapping("/backup/thirdparty")
+    String thirdPartyBackup(
+            @RequestParam("encrypt") String encrypt);
+
     @PostMapping("/wallet")
     String walletCall(
             //            @HeaderMap Map<String, String> headers,

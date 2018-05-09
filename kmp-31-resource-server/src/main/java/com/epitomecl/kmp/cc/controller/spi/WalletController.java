@@ -1,11 +1,14 @@
 package com.epitomecl.kmp.cc.controller.spi;
 
 import com.epitomecl.kmp.cc.interfaces.spi.IWallet;
+import com.epitomecl.kmp.dc.repository.SharedBackupRepository;
+import com.epitomecl.kmp.dc.repository.ThirdPartyBackupRepository;
 import info.blockchain.wallet.api.data.Settings;
 import info.blockchain.wallet.api.data.Status;
 import info.blockchain.wallet.api.data.WalletOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +19,33 @@ import java.lang.invoke.MethodHandles;
 public class WalletController implements IWallet {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
+    @Autowired
+    SharedBackupRepository sharedBackupRepository;
+
+    @Autowired
+    ThirdPartyBackupRepository thirdPartyBackupRepository;
+
     public WalletController() {
 
+    }
+
+    @Override
+    public String sharingBackup(
+            @RequestParam("method") String method,
+            @RequestParam("guid") String guid,
+            @RequestParam("payload") String payload,
+            @RequestParam("api_code") String apiCode) {
+        String result = "ok";
+
+        return result;
+    }
+
+    @Override
+    public String thirdPartyBackup(
+            @RequestParam("encrypt") String encrypt) {
+        String result = "ok";
+
+        return result;
     }
 
     @Override

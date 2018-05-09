@@ -1,4 +1,4 @@
-package com.epitomecl.kmp.dc.entity.hello;
+package com.epitomecl.kmp.dc.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
