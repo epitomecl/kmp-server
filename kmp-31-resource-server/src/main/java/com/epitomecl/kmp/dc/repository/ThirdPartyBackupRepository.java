@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface ThirdPartyBackupRepository extends CrudRepository<ThirdPartyBackup, Long> {
 
-    @Query("select tb from thirdparty_backup tb where tb.guid = :guid")
+    @Query("select tb from ThirdPartyBackup tb where tb.guid = :guid")
     ThirdPartyBackup findByGuid(@Param("guid") String guid);
 
 }
