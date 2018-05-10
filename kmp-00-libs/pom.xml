@@ -12,7 +12,6 @@
 
     <modules>
         <module>api-client</module>
-        <module>bitcoinj-core</module>
         <module>MyWalletHD</module>
     </modules>
 
