@@ -4,10 +4,10 @@
 
     <parent>
         <groupId>com.epitomecl.kmp</groupId>
-        <artifactId>kmp-libs</artifactId>
+        <artifactId>kmp</artifactId>
         <version>2.0.0</version>
     </parent>
-    <artifactId>bitcoinj-core</artifactId>
+    <artifactId>kmp-00-install</artifactId>
     <packaging>pom</packaging>
 
     <properties>

@@ -25,6 +25,7 @@
 
 
     <modules>
+        <module>kmp-00-install</module>
         <module>kmp-00-libs</module>
         <module>kmp-01-common</module>
 
@@ -36,7 +37,6 @@
         <module>kmp-91-devtool-test</module>
         <module>kmp-92-devtool-release</module>
         <module>kmp-93-devtool-itest</module>
-
     </modules>
 
 
