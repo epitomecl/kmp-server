@@ -11,6 +11,19 @@ $ sudo apt-get install oracle-java8-installer
 $ javac -version
 ```
 
+## maven 설치
+```
+$ sudo apt -qq install maven
+```
+
+## port open
+ - ssh: 22
+ - http: 80, 8080, 443, 8443
+ - bitcoind: 18332, 18333
+ - geth: 8545, 30305
+ - jenkins: 9070
+ 
+
 ## jenkins-ci 설치
 ```
 $ mkdir -p work/local/jenkins
