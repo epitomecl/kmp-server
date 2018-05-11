@@ -38,5 +38,7 @@ Insert the following lines into the bitcoin.conf, and replce with your username 
     ls /data/ubuntu/.bitcoin
     du -sh /data/ubuntu/.bitcoin/
     tail -f /data/ubuntu/.bitcoin/testnet3/debug.log
+    curl -v --data-binary '{"jsonrpc":"1.0","id":"curltext","method":"getblockchaininfo","params":[]}' -H 'content-type: text/plain;' http://kmp:kmptest@127.0.0.1:18332/
+
 
 
