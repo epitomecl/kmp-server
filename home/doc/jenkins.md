@@ -22,7 +22,7 @@ $ sudo apt -qq install maven
  - bitcoind: 18332, 18333
  - geth: 8545, 30305
  - jenkins: 9070
- 
+ - sonarqube: 9000 
 
 ## jenkins-ci 설치
 ```
@@ -36,4 +36,17 @@ $ chmod +x jenkins.sh
 $ ./jenkins.sh
 $ jps -l
 $ curl http://localhost:9070
+```
+
+## sonarqube 설치
+- https://www.lesstif.com/pages/viewpage.action?pageId=39126262
+- http://keichee.tistory.com/158
+```
+$ mkdir -p ~/work/local/sonarqube
+$ cd ~/work/local/sonarqube
+$ wget https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-7.1.zip
+$ unzip sonarqube-7.1.zip
+$ cd sonarqube-7.1/
+$ ./bin/linux-x86-64/sonar.sh start
+$ curl http://localhost:9000
 ```
