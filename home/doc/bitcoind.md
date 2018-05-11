@@ -25,7 +25,7 @@ Insert the following lines into the bitcoin.conf, and replce with your username 
     # Please make rpcpassword to something secure, `5gKAgrJv8CQr2CGUhjVbBFLSj29HnE6YGXvfykHJzS3k` for example.
     # Listen for JSON-RPC connections on <port> (default: 8332 or testnet: 18332)
     rpcuser=kmp
-    rpcpassword=kmp!@#
+    rpcpassword=kmptest
     rpcport=18332
     rpcallowip=0.0.0.0/0
 
