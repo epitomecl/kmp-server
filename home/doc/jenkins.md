@@ -1,6 +1,6 @@
 ## 접속 정보
 ```
-$ ssh ubuntu@ec2-13-125-3-157.ap-northeast-2.compute.amazonaws.com
+$ ssh ubuntu@ec2-13-125-250-135.ap-northeast-2.compute.amazonaws.com
 ```
 
 ## Oracle JDK 1.8 설치
