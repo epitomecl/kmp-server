@@ -27,7 +27,7 @@ Insert the following lines into the bitcoin.conf, and replce with your username 
     rpcuser=kmp
     rpcpassword=kmp!@#
     rpcport=18332
-    rpcallowip=*
+    rpcallowip=0.0.0.0/0
 
     # Notify when receiving coins
     # walletnotify=/usr/local/sbin/rabbitmqadmin publish routing_key=peatio.deposit.coin payload='{"txid":"%s", "channel_key":"satoshi"}'
