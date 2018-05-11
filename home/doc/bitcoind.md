@@ -36,3 +36,7 @@ Insert the following lines into the bitcoin.conf, and replce with your username 
 
     bitcoind
     ls /data/ubuntu/.bitcoin
+    du -sh /data/ubuntu/.bitcoin/
+    tail -f /data/ubuntu/.bitcoin/testnet3/debug.log
+
+
