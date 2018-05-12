@@ -1,32 +1,38 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from "@angular/router";
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MyNavComponent } from './my-nav/my-nav.component';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
-import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
-import { MyTableComponent } from './my-table/my-table.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {LayoutModule} from '@angular/cdk/layout';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatGridListModule,
+  MatIconModule,
+  MatListModule,
+  MatMenuModule,
+  MatPaginatorModule,
+  MatSidenavModule,
+  MatSortModule,
+  MatTableModule,
+  MatToolbarModule
+} from '@angular/material';
 
-const routes: Routes = [
-  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
-  {path: 'dashboard', component: MyDashboardComponent},
-  {path: 'nav', component: MyNavComponent},
-  {path: 'table', component: MyTableComponent},
-];
+import {AppComponent} from './layouts/main/app.component';
+import {NavbarComponent} from './layouts/navbar/navbar.component';
+import {MyDashboardComponent} from './my-dashboard/my-dashboard.component';
+import {MyTableComponent} from './my-table/my-table.component';
+import {KmpAppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MyNavComponent,
+    NavbarComponent,
     MyDashboardComponent,
     MyTableComponent
   ],
   imports: [
     BrowserModule,
-    [RouterModule.forRoot(routes)],
+    KmpAppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,
@@ -44,4 +50,5 @@ const routes: Routes = [
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
