@@ -30,7 +30,8 @@
               {
                 "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
               },
-              "src/styles.scss"
+              "src/content/scss/vendor.scss",
+              "src/content/scss/styles.scss"
             ],
             "scripts": []
           },

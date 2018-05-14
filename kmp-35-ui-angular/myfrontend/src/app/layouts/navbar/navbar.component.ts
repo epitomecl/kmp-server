@@ -12,4 +12,20 @@ export class NavbarComponent {
 
   constructor(private breakpointObserver: BreakpointObserver) {
   }
+
+  isAuthenticated() {
+    return false;
+  }
+
+  collapseNavbar() {
+
+  }
+
+  logout() {
+
+  }
+
+  login() {
+
+  }
 }

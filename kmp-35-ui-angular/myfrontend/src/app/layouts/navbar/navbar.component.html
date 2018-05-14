@@ -22,8 +22,44 @@
         *ngIf="(isHandset | async)!.matches">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Key Management Platform</span>
+      <span>KMP</span>
       &nbsp;&nbsp;<a href="https://ovenapp.io/view/ePfo4MpkUaWz99FiR7ae7FEtCyYmfkp0/ux5DB" target="_blank">IA/UI</a>
+      <button mat-button placement="bottom-right" [matMenuTriggerFor]="menuAccount">
+        <span><i class="fa fa-user" aria-hidden="true"></i>Account</span>
+      </button>
     </mat-toolbar>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<mat-menu #menuAccount="matMenu" [ngSwitch]="isAuthenticated()">
+  <button mat-menu-item *ngSwitchCase="true">
+    <a routerLink="settings" routerLinkActive="active" (click)="collapseNavbar()">
+      <i class="fa fa-fw fa-wrench" aria-hidden="true"></i>
+      <span>Settings</span>
+    </a>
+  </button>
+  <button mat-menu-item *ngSwitchCase="true">
+    <a routerLink="password" routerLinkActive="active" (click)="collapseNavbar()">
+      <i class="fa fa-fw fa-clock-o" aria-hidden="true"></i>
+      <span>Password</span>
+    </a>
+  </button>
+  <button mat-menu-item *ngSwitchCase="true">
+    <a (click)="logout()" id="logout">
+      <i class="fa fa-fw fa-sign-out" aria-hidden="true"></i>
+      <span>Sign out</span>
+    </a>
+  </button>
+  <button mat-menu-item *ngSwitchCase="false">
+    <a (click)="login()" id="login">
+      <i class="fa fa-fw fa-sign-in" aria-hidden="true"></i>
+      <span>Sign in</span>
+    </a>
+  </button>
+  <button mat-menu-item *ngSwitchCase="false">
+    <a routerLink="register" routerLinkActive="active" (click)="collapseNavbar()">
+      <i class="fa fa-fw fa-user-plus" aria-hidden="true"></i>
+      <span>Register</span>
+    </a>
+  </button>
+</mat-menu>
