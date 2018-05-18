@@ -22,6 +22,7 @@ import {NavbarComponent} from './layouts/navbar/navbar.component';
 import {MyDashboardComponent} from './my-dashboard/my-dashboard.component';
 import {MyTableComponent} from './my-table/my-table.component';
 import {KmpAppRoutingModule} from './app-routing.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {KmpAppRoutingModule} from './app-routing.module';
     MatMenuModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
