@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {LayoutModule} from '@angular/cdk/layout';
 import {
   MatButtonModule,
@@ -22,7 +23,6 @@ import {NavbarComponent} from './layouts/navbar/navbar.component';
 import {MyDashboardComponent} from './my-dashboard/my-dashboard.component';
 import {MyTableComponent} from './my-table/my-table.component';
 import {KmpAppRoutingModule} from './app-routing.module';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -33,8 +33,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   ],
   imports: [
     BrowserModule,
-    KmpAppRoutingModule,
     BrowserAnimationsModule,
+    NgbModule.forRoot(),
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -47,7 +47,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    NgbModule.forRoot()
+    KmpAppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
