@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {LayoutModule} from '@angular/cdk/layout';
 import {
   MatButtonModule,
@@ -17,24 +16,25 @@ import {
   MatTableModule,
   MatToolbarModule
 } from '@angular/material';
+import {Ng2Webstorage} from "ngx-webstorage";
 
-import {AppComponent} from './layouts/main/app.component';
-import {NavbarComponent} from './layouts/navbar/navbar.component';
+import {MymonoCoreModule} from "./core";
+import {MymonoSharedModule} from "./shared";
+import {ActiveMenuDirective, AppComponent, NavbarComponent} from './layouts';
+
 import {MyDashboardComponent} from './my-dashboard/my-dashboard.component';
 import {MyTableComponent} from './my-table/my-table.component';
-import {KmpAppRoutingModule} from './app-routing.module';
+import {MymonoAppRoutingModule} from './app-routing.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    MyDashboardComponent,
-    MyTableComponent
-  ],
   imports: [
     BrowserModule,
+    MymonoAppRoutingModule,
+    Ng2Webstorage.forRoot({prefix: 'jhi', separator: '-'}),
+    MymonoSharedModule,
+    MymonoCoreModule,
+
     BrowserAnimationsModule,
-    NgbModule.forRoot(),
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -46,8 +46,15 @@ import {KmpAppRoutingModule} from './app-routing.module';
     MatMenuModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule,
-    KmpAppRoutingModule
+    MatSortModule
+  ],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    MyDashboardComponent,
+    MyTableComponent,
+
+    ActiveMenuDirective
   ],
   providers: [],
   bootstrap: [AppComponent]
