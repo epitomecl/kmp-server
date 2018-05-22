@@ -217,18 +217,6 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.0-6"
 
-"@fortawesome/free-brands-svg-icons@^5.1.0-8":
-  version "5.1.0-8"
-  resolved "https://registry.yarnpkg.com/@fortawesome/free-brands-svg-icons/-/free-brands-svg-icons-5.1.0-8.tgz#44ed7a3b49d1708f42f74e9b053975894dfe2ae2"
-  dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.2.0-6"
-
-"@fortawesome/free-regular-svg-icons@^5.1.0-8":
-  version "5.1.0-8"
-  resolved "https://registry.yarnpkg.com/@fortawesome/free-regular-svg-icons/-/free-regular-svg-icons-5.1.0-8.tgz#c8b30b0a3de289472b08474eeea773555e43a2d4"
-  dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.2.0-6"
-
 "@fortawesome/free-solid-svg-icons@^5.1.0-8":
   version "5.1.0-8"
   resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-5.1.0-8.tgz#ea061224673b8bf225be4e4641d81cbb6fe098d0"
@@ -4155,9 +4143,9 @@ next-tick@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
 
-"ng-jhipster@file:../../../../proj_jh/ng-jhipster/ng-jhipster-v0.5.3.tgz":
-  version "0.5.3"
-  resolved "file:../../../../proj_jh/ng-jhipster/ng-jhipster-v0.5.3.tgz#5ca8ebefde3e288614c1f4d2e5bdbca0a6ce7a51"
+ng-jhipster@^0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/ng-jhipster/-/ng-jhipster-0.5.4.tgz#85ef20ad94f82c642181be2ed6c960104ff32fde"
   dependencies:
     "@ngx-translate/core" "^10.0.1"
     "@ngx-translate/http-loader" "^3.0.1"
