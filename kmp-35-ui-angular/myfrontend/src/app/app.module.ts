@@ -25,6 +25,7 @@ import {ActiveMenuDirective, AppComponent, NavbarComponent} from './layouts';
 import {MyDashboardComponent} from './my-dashboard/my-dashboard.component';
 import {MyTableComponent} from './my-table/my-table.component';
 import {MymonoAppRoutingModule} from './app-routing.module';
+import {PageRibbonComponent} from "./layouts/profiles/page-ribbon.component";
 
 @NgModule({
   imports: [
@@ -51,6 +52,7 @@ import {MymonoAppRoutingModule} from './app-routing.module';
   declarations: [
     AppComponent,
     NavbarComponent,
+    PageRibbonComponent,
     MyDashboardComponent,
     MyTableComponent,
 
