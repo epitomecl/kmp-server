@@ -1,6 +1,8 @@
+import './vendor.ts';
+
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
+import {HttpClient} from "@angular/common/http";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LayoutModule} from '@angular/cdk/layout';
 import {
@@ -16,6 +18,8 @@ import {
   MatTableModule,
   MatToolbarModule
 } from '@angular/material';
+import {MissingTranslationHandler, TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {JhiConfigService, missingTranslationHandler, translatePartialLoader} from "ng-jhipster";
 import {Ng2Webstorage} from "ngx-webstorage";
 
 import {MymonoCoreModule} from "./core";
@@ -35,6 +39,20 @@ import {PageRibbonComponent} from "./layouts/profiles/page-ribbon.component";
     MymonoSharedModule,
     MymonoCoreModule,
 
+    // from D:\mnt\work\proj_jh\ng-jhipster\index.ts
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: translatePartialLoader,
+        deps: [HttpClient]
+      },
+      missingTranslationHandler: {
+        provide: MissingTranslationHandler,
+        useFactory: missingTranslationHandler,
+        deps: [JhiConfigService]
+      }
+    }),
+
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,
@@ -53,10 +71,10 @@ import {PageRibbonComponent} from "./layouts/profiles/page-ribbon.component";
     AppComponent,
     NavbarComponent,
     PageRibbonComponent,
-    MyDashboardComponent,
-    MyTableComponent,
+    ActiveMenuDirective,
 
-    ActiveMenuDirective
+    MyDashboardComponent,
+    MyTableComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

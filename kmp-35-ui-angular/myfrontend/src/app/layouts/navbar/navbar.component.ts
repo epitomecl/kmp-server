@@ -1,34 +1,76 @@
-import {Component} from '@angular/core';
-import {BreakpointObserver, Breakpoints, BreakpointState} from '@angular/cdk/layout';
-import {Observable} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {JhiLanguageService} from 'ng-jhipster';
 
-import {SERVER_API_URL} from "../../app.constants";
+import {VERSION} from 'src/app/app.constants';
+import {JhiLanguageHelper, LoginModalService, LoginService, Principal} from 'src/app/core';
+import {ProfileService} from '../profiles/profile.service';
 
 @Component({
-  selector: 'my-nav',
+  selector: 'jhi-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['navbar.component.scss']
 })
-export class NavbarComponent {
-  isHandset: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Handset);
-  server_api_url = SERVER_API_URL;
+export class NavbarComponent implements OnInit {
+  inProduction: boolean;
+  isNavbarCollapsed: boolean;
+  languages: any[];
+  swaggerEnabled: boolean;
+  modalRef: NgbModalRef;
+  version: string;
 
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(
+    private loginService: LoginService,
+    private languageService: JhiLanguageService,
+    private languageHelper: JhiLanguageHelper,
+    private principal: Principal,
+    private loginModalService: LoginModalService,
+    private profileService: ProfileService,
+    private router: Router
+  ) {
+    this.version = VERSION ? 'v' + VERSION : '';
+    this.isNavbarCollapsed = true;
   }
 
-  isAuthenticated() {
-    return false;
+  ngOnInit() {
+    this.languageHelper.getAll().then(languages => {
+      this.languages = languages;
+    });
+
+    this.profileService.getProfileInfo().then(profileInfo => {
+      this.inProduction = profileInfo.inProduction;
+      this.swaggerEnabled = profileInfo.swaggerEnabled;
+    });
+  }
+
+  changeLanguage(languageKey: string) {
+    this.languageService.changeLanguage(languageKey);
   }
 
   collapseNavbar() {
-
+    this.isNavbarCollapsed = true;
   }
 
-  logout() {
-
+  isAuthenticated() {
+    return this.principal.isAuthenticated();
   }
 
   login() {
+    this.modalRef = this.loginModalService.open();
+  }
 
+  logout() {
+    this.collapseNavbar();
+    this.loginService.logout();
+    this.router.navigate(['']);
+  }
+
+  toggleNavbar() {
+    this.isNavbarCollapsed = !this.isNavbarCollapsed;
+  }
+
+  getImageUrl() {
+    return this.isAuthenticated() ? this.principal.getImageUrl() : null;
   }
 }
