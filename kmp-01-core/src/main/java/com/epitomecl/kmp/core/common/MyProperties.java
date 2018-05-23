@@ -1,4 +1,4 @@
-package com.epitomecl.kmp.cc.common;
+package com.epitomecl.kmp.core.common;
 
 import org.apache.commons.configuration2.AbstractConfiguration;
 import org.apache.commons.configuration2.Configuration;

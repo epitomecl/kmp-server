@@ -1,8 +1,8 @@
 package com.epitomecl.kmp.cc.controller.api;
 
 import com.epitomecl.kmp.cc.common.FrameworkImpl;
-import com.epitomecl.kmp.cc.common.HomeConfigurator;
 import com.epitomecl.kmp.cc.interfaces.api.IServiceWallet;
+import com.epitomecl.kmp.core.common.HomeConfigurator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import info.blockchain.api.data.*;
 import info.blockchain.wallet.BlockchainFramework;

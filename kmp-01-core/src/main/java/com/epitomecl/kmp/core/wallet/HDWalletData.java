@@ -1,4 +1,4 @@
-package com.epitomecl.kmp.wallet;
+package com.epitomecl.kmp.core.wallet;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -82,10 +82,10 @@ public class HDWalletData {
         return param;
     }
 
-    private static NetworkParameters getNetworkParameters(CryptoType cryptoType){
+    private static NetworkParameters getNetworkParameters(CryptoType cryptoType) {
         NetworkParameters result = null;
 
-        switch(cryptoType) {
+        switch (cryptoType) {
             case BITCOIN:
             case ETHEREUM:          //Create etherium wallet code from <== EthereumWalletTest.java
             case ETHEREUM_TESTNET:
@@ -352,17 +352,17 @@ public class HDWalletData {
     }
 
     public static HDWalletData recoverFromMnemonic(CryptoType crytoType, String mnemonic, String defaultAccountName,
-                                                                                   int accountSize) throws Exception {
+                                                   int accountSize) throws Exception {
         return recoverFromMnemonic(crytoType, mnemonic, "", defaultAccountName, accountSize);
     }
 
     public static HDWalletData recoverFromMnemonic(CryptoType crytoType, String mnemonic, String passphrase,
-                                                                                   String defaultAccountName) throws Exception {
+                                                   String defaultAccountName) throws Exception {
         return recoverFromMnemonic(crytoType, mnemonic, passphrase, defaultAccountName, 0);
     }
 
     public static HDWalletData recoverFromMnemonic(CryptoType cryptoType, String mnemonic, String passphrase,
-                                                                                   String defaultAccountName, int walletSize) throws Exception {
+                                                   String defaultAccountName, int walletSize) throws Exception {
         NetworkParameters param = getNetworkParameters(cryptoType);
 
         //Start with initial wallet size of 1.

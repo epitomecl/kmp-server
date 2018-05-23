@@ -1,6 +1,6 @@
 package com.waferthin.bitcoinj;
 
-import com.epitomecl.kmp.cc.common.HomeConfigurator;
+import com.epitomecl.kmp.core.common.HomeConfigurator;
 import org.bitcoinj.core.*;
 import org.bitcoinj.net.discovery.DnsDiscovery;
 import org.bitcoinj.store.BlockStore;

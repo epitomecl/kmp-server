@@ -1,4 +1,4 @@
-package com.epitomecl.kmp.cc.common;
+package com.epitomecl.kmp.core.common;
 
 public class AppConfInfo {
     //#############################

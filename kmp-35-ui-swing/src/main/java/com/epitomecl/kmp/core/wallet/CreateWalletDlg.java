@@ -1,4 +1,4 @@
-package com.epitomecl.kmp.wallet;
+package com.epitomecl.kmp.core.wallet;
 
 import info.blockchain.wallet.bip44.HDWallet;
 import info.blockchain.wallet.bip44.HDWalletFactory;
@@ -28,7 +28,7 @@ public class CreateWalletDlg extends JDialog {
     private final String create = "Press button it will make '%s' wallet";
 
     public CreateWalletDlg(JDialog parent, boolean modal, CryptoType coinType) {
-        super(parent,modal);
+        super(parent, modal);
 
         setContentPane(contentPane);
         setModal(true);
@@ -69,8 +69,7 @@ public class CreateWalletDlg extends JDialog {
 
     private void onOK() {
         // add your code here
-        if(isvalidLabel())
-        {
+        if (isvalidLabel()) {
             NetworkParameters param = null;
 
             if (coinType == CryptoType.ETHEREUM) {
@@ -108,9 +107,8 @@ public class CreateWalletDlg extends JDialog {
         dispose();
     }
 
-    private boolean isvalidLabel()
-    {
-        if (walletLabel.getText().length() > 0){
+    private boolean isvalidLabel() {
+        if (walletLabel.getText().length() > 0) {
             return true;
         }
 

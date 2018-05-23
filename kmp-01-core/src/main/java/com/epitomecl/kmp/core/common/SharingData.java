@@ -1,4 +1,4 @@
-package com.epitomecl.kmp.cc.common;
+package com.epitomecl.kmp.core.common;
 
 import com.codahale.shamir.Scheme;
 import info.blockchain.wallet.crypto.AESUtil;
@@ -24,8 +24,7 @@ public class SharingData {
             encrypted = new String(encrypt);
 
             final String decrypt = AESUtil.decryptWithKey(encryptionKey, encrypted);
-            if(!decrypt.equals(source))
-            {
+            if (!decrypt.equals(source)) {
                 throw new Exception("SharingData mnemonics encryption fail.");
             }
         } catch (InvalidCipherTextException e) {
@@ -44,8 +43,7 @@ public class SharingData {
         this.encrypted = encrypted;
         this.parts = parts;
 
-        if(parts.size() < need)
-        {
+        if (parts.size() < need) {
             throw new Exception("Parts needs more part.");
         }
     }

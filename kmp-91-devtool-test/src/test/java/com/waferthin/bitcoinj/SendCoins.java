@@ -1,6 +1,6 @@
 package com.waferthin.bitcoinj;
 
-import com.epitomecl.kmp.cc.common.HomeConfigurator;
+import com.epitomecl.kmp.core.common.HomeConfigurator;
 import info.blockchain.wallet.bip44.HDChain;
 import org.bitcoinj.core.*;
 import org.bitcoinj.crypto.DeterministicKey;

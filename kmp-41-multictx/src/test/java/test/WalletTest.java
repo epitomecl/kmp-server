@@ -1,9 +1,9 @@
 package test;
 
-import com.epitomecl.kmp.cc.common.HomeConfigurator;
-import com.epitomecl.kmp.wallet.AccountData;
-import com.epitomecl.kmp.wallet.CryptoType;
-import com.epitomecl.kmp.wallet.HDWalletData;
+import com.epitomecl.kmp.core.common.HomeConfigurator;
+import com.epitomecl.kmp.core.wallet.AccountData;
+import com.epitomecl.kmp.core.wallet.CryptoType;
+import com.epitomecl.kmp.core.wallet.HDWalletData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import info.blockchain.wallet.bip44.HDWallet;
 import info.blockchain.wallet.bip44.HDWalletFactory;

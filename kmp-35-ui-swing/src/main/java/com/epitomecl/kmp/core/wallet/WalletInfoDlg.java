@@ -1,4 +1,4 @@
-package com.epitomecl.kmp.wallet;
+package com.epitomecl.kmp.core.wallet;
 
 import info.blockchain.wallet.bip44.HDWallet;
 import info.blockchain.wallet.ethereum.EthereumWallet;

@@ -1,6 +1,6 @@
 package com.epitomecl.kmp.cc.main;
 
-import com.epitomecl.kmp.cc.common.HomeConfigurator;
+import com.epitomecl.kmp.core.common.HomeConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;

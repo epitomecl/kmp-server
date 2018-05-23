@@ -1,4 +1,4 @@
-package com.epitomecl.kmp.wallet;
+package com.epitomecl.kmp.core.wallet;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

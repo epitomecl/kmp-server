@@ -1,4 +1,4 @@
-package com.epitomecl.kmp.cc.common;
+package com.epitomecl.kmp.core.common;
 
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
@@ -12,7 +12,7 @@ import java.lang.invoke.MethodHandles;
 import java.lang.management.ManagementFactory;
 import java.util.List;
 
-import static com.epitomecl.kmp.cc.common.AppConfInfo.CONFIG_SERVER_HOME;
+import static com.epitomecl.kmp.core.common.AppConfInfo.CONFIG_SERVER_HOME;
 
 
 public class HomeConfigurator {
@@ -81,7 +81,7 @@ public class HomeConfigurator {
                     }
                 }
                 // 2. 이 클래스가 spring-boot 환경에 존재
-                // file:/home/epitome/kmp/webapps/kmp-server-2.0.0.war!/WEB-INF/lib/kmp-common-2.0.0.jar!/
+                // file:/home/epitome/kmp/webapps/kmp-server-2.0.0.war!/WEB-INF/lib/kmp-01-core-2.0.0.jar!/
                 else if (current_dir.contains(FS("kmp-server-2.0.0.war!"))) {
                     relative_path = current_file.getParentFile().getParentFile().getParentFile().getParentFile().getParentFile().getPath().replaceFirst("^file:", "");
                 }

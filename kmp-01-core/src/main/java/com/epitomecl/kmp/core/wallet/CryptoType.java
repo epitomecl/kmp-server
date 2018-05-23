@@ -1,4 +1,4 @@
-package com.epitomecl.kmp.wallet;
+package com.epitomecl.kmp.core.wallet;
 
 public enum CryptoType {
     BITCOIN,

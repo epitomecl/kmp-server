@@ -1,8 +1,7 @@
 package com.waferthin.bitcoinj;
 
-import com.epitomecl.kmp.cc.common.HomeConfigurator;
+import com.epitomecl.kmp.core.common.HomeConfigurator;
 import org.bitcoinj.core.Address;
-import org.bitcoinj.core.Coin;
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.NetworkParameters;
 import org.bitcoinj.wallet.DeterministicSeed;
@@ -24,7 +23,7 @@ public class GetinfoWallet {
         Wallet wallet = null;
         final File walletFile = new File("test.wallet");
 
-        try{
+        try {
             wallet = Wallet.loadFromFile(walletFile, null);
 
             /* test 1 : check equals if convert eckey to address */
@@ -32,8 +31,8 @@ public class GetinfoWallet {
             ECKey ecKey = wallet.currentReceiveKey();
             Address fAddress = wallet.freshReceiveAddress();
 
-            logger.info("result:"+ecKey.toAddress(wallet.getParams()).equals(address));
-            logger.info("result:"+!fAddress.equals(address));
+            logger.info("result:" + ecKey.toAddress(wallet.getParams()).equals(address));
+            logger.info("result:" + !fAddress.equals(address));
 
             /* test 2 : create seed word */
             DeterministicSeed seed = wallet.getKeyChainSeed();
@@ -45,9 +44,9 @@ public class GetinfoWallet {
             long creationTime = 1444444444L;
             DeterministicSeed newSeed = new DeterministicSeed(seedCode, null, "", creationTime);
             Wallet restoredWallet = Wallet.fromSeed(netParams, seed);
-            logger.info("Balance : "+ restoredWallet.getBalance());
+            logger.info("Balance : " + restoredWallet.getBalance());
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

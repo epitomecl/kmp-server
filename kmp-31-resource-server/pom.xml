@@ -13,7 +13,7 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>kmp-01-common</artifactId>
+            <artifactId>kmp-01-core</artifactId>
         </dependency>
 
         <!-- This is a must have during your application migration: -->

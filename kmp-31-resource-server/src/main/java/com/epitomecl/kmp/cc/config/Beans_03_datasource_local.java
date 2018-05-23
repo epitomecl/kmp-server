@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.epitomecl.kmp.cc.common.AppConfInfo.*;
+import static com.epitomecl.kmp.core.common.AppConfInfo.*;
 
 @Configuration
 @EnableJpaRepositories(
