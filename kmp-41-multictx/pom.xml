@@ -37,6 +37,11 @@
         </dependency>
 
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>kmp-35-ui-angular</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.codahale</groupId>
             <artifactId>shamir</artifactId>
             <version>0.6.0</version>
