@@ -39,20 +39,6 @@ import {PageRibbonComponent} from "./layouts/profiles/page-ribbon.component";
     MymonoSharedModule,
     MymonoCoreModule,
 
-    // from D:\mnt\work\proj_jh\ng-jhipster\index.ts
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: translatePartialLoader,
-        deps: [HttpClient]
-      },
-      missingTranslationHandler: {
-        provide: MissingTranslationHandler,
-        useFactory: missingTranslationHandler,
-        deps: [JhiConfigService]
-      }
-    }),
-
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,
