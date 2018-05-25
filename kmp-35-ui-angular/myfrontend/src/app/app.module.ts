@@ -13,15 +13,17 @@ import {MyTableComponent} from './my-table/my-table.component';
 import {MymonoAppRoutingModule} from './app-routing.module';
 import {PageRibbonComponent} from "./layouts/profiles/page-ribbon.component";
 import {MyMatModule} from "./my-mat/my-mat.module";
+import {MymonoHomeModule} from "./home";
 
 @NgModule({
   imports: [
     BrowserModule,
+    MyMatModule,
     MymonoAppRoutingModule,
     Ng2Webstorage.forRoot({prefix: 'jhi', separator: '-'}),
     MymonoSharedModule,
     MymonoCoreModule,
-    MyMatModule
+    MymonoHomeModule
   ],
   declarations: [
     AppComponent,
