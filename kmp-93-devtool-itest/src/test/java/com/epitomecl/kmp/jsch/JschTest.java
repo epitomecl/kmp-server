@@ -15,8 +15,15 @@ public class JschTest {
     public static void main(String[] args) throws JSchException, IOException {
         HomeConfigurator.changeLogConfiguration();
 
+        String download_dir = "/data/ubuntu/kmp-server";
+
+        String username = "ubuntu";
+        String privateKey = System.getProperty("user.home") + "/.ssh/id_rsa";
+        String host = "dev1.epitomecl.com";
+        int port = 22;
+
         JschLib jschLib = new JschLib();
-        Session session = jschLib.connect("ubuntu", null, "dev1.epitomecl.com", 22);
+        Session session = jschLib.connect(username, privateKey, host, port);
 
         // 초기상태
         jschLib.doExec(session, "ls -1");
@@ -26,16 +33,16 @@ public class JschTest {
         jschLib.doExec(session, "pkill -9 -ef kmp-server");
 
         // remove
-        jschLib.doExec(session, "rm -rf kmp-server*");
+        jschLib.doExec(session, "rm -rf " + download_dir);
         jschLib.doExec(session, "ls -1");
+        jschLib.doExec(session, "mkdir -p " + download_dir);
 
         // copy
-        jschLib.doScpTo(session, "./kmp-92-devtool-release/target/epitomecl-kmp.tar.gz", "/data/ubuntu");
+        jschLib.doScpTo(session, "./kmp-92-devtool-release/target/epitomecl-kmp.tar.gz", download_dir);
         jschLib.doExec(session, "ls -1");
 
         // install
-        jschLib.doExec(session, "mkdir /data/ubuntu/kmp-server");
-        jschLib.doExec(session, "tar -C /data/ubuntu/kmp-server -xzvf epitomecl-kmp.tar.gz");
+        jschLib.doExec(session, "tar -C " + download_dir + " -xzvf " + download_dir + "/epitomecl-kmp.tar.gz");
         jschLib.doExec(session, "ls -1");
 
         // init
@@ -43,6 +50,6 @@ public class JschTest {
 
         // start
         // redirect to /dev/null for ssh with nohup
-        jschLib.doExec(session, "/data/ubuntu/kmp-server/bin/linux/start.sh > /dev/null 2>&1");
+        jschLib.doExec(session, download_dir + "/bin/linux/start.sh > /dev/null 2>&1");
     }
 }

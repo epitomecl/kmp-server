@@ -10,10 +10,11 @@ import java.lang.invoke.MethodHandles;
 public class JschLib {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    public Session connect(String username, String password, String host, int port) throws JSchException {
+    public Session connect(String username, String privateKey, String host, int port) throws JSchException {
         JSch jsch = new JSch();
+        jsch.addIdentity(privateKey);
         Session session = jsch.getSession(username, host, port);
-        session.setUserInfo(new MyUserInfo(password));
+        session.setUserInfo(new MyUserInfo());
         session.connect();
         return session;
     }
@@ -172,6 +173,9 @@ public class JschLib {
 
 class MyUserInfo implements UserInfo {
     private String password;
+
+    MyUserInfo() {
+    }
 
     MyUserInfo(String password) {
         this.password = password;
