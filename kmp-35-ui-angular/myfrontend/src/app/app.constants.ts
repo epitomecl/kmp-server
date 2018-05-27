@@ -4,5 +4,5 @@
 
 export const VERSION = 0.1;
 export const DEBUG_INFO_ENABLED: boolean = true;
-export const SERVER_API_URL = location.protocol + '//' + location.hostname + ':8080';
+export const SERVER_API_URL = location.protocol + '//' + location.hostname + ':8080/';
 export const BUILD_TIMESTAMP = 0;
