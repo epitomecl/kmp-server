@@ -36,6 +36,11 @@
     </pluginRepositories>
 
     <properties>
+        <!-- for fix "mvnw install -DskipTests" by jdlee -->
+        <start-class>example.mymono.MymonoApp</start-class>
+
+
+
         <!-- Build properties -->
         <maven.version>3.0.0</maven.version>
         <java.version>10</java.version>
@@ -805,15 +810,6 @@
                         <version>${maven-war-plugin.version}</version>
                         <configuration>
                             <failOnMissingWebXml>false</failOnMissingWebXml>
-                            <warSourceDirectory>target/www/</warSourceDirectory>
-                            <webResources>
-                                <resource>
-                                    <directory>src/main/webapp</directory>
-                                    <includes>
-                                        <include>WEB-INF/**</include>
-                                    </includes>
-                                </resource>
-                            </webResources>
                         </configuration>
                     </plugin>
                 </plugins>
