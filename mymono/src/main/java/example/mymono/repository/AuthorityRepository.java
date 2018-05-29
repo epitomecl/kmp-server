@@ -1,7 +1,6 @@
 package example.mymono.repository;
 
 import example.mymono.domain.Authority;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

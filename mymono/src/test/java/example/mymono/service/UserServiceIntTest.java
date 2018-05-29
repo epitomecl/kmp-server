@@ -6,7 +6,6 @@ import example.mymono.domain.User;
 import example.mymono.repository.UserRepository;
 import example.mymono.service.dto.UserDTO;
 import example.mymono.service.util.RandomUtil;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -155,8 +154,8 @@ public class UserServiceIntTest {
         final PageRequest pageable = PageRequest.of(0, (int) userRepository.count());
         final Page<UserDTO> allManagedUsers = userService.getAllManagedUsers(pageable);
         assertThat(allManagedUsers.getContent().stream()
-            .noneMatch(user -> Constants.ANONYMOUS_USER.equals(user.getLogin())))
-            .isTrue();
+                .noneMatch(user -> Constants.ANONYMOUS_USER.equals(user.getLogin())))
+                .isTrue();
     }
 
     @Test

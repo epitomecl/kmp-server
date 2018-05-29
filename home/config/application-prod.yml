@@ -1,0 +1,8 @@
+server:
+  port: 8443
+  ssl:
+    keyStoreType: jks
+    key-store: ${EPITOMECL_KMP_HOME}/config/keystore/keystore.jks
+    key-store-password: secret
+    key-password: another-secret
+    key-alias: tomcat

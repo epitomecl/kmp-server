@@ -1,7 +1,7 @@
 package example.mymono.service;
-import example.mymono.config.Constants;
 
 import example.mymono.MymonoApp;
+import example.mymono.config.Constants;
 import example.mymono.domain.User;
 import io.github.jhipster.config.JHipsterProperties;
 import org.junit.Before;

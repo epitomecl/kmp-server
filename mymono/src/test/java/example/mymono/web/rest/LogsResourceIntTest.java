@@ -1,9 +1,9 @@
 package example.mymono.web.rest;
 
-import example.mymono.MymonoApp;
-import example.mymono.web.rest.vm.LoggerVM;
 import ch.qos.logback.classic.AsyncAppender;
 import ch.qos.logback.classic.LoggerContext;
+import example.mymono.MymonoApp;
+import example.mymono.web.rest.vm.LoggerVM;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,27 +38,27 @@ public class LogsResourceIntTest {
 
         LogsResource logsResource = new LogsResource();
         this.restLogsMockMvc = MockMvcBuilders
-            .standaloneSetup(logsResource)
-            .build();
+                .standaloneSetup(logsResource)
+                .build();
     }
 
     @Test
-    public void getAllLogs()throws Exception {
+    public void getAllLogs() throws Exception {
         restLogsMockMvc.perform(get("/management/logs"))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
     }
 
     @Test
-    public void changeLogs()throws Exception {
+    public void changeLogs() throws Exception {
         LoggerVM logger = new LoggerVM();
         logger.setLevel("INFO");
         logger.setName("ROOT");
 
         restLogsMockMvc.perform(put("/management/logs")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(logger)))
-            .andExpect(status().isNoContent());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(logger)))
+                .andExpect(status().isNoContent());
     }
 
     @Test
