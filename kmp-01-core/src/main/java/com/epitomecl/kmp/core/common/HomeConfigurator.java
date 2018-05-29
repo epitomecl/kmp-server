@@ -34,7 +34,7 @@ public class HomeConfigurator {
     private static String home_dir;
 
     // changeLogbackConfiguration에서 사용하므로, logger사용 불가
-    protected static synchronized String getHomeDir() {
+    public static synchronized String getHomeDir() {
         if (home_dir == null) {
             home_dir = System.getProperty(CONFIG_SERVER_HOME);
             if (home_dir == null) {

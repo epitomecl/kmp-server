@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Properties;
 
+import static com.epitomecl.kmp.core.common.AppConfInfo.CONFIG_SERVER_HOME;
 import static example.mymono.config.DefaultProfileUtil.SPRING_PROFILE_DEFAULT;
 import static org.springframework.boot.context.config.ConfigFileApplicationListener.CONFIG_ADDITIONAL_LOCATION_PROPERTY;
 
@@ -63,6 +64,7 @@ public class MymonoApp {
         Properties props = new Properties();
         String config_dir = HomeConfigurator.getConfigDir();
         String config_dir_uri = Paths.get(config_dir).toUri().toString();
+        props.put(CONFIG_SERVER_HOME, HomeConfigurator.getHomeDir());
         props.put(CONFIG_ADDITIONAL_LOCATION_PROPERTY, "classpath:/config/," + config_dir_uri);
         props.put(SPRING_PROFILE_DEFAULT, JHipsterConstants.SPRING_PROFILE_DEVELOPMENT);
 
