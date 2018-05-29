@@ -246,26 +246,6 @@
 
 
             <!---->
-            <!-- org.jooq -->
-            <!---->
-            <dependency>
-                <groupId>org.jooq</groupId>
-                <artifactId>jooq</artifactId>
-                <version>3.9.5</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jooq</groupId>
-                <artifactId>jooq-meta</artifactId>
-                <version>3.9.5</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jooq</groupId>
-                <artifactId>jooq-codegen</artifactId>
-                <version>3.9.5</version>
-            </dependency>
-
-
-            <!---->
             <!-- derby -->
             <!---->
             <dependency>

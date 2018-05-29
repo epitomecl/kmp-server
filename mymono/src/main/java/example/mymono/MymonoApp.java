@@ -1,20 +1,26 @@
 package example.mymono;
 
+import com.epitomecl.kmp.core.common.HomeConfigurator;
 import example.mymono.config.ApplicationProperties;
-import example.mymono.config.DefaultProfileUtil;
 import io.github.jhipster.config.JHipsterConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.core.env.Environment;
 
 import javax.annotation.PostConstruct;
 import java.net.InetAddress;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Properties;
+
+import static example.mymono.config.DefaultProfileUtil.SPRING_PROFILE_DEFAULT;
+import static org.springframework.boot.context.config.ConfigFileApplicationListener.CONFIG_ADDITIONAL_LOCATION_PROPERTY;
 
 @SpringBootApplication
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
@@ -54,8 +60,18 @@ public class MymonoApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(MymonoApp.class);
-        DefaultProfileUtil.addDefaultProfile(app);
+        Properties props = new Properties();
+        String config_dir = HomeConfigurator.getConfigDir();
+        String config_dir_uri = Paths.get(config_dir).toUri().toString();
+        props.put(CONFIG_ADDITIONAL_LOCATION_PROPERTY, "classpath:/config/," + config_dir_uri);
+        props.put(SPRING_PROFILE_DEFAULT, JHipsterConstants.SPRING_PROFILE_DEVELOPMENT);
+
+        SpringApplication app = new SpringApplicationBuilder()
+                .sources(MymonoApp.class)
+                .properties(props)
+                .build();
+
+//        DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         String protocol = "http";
         if (env.getProperty("server.ssl.key-store") != null) {

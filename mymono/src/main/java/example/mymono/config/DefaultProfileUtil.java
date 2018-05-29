@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public final class DefaultProfileUtil {
 
-    private static final String SPRING_PROFILE_DEFAULT = "spring.profiles.default";
+    public static final String SPRING_PROFILE_DEFAULT = "spring.profiles.default";
 
     private DefaultProfileUtil() {
     }

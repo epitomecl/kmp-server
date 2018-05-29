@@ -10,7 +10,7 @@ SERVER_HOME=$( cd "$( dirname "$0" )" && cd .. && cd .. && pwd )
 # start
 #########################
 LOGFILE="start.log"
-CMD_OPTS="--server.port=8080"
+CMD_OPTS="--spring.profiles.active=prod"
 
 cmd="nohup java ${JVM_OPTS} -jar "'"'"${UBER_JAR}"'"'" ${CMD_OPTS} 2>&1 | tee ${SERVER_LOG}/${LOGFILE} &"
 echo ${cmd}
