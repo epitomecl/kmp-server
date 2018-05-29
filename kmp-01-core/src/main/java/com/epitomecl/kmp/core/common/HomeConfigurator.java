@@ -126,8 +126,8 @@ public class HomeConfigurator {
     ///////////////////////////////////////////////
     // read only directories
     ///////////////////////////////////////////////
-    public static String getConfDir() {
-        return getHomeDir() + "/conf";
+    public static String getConfigDir() {
+        return getHomeDir() + "/config";
     }
 
     public static String getWalletDir() {
@@ -185,7 +185,7 @@ public class HomeConfigurator {
             logDir.mkdir();
         }
 //        if (logPropertyFile == null) {
-        String config_file = getConfDir() + "/logback.xml";
+        String config_file = getConfigDir() + "/logback.xml";
         try {
             LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
             context.reset();

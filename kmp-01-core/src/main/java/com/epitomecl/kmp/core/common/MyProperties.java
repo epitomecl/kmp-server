@@ -40,7 +40,7 @@ public class MyProperties {
         // 3. putAll parentProperties
         /////////////////////////////////////////////
         Properties props = new Properties();
-        String confDir = HomeConfigurator.getConfDir();
+        String confDir = HomeConfigurator.getConfigDir();
 
         // 1. load appconf.properties
         try {
