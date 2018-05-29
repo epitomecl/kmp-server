@@ -8,9 +8,7 @@
         <artifactId>kmp-server</artifactId>
         <version>2.0.0</version>
     </parent>
-    <groupId>example.mymono</groupId>
     <artifactId>mymono</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Mymono</name>
 
@@ -258,12 +256,14 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jcache</artifactId>
         </dependency>
+<!--
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jpamodelgen</artifactId>
             <version>${hibernate.version}</version>
             <scope>provided</scope>
         </dependency>
+-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-envers</artifactId>
@@ -1091,11 +1091,13 @@
                     <artifactId>mapstruct-processor</artifactId>
                     <version>${mapstruct.version}</version>
                 </dependency>
+<!--
                 <dependency>
                     <groupId>org.hibernate</groupId>
                     <artifactId>hibernate-jpamodelgen</artifactId>
                     <version>${hibernate.version}</version>
                 </dependency>
+-->
             </dependencies>
         </profile>
         <!-- jhipster-needle-maven-add-profile -->
