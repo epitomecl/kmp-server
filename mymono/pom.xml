@@ -62,7 +62,7 @@
         <spring-boot.version>2.0.2.RELEASE</spring-boot.version>
         <!-- The hibernate version should match the one managed by
         https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies/${spring-boot.version} -->
-        <hibernate.version>5.2.17.Final</hibernate.version>
+        <hibernate.version>5.3.1.Final</hibernate.version>
         <!-- The javassist version should match the one managed by
         https://mvnrepository.com/artifact/org.hibernate/hibernate-core/${hibernate.version} -->
         <javassist.version>3.22.0-GA</javassist.version>
@@ -256,14 +256,12 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jcache</artifactId>
         </dependency>
-<!--
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jpamodelgen</artifactId>
             <version>${hibernate.version}</version>
             <scope>provided</scope>
         </dependency>
--->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-envers</artifactId>
@@ -397,14 +395,11 @@
                             <version>${mapstruct.version}</version>
                         </path>
                         <!-- For JPA static metamodel generation -->
-                        <!--
-                                                <path>
-                                                    <groupId>org.hibernate</groupId>
-                                                    <artifactId>hibernate-jpamodelgen</artifactId>
-                                                    <version>${hibernate.version}</version>
-                                                </path>
-                        -->
-
+                        <path>
+                            <groupId>org.hibernate</groupId>
+                            <artifactId>hibernate-jpamodelgen</artifactId>
+                            <version>${hibernate.version}</version>
+                        </path>
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
@@ -1091,13 +1086,11 @@
                     <artifactId>mapstruct-processor</artifactId>
                     <version>${mapstruct.version}</version>
                 </dependency>
-<!--
                 <dependency>
                     <groupId>org.hibernate</groupId>
                     <artifactId>hibernate-jpamodelgen</artifactId>
                     <version>${hibernate.version}</version>
                 </dependency>
--->
             </dependencies>
         </profile>
         <!-- jhipster-needle-maven-add-profile -->
