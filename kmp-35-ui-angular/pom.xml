@@ -14,80 +14,6 @@
         <plugins>
 
             <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>1.6</version>
-
-                <configuration>
-                    <workingDirectory>myfrontend</workingDirectory>
-                    <installDirectory>node-and-npm</installDirectory>
-                </configuration>
-
-                <executions>
-
-                    <execution>
-                        <id>install node and npm</id>
-                        <goals>
-                            <goal>install-node-and-npm</goal>
-                        </goals>
-                        <configuration>
-                            <!-- See https://nodejs.org/en/download/current/ for latest node and npm (lts) versions -->
-                            <nodeVersion>v8.11.2</nodeVersion>
-                            <npmVersion>5.6.0</npmVersion>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>npm install</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <!-- Optional configuration which provides for running any npm command -->
-                        <configuration>
-                            <arguments>install</arguments>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>npm run build</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>run build</arguments>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>javascript tests</id>
-                        <goals>
-                            <goal>karma</goal>
-                        </goals>
-                        <configuration>
-                            <skipTests>true</skipTests>
-                            <karmaConfPath>karma.conf.js</karmaConfPath>
-                        </configuration>
-                    </execution>
-
-                    <!-- Integration Tests -->
-                    <execution>
-                        <id>npm run test</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <skipTests>true</skipTests>
-                            <arguments>run test</arguments>
-                            <testFailureIgnore>true</testFailureIgnore>
-                        </configuration>
-                        <phase>integration-test</phase>
-                    </execution>
-
-                </executions>
-            </plugin>
-
-
-            <plugin>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-codegen-maven-plugin</artifactId>
                 <version>2.3.1</version>
@@ -115,4 +41,88 @@
 
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>prod</id>
+            <build>
+
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>1.6</version>
+
+                        <configuration>
+                            <workingDirectory>myfrontend</workingDirectory>
+                            <installDirectory>node-and-npm</installDirectory>
+                        </configuration>
+
+                        <executions>
+
+                            <execution>
+                                <id>install node and npm</id>
+                                <goals>
+                                    <goal>install-node-and-npm</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- See https://nodejs.org/en/download/current/ for latest node and npm (lts) versions -->
+                                    <nodeVersion>v8.11.2</nodeVersion>
+                                    <npmVersion>5.6.0</npmVersion>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>npm install</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <!-- Optional configuration which provides for running any npm command -->
+                                <configuration>
+                                    <arguments>install</arguments>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>npm run build</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>run ng -- build --prod</arguments>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>javascript tests</id>
+                                <goals>
+                                    <goal>karma</goal>
+                                </goals>
+                                <configuration>
+                                    <skipTests>true</skipTests>
+                                    <karmaConfPath>karma.conf.js</karmaConfPath>
+                                </configuration>
+                            </execution>
+
+                            <!-- Integration Tests -->
+                            <execution>
+                                <id>npm run test</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <configuration>
+                                    <skipTests>true</skipTests>
+                                    <arguments>run test</arguments>
+                                    <testFailureIgnore>true</testFailureIgnore>
+                                </configuration>
+                                <phase>integration-test</phase>
+                            </execution>
+
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>
