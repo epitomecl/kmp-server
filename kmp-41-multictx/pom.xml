@@ -35,7 +35,6 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>kmp-31-resource-server</artifactId>
         </dependency>
-
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>kmp-35-ui-angular</artifactId>
@@ -58,11 +57,6 @@
                 <configuration>
                     <mainClass>com.epitomecl.kmp.cc.main.KmpApp</mainClass>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
             </plugin>
 
         </plugins>

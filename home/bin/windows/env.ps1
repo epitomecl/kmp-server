@@ -19,7 +19,7 @@ $JVM_OPTS_HOME="-DEPITOMECL_KMP_HOME=${EPITOMECL_KMP_HOME} -D""user.language""=e
 # $JVM_OPTS_STOP="-DSTOP_PORT=10959 -DSTOP_KEY=stop_engine"
 $JVM_OPTS="${JVM_OPTS_JDWP} ${JVM_OPTS_MSIZ} ${JVM_OPTS_JAVA9} ${JVM_OPTS_LOG} ${JVM_OPTS_HOME} ${JVM_OPTS_STOP}"
 
-$UBER_JAR="${EPITOMECL_KMP_HOME}/webapps/kmp-41-multictx-2.0.0.war"
+$UBER_JAR="${EPITOMECL_KMP_HOME}/webapps/kmp-41-mymono-2.0.0.war"
 
 $SERVER_LOG="${EPITOMECL_KMP_HOME}/data/logs"
 if ( !( Test-Path "${SERVER_LOG}" ) )

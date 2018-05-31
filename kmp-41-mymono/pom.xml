@@ -139,7 +139,7 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>kmp-01-core</artifactId>
+            <artifactId>kmp-31-resource-server</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -408,13 +408,13 @@
                             <version>${mapstruct.version}</version>
                         </path>
                         <!-- For JPA static metamodel generation -->
-<!--
-                        <path>
-                            <groupId>org.hibernate</groupId>
-                            <artifactId>hibernate-jpamodelgen</artifactId>
-                            <version>${hibernate.version}</version>
-                        </path>
--->
+                        <!--
+                                                <path>
+                                                    <groupId>org.hibernate</groupId>
+                                                    <artifactId>hibernate-jpamodelgen</artifactId>
+                                                    <version>${hibernate.version}</version>
+                                                </path>
+                        -->
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>

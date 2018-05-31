@@ -47,6 +47,12 @@
             <source>../kmp-41-multictx/target/kmp-41-multictx-${project.version}.war</source>
         </file>
 
+        <file>
+            <outputDirectory>webapps</outputDirectory>
+            <filtered>false</filtered>
+            <source>../kmp-41-mymono/target/kmp-41-mymono-${project.version}.war</source>
+        </file>
+
     </files>
 
 </assembly>
