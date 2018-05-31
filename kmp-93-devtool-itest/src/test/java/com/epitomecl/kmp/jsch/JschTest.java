@@ -28,7 +28,7 @@ public class JschTest {
 
         // stop
 //        jschLib.doExec(session, "kmp/bin/linux/stop.sh");
-        jschLib.doExec(session, "pkill -9 -ef kmp-server");
+        jschLib.doExec(session, "pkill -9 -ef kmp-41-multictx-2.0.0.war");
 
         // remove
         jschLib.doExec(session, "rm -rf " + download_dir);
