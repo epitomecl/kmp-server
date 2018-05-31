@@ -10,18 +10,28 @@ import java.lang.invoke.MethodHandles;
 public class JschLib {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    public Session connect(String username, String privateKey, String host, int port) throws JSchException {
-        JSch jsch = new JSch();
-        jsch.addIdentity(privateKey);
-        Session session = jsch.getSession(username, host, port);
-        session.setUserInfo(new MyUserInfo());
-        session.connect();
-        return session;
+    public Session connect(String username, String privateKey, String host, int port) {
+        try {
+            JSch jsch = new JSch();
+            jsch.addIdentity(privateKey);
+            Session session = jsch.getSession(username, host, port);
+            session.setUserInfo(new MyUserInfo());
+            session.connect();
+            return session;
+        } catch (JSchException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
-    public void doExec(Session session, String command) throws IOException, JSchException {
+    public void doExec(Session session, String command) {
         logger.info("{}", command);
-        ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
+        ChannelExec channelExec;
+        try {
+            channelExec = (ChannelExec) session.openChannel("exec");
+        } catch (JSchException e) {
+            throw new IllegalStateException(e);
+        }
+
         channelExec.setCommand(command);
         // X Forwarding
         // channelExec.setXForwarding(true);
@@ -35,28 +45,30 @@ public class JschLib {
         //channelExec.setErrStream(fos);
         channelExec.setErrStream(System.err);
 
-        InputStream in = channelExec.getInputStream();
+        try {
+            InputStream in = channelExec.getInputStream();
+            channelExec.connect();
 
-        channelExec.connect();
-
-
-        byte[] tmp = new byte[1024];
-        while (true) {
-            while (in.available() > 0) {
-                int i = in.read(tmp, 0, 1024);
-                if (i < 0) break;
-                logger.info(new String(tmp, 0, i));
+            byte[] tmp = new byte[1024];
+            while (true) {
+                while (in.available() > 0) {
+                    int i = in.read(tmp, 0, 1024);
+                    if (i < 0) break;
+                    logger.info(new String(tmp, 0, i));
+                }
+                if (channelExec.isClosed()) {
+                    if (in.available() > 0) continue;
+                    logger.info("exit-status: " + channelExec.getExitStatus());
+                    break;
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                    logger.warn("{}", e);
+                }
             }
-            if (channelExec.isClosed()) {
-                if (in.available() > 0) continue;
-                logger.info("exit-status: " + channelExec.getExitStatus());
-                break;
-            }
-            try {
-                Thread.sleep(1000);
-            } catch (Exception e) {
-                logger.warn("{}", e);
-            }
+        } catch (IOException | JSchException e) {
+            e.printStackTrace();
         }
 
         channelExec.disconnect();

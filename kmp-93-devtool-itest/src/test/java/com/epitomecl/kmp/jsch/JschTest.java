@@ -1,18 +1,16 @@
 package com.epitomecl.kmp.jsch;
 
 import com.epitomecl.kmp.core.common.HomeConfigurator;
-import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 
 public class JschTest {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    public static void main(String[] args) throws JSchException, IOException {
+    public static void main(String[] args) {
         HomeConfigurator.changeLogConfiguration();
 
         String download_dir = "/data/ubuntu/kmp-server";
