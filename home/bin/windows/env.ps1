@@ -1,8 +1,8 @@
 <#
-Set-ExecutionPolicy -Scope CurrentUser Unrestricted
-# Set-ExecutionPolicy -Scope CurrentUser RemoteSigned -Force
-Get-ExecutionPolicy
-.\bin\windows\env.ps1
+powershell Set-ExecutionPolicy -Scope CurrentUser Unrestricted
+# powershell Set-ExecutionPolicy -Scope CurrentUser RemoteSigned -Force
+powershell Get-ExecutionPolicy
+powershell .\bin\windows\env.ps1
 #>
 
 #########################

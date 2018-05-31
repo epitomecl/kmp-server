@@ -1,11 +1,8 @@
 <#
- powershell
- Set-ExecutionPolicy -Scope CurrentUser Unrestricted
-# Set-ExecutionPolicy -Scope CurrentUser RemoteSigned -Force
- .\bin\mint.ps1
+powershell Set-ExecutionPolicy -Scope CurrentUser Unrestricted
+# powershell Set-ExecutionPolicy -Scope CurrentUser RemoteSigned -Force
+powershell .\bin\windows\start.ps1
 #>
-
-(Get-Host).Version
 
 #########################
 # env
