@@ -27,20 +27,6 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>wf.bitcoin</groupId>
-            <artifactId>JavaBitcoindRpcClient</artifactId>
-        </dependency>
-
         <!-- Spring data JPA, default tomcat pool, exclude it -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -114,12 +100,6 @@
             <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
 
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>info.blockchain</groupId>

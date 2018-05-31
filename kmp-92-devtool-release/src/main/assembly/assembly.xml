@@ -32,9 +32,9 @@
         </fileSet>
 
         <fileSet>
-            <outputDirectory>conf</outputDirectory>
+            <outputDirectory>config</outputDirectory>
             <filtered>false</filtered>
-            <directory>../home/conf</directory>
+            <directory>../home/config</directory>
         </fileSet>
 
     </fileSets>

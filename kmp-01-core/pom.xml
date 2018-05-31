@@ -42,11 +42,30 @@
             <groupId>info.blockchain</groupId>
             <artifactId>MyWalletHD</artifactId>
         </dependency>
+        <dependency>
+            <groupId>wf.bitcoin</groupId>
+            <artifactId>JavaBitcoindRpcClient</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.codahale</groupId>
             <artifactId>shamir</artifactId>
             <version>0.6.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
