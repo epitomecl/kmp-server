@@ -1,6 +1,7 @@
 package com.epitomecl.kmp.jsch;
 
 import com.jcraft.jsch.*;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,10 +69,11 @@ public class JschLib {
                 }
             }
         } catch (IOException | JSchException e) {
-            e.printStackTrace();
+            logger.error("{}", ExceptionUtils.getStackTrace(e));
+            throw new IllegalStateException(e);
+        } finally {
+            channelExec.disconnect();
         }
-
-        channelExec.disconnect();
     }
 
     public void doScpTo(Session session, String lfilename, String rfilename) {
