@@ -34,12 +34,12 @@
         </sequential>
     </macrodef>
 
-    <target name="all" depends="compile, deploy">
+    <target name="all" depends="install, deploy">
     </target>
 
-    <target name="compile">
+    <target name="install">
         <echo message="${epitomecl-kmp.basedir}"/>
-        <my:mvn dir="${epitomecl-kmp.basedir}" cmd="clean install -DskipTests -Dfailsafe.skipTests=true"/>
+        <my:mvn dir="${epitomecl-kmp.basedir}" cmd="clean install -Pprod -DskipTests -Dfailsafe.skipTests=true"/>
     </target>
 
     <target name="deploy">
