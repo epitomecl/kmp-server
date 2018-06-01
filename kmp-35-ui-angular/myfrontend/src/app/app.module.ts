@@ -3,10 +3,12 @@ import './vendor.ts';
 import {BrowserModule} from '@angular/platform-browser';
 import {Injector, NgModule} from '@angular/core';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {ServiceWorkerModule} from '@angular/service-worker';
 
 import {LocalStorageService, Ng2Webstorage, SessionStorageService} from "ngx-webstorage";
 import {JhiEventManager} from "ng-jhipster";
 
+import {environment} from '../environments/environment';
 import {MymonoCoreModule} from "./core";
 import {MymonoSharedModule} from "./shared";
 import {MyMatModule} from "./my-mat/my-mat.module";
@@ -31,7 +33,8 @@ import {MyTableComponent} from './my-table/my-table.component';
     Ng2Webstorage.forRoot({prefix: 'jhi', separator: '-'}),
     MymonoSharedModule,
     MymonoCoreModule,
-    MymonoHomeModule
+    MymonoHomeModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
   ],
   declarations: [
     AppComponent,
