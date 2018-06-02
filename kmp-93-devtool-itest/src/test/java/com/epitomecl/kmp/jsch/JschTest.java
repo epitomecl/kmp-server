@@ -20,6 +20,7 @@ public class JschTest {
         String host = "dev1.epitomecl.com";
         int port = 22;
 
+        // session connect
         JschLib jschLib = new JschLib();
         Session session = jschLib.connect(username, privateKey, host, port);
 
@@ -49,5 +50,8 @@ public class JschTest {
         // start
         // redirect to /dev/null for ssh with nohup
         jschLib.doExec(session, download_dir + "/bin/linux/start.sh > /dev/null 2>&1");
+
+        // session disconnect
+        session.disconnect();
     }
 }
