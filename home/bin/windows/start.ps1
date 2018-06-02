@@ -16,6 +16,6 @@ $EPITOMECL_KMP_HOME=(get-item (split-path -parent $MyInvocation.MyCommand.Defini
 $LOGFILE="start.log"
 $CMD_OPTS="--spring.profiles.active=prod"
 
-$cmd="java ${JVM_OPTS} -jar ${UBER_JAR} ${CMD_OPTS} *> ${SERVER_LOG}/${LOGFILE}"
+$cmd="java ${JVM_OPTS} -jar ${UBER_JAR} ${CMD_OPTS} *>&1 | Tee-Object ${SERVER_LOG}/${LOGFILE}"
 Write-Host ${cmd} -ForegroundColor Green
 Invoke-Expression "${cmd}"
