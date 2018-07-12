@@ -30,8 +30,8 @@
         <module>kmp-01-core</module>
         <module>kmp-31-resource-server</module>
         <module>kmp-35-ui-swing</module>
-        <module>kmp-35-ui-angular</module>
 
+        <module>kmp-41-jh</module>
         <module>kmp-41-multictx</module>
 
         <module>kmp-91-devtool-test</module>
@@ -142,12 +142,13 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>kmp-35-ui-angular</artifactId>
+                <artifactId>kmp-31-resource-server</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>kmp-31-resource-server</artifactId>
+                <artifactId>kmp-41-jh</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
