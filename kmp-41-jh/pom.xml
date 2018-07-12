@@ -17,7 +17,7 @@
     <properties>
         <!-- Build properties -->
         <maven.version>3.0.0</maven.version>
-        <java.version>1.8</java.version>
+        <java.version>10</java.version>
         <scala.version>2.12.6</scala.version>
         <node.version>v8.11.3</node.version>
         <yarn.version>v1.6.0</yarn.version>
@@ -41,7 +41,7 @@
         <spring-boot.version>2.0.3.RELEASE</spring-boot.version>
         <!-- The hibernate version should match the one managed by
         https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies/${spring-boot.version} -->
-        <hibernate.version>5.2.17.Final</hibernate.version>
+        <hibernate.version>5.3.1.Final</hibernate.version>
         <!-- The javassist version should match the one managed by
         https://mvnrepository.com/artifact/org.hibernate/hibernate-core/${hibernate.version} -->
         <javassist.version>3.22.0-GA</javassist.version>
@@ -393,7 +393,7 @@
                         <requireJavaVersion>
                             <!-- Until JHipster supports JDK 9 -->
                             <message>You are running an incompatible version of Java. JHipster requires JDK ${java.version}</message>
-                            <version>[1.8,1.9)</version>
+                            <version>[${java.version},)</version>
                         </requireJavaVersion>
                     </rules>
                 </configuration>
