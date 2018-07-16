@@ -20,6 +20,7 @@
             "status": "상태"
         },
         "status": {
+            "UNKNOWN": "UNKNOWN",
             "UP": "사용할 수",
             "DOWN": "서비스 중"
         }
