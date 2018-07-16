@@ -16,6 +16,7 @@
 
     <properties>
         <skipTests>true</skipTests>
+        <start-class>example.kmp.jh.KmpjhApp</start-class>
 
         <!-- Build properties -->
         <maven.version>3.0.0</maven.version>
