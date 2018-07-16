@@ -14,8 +14,8 @@
         <org.hsqldb.classifier></org.hsqldb.classifier>
         <!--<org.hsqldb.classifier>jdk8debug</org.hsqldb.classifier>-->
 
-        <org.springframework.boot.version>2.0.2.RELEASE</org.springframework.boot.version>
-        <io.springfox.version>2.8.0</io.springfox.version>
+        <org.springframework.boot.version>2.0.3.RELEASE</org.springframework.boot.version>
+        <io.springfox.version>2.9.2</io.springfox.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <github.global.server>github</github.global.server>
@@ -276,9 +276,9 @@
             <!-- postgresql -->
             <!---->
             <dependency>
-                <groupId>postgresql</groupId>
+                <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
-                <version>9.1-901-1.jdbc4</version>
+                <version>42.2.2</version>
             </dependency>
 
 

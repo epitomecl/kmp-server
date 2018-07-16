@@ -11,13 +11,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <org.springframework.boot.version>2.0.0.RELEASE</org.springframework.boot.version>
-        <io.springfox.version>2.8.0</io.springfox.version>
-
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <github.global.server>github</github.global.server>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <build>
