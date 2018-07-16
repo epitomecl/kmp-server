@@ -9,6 +9,11 @@
     <artifactId>kmp-01-core</artifactId>
     <packaging>jar</packaging>
 
+
+    <properties>
+        <skipTests>true</skipTests>
+    </properties>
+
     <dependencies>
 
         <dependency>

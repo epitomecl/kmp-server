@@ -4,6 +4,7 @@
 
 ### kmp-00-install
 - 소스코드가 없는 라이브러리 설치 모듈
+- 부득이한 경우만 사용하고, 가능한 최소화 해야함
 - bitcoinj-core-0.15-SNAPSHOT.jar
 
 ### kmp-00-libs
