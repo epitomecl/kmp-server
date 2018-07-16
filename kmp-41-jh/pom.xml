@@ -109,7 +109,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>kmp-31-resource-server</artifactId>
+            <artifactId>kmp-40-multictx</artifactId>
         </dependency>
 
         <dependency>

@@ -31,8 +31,8 @@
         <module>kmp-31-resource-server</module>
         <module>kmp-35-ui-swing</module>
 
+        <module>kmp-40-multictx</module>
         <module>kmp-41-jh</module>
-        <module>kmp-41-multictx</module>
 
         <module>kmp-91-devtool-test</module>
         <module>kmp-92-devtool-release</module>
@@ -148,12 +148,12 @@
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>kmp-41-jh</artifactId>
+                <artifactId>kmp-40-multictx</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>kmp-41-multictx</artifactId>
+                <artifactId>kmp-41-jh</artifactId>
                 <version>${project.version}</version>
                 <classifier>${webClassifier}</classifier>
             </dependency>
