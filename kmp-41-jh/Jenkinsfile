@@ -15,7 +15,7 @@ node {
     }
 
     stage('install tools') {
-        sh "./mvnw com.github.eirslett:frontend-maven-plugin:install-node-and-yarn -DnodeVersion=v8.10.0 -DyarnVersion=v1.5.1"
+        sh "./mvnw com.github.eirslett:frontend-maven-plugin:install-node-and-yarn -DnodeVersion=v8.11.3 -DyarnVersion=v1.6.0"
     }
 
     stage('yarn install') {
@@ -38,7 +38,7 @@ node {
         } catch(err) {
             throw err
         } finally {
-            junit '**/target/test-results/karma/TESTS-*.xml'
+            junit '**/target/test-results/jest/TESTS-*.xml'
         }
     }
 
@@ -47,9 +47,4 @@ node {
         archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
     }
 
-    stage('quality analysis') {
-        withSonarQubeEnv('Sonar') {
-            sh "./mvnw sonar:sonar"
-        }
-    }
 }
