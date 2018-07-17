@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.epitomecl.kmp.mapper.BlockExplorerMapper">
+
+    <select id="getBalance" resultType="com.epitomecl.kmp.blockexplorer.domain.UTXO">
+        select
+  	        encode(hash,'hex') as hash,
+  	        index,
+  	        value,
+  	        encode(scriptbytes,'hex') as scriptbytes
+        from
+			openoutputs
+        where toaddress = #{address}
+    </select>
+
+    <select id="getSpendTXOCount" resultType="java.lang.Integer">
+        select
+  	        count(1)
+        from
+			openoutputs_used
+        where toaddress = #{address}
+    </select>
+
+</mapper>

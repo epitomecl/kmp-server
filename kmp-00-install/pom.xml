@@ -23,17 +23,17 @@
                 <inherited>false</inherited>
                 <executions>
                     <execution>
-                        <id>bitcoinj-core</id>
+                        <id>bitcoinj-core-custom</id>
                         <phase>initialize</phase>
                         <goals>
                             <goal>install-file</goal>
                         </goals>
                         <configuration>
                             <file>
-                                lib/m2repository/org/bitcoinj/bitcoinj-core/0.15-SNAPSHOT/bitcoinj-core-0.15-SNAPSHOT.jar
+                                lib/m2repository/org/bitcoinj/bitcoinj-core-custom/0.15-SNAPSHOT/bitcoinj-core-custom-0.15-SNAPSHOT.jar
                             </file>
                             <groupId>org.bitcoinj</groupId>
-                            <artifactId>bitcoinj-core</artifactId>
+                            <artifactId>bitcoinj-core-custom</artifactId>
                             <version>0.15-SNAPSHOT</version>
                             <packaging>jar</packaging>
                         </configuration>
