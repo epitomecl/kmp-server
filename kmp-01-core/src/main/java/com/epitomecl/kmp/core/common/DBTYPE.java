@@ -4,7 +4,7 @@ import org.jooq.SQLDialect;
 
 public enum DBTYPE {
     // commercial dbms not supproted by jooq open source license.
-    HSQLDB, H2DB, MARIADB, MYSQL, PGSQL, /* ORACLE, MSSQL */;
+    H2DB, MARIADB, MYSQL, PGSQL, /* ORACLE, MSSQL */;
 
     private final String initSqlPathPrefix;
     private final String db_properties_filename;
@@ -25,8 +25,6 @@ public enum DBTYPE {
 
     public SQLDialect getSQLDialect() {
         switch (this) {
-            case HSQLDB:
-                return SQLDialect.HSQLDB;
             case H2DB:
                 return SQLDialect.H2;
             case MARIADB:

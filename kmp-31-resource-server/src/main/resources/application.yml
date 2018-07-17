@@ -1,15 +1,14 @@
 spring:
-  profiles: default
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:h2:file:./target/h2db/db/kmpjh;DB_CLOSE_DELAY=-1
+        username: kmpjh
+        password:
 
-datasource:
-  bch-testnet:
-      initialize: true
-      driver-class-name: "org.postgresql.Driver"
-      url: "jdbc:postgresql://13.125.250.135:5432/bitcoin_core_testnet"
-      user-name: "postgres"
-      password: "##free@2018.."
-      initial-size: 10
-      max-active: 10
-      max-idle: 10
-      min-idle: 10
-      max-wait: 3000
+partner:
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:postgresql://13.125.250.135:5432/bitcoin_core_testnet
+        username: postgres
+        password: ##free@2018..
+        driver-class-name: org.postgresql.Driver

@@ -6,9 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.PersistenceContext;
 
-@SuppressWarnings("unused")
 @Repository
 @Transactional("partnerTransactionManager")
 @PersistenceContext(name = "partnerEntityManagerFactory")
-public interface TestPostRepository extends JpaRepository<TestPost,Long> {
+public interface TestPostRepository extends JpaRepository<TestPost, Long> {
 }

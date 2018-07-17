@@ -24,7 +24,7 @@ public class AppConfInfo {
     public static final String CONFIG_db_def_system_username = "db_def_system_username";
     public static final String CONFIG_db_def_system_password = "db_def_system_password";
     // for defdb.user
-    // ## username should be uppercase in hsqldb
+    // ## username should be uppercase in h2db
     public static final String CONFIG_db_def_user_url = "db_def_user_url";
     public static final String CONFIG_db_def_user_dbname = "db_def_user_dbname";
     public static final String CONFIG_db_def_user_username = "db_def_user_username";
