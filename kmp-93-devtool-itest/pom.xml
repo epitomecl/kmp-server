@@ -15,6 +15,10 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>kmp-31-blockexplorer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>kmp-31-resource-server</artifactId>
         </dependency>
 

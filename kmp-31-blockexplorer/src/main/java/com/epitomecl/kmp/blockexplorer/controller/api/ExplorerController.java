@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import java.lang.invoke.MethodHandles;
-import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -161,12 +160,12 @@ public class ExplorerController implements IExplorer {
             @RequestParam("api_code") String apiCode,
             HttpSession session) {
         try {
-            if(xpub.length() > 0) {
+            if (xpub.length() > 0) {
                 final NetworkParameters netParams = NetworkParameters.testNet();
 
                 DeterministicKey key = createMasterPubKeyFromXPub(netParams, xpub);
-                DeterministicKey receiveKey = HDKeyDerivation.deriveChildKey(key,0);
-                DeterministicKey receiveAddress = HDKeyDerivation.deriveChildKey(receiveKey,0);
+                DeterministicKey receiveKey = HDKeyDerivation.deriveChildKey(key, 0);
+                DeterministicKey receiveAddress = HDKeyDerivation.deriveChildKey(receiveKey, 0);
 
                 String address = receiveAddress.toAddress(NetworkParameters.testNet()).toBase58();
 
@@ -188,7 +187,7 @@ public class ExplorerController implements IExplorer {
             @RequestParam("api_code") String apiCode,
             HttpSession session) {
         try {
-            if(address.length() > 0) {
+            if (address.length() > 0) {
                 return service.getSpendTXOCount(address);
             }
         } catch (Exception e) {

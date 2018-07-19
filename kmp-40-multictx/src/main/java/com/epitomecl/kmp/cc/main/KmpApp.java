@@ -1,5 +1,6 @@
 package com.epitomecl.kmp.cc.main;
 
+import com.epitomecl.kmp.blockexplorer.config.PrimaryDbConfig;
 import com.epitomecl.kmp.cc.config.SwaggerConfig;
 import com.epitomecl.kmp.dc.entity.Customer;
 import com.epitomecl.kmp.dc.repository.CustomerRepository;
@@ -24,7 +25,9 @@ import java.util.stream.Stream;
         GsonAutoConfiguration.class
 })
 @ComponentScan(basePackageClasses = {
-        SwaggerConfig.class
+        PrimaryDbConfig.class,
+        SwaggerConfig.class,
+        CustomerRepository.class
 })
 public class KmpApp implements CommandLineRunner {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());

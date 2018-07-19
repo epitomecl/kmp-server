@@ -5,7 +5,6 @@ import com.epitomecl.kmp.blockexplorer.domain.UTXO;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,11 +15,11 @@ public class BlockExplorerServiceImpl {
     @Inject
     private BlockExplorerDAOImpl dao;
 
-    public List<UTXO> getBalanceEx(String address){
+    public List<UTXO> getBalanceEx(String address) {
         return dao.getBalanceEx(address);
     }
 
-    public int getSpendTXOCount(String address){
+    public int getSpendTXOCount(String address) {
         return dao.getSpendTXOCount(address);
     }
 
