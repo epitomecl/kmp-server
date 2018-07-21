@@ -49,7 +49,7 @@ public class PartnerDbConfig {
     public LocalContainerEntityManagerFactoryBean customerEntityManagerFactory(
             EntityManagerFactoryBuilder builder) {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        properties.setProperty("hibernate.dialect", org.hibernate.dialect.PostgreSQLDialect.class.getName());
 
         LocalContainerEntityManagerFactoryBean emf = builder
                 .dataSource(partnerDataSource())
