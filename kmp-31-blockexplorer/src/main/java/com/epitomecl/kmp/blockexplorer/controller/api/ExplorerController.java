@@ -13,11 +13,11 @@ import org.bitcoinj.crypto.HDKeyDerivation;
 import org.bitcoinj.params.MainNetParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import java.lang.invoke.MethodHandles;
 import java.nio.ByteBuffer;
@@ -29,7 +29,7 @@ import java.util.List;
 public class ExplorerController implements IExplorer {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    @Inject
+    @Autowired
     private BlockExplorerServiceImpl service;
 
     public ExplorerController() {

@@ -2,9 +2,9 @@ package com.epitomecl.kmp.blockexplorer.service;
 
 import com.epitomecl.kmp.blockexplorer.dao.BlockExplorerDAOImpl;
 import com.epitomecl.kmp.blockexplorer.domain.UTXO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.inject.Inject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class BlockExplorerServiceImpl {
 
-    @Inject
+    @Autowired
     private BlockExplorerDAOImpl dao;
 
     public List<UTXO> getBalanceEx(String address) {
