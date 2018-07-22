@@ -35,7 +35,6 @@ import java.util.stream.Stream;
         Beans_01_properties.class,
         PrimaryDbConfig.class,
         SwaggerConfig.class,
-        CustomerRepository.class,
         BlockExplorerDAOImpl.class,
         BlockExplorerServiceImpl.class
 })
