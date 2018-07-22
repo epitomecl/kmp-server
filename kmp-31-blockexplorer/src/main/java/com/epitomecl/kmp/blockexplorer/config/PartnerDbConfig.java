@@ -27,7 +27,11 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EntityScan(basePackages = "com.my.test.custom.domain")
-@EnableJpaRepositories(transactionManagerRef = "partnerTransactionManager", entityManagerFactoryRef = "partnerEntityManagerFactory", basePackages = "com.my.test.custom.repository")
+@EnableJpaRepositories(
+        basePackages = "com.my.test.custom.repository",
+        entityManagerFactoryRef = "partnerEntityManagerFactory",
+        transactionManagerRef = "partnerTransactionManager"
+)
 public class PartnerDbConfig {
 
     //region dataSource
