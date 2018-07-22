@@ -26,7 +26,6 @@
         <module>kmp-00-libs</module>
         <module>kmp-01-core</module>
         <module>kmp-31-blockexplorer</module>
-        <module>kmp-31-resource-server</module>
         <module>kmp-35-ui-swing</module>
 
         <module>kmp-40-multictx</module>
@@ -141,11 +140,6 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>kmp-31-blockexplorer</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>kmp-31-resource-server</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

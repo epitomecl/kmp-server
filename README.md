@@ -22,10 +22,6 @@
 - kmp-server 의 핵심 로직 관리 모듈
 - 대부분의 코드가 여기에 있음
 
-### kmp-31-resource-server
-- kmp-server 의 핵심 로직 관리 모듈
-- 대부분의 코드가 여기에 있음
-
 ### kmp-35-ui-swing
 - kmp-server 테스트를 위한 swing ui 모듈
 

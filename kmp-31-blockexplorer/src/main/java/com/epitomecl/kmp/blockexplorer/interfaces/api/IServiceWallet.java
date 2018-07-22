@@ -76,9 +76,11 @@ public interface IServiceWallet {
             @RequestParam("api_code") String apiCode,
             @RequestParam("address") String address);
 
+    //region custom extension
     @PostMapping("/send")
     String send(
             @RequestParam("hashtx") String hashtx,
             @RequestParam("api_code") String api_code,
             HttpSession session);
+    //endregion
 }

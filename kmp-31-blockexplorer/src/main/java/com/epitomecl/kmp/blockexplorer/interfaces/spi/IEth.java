@@ -1,4 +1,4 @@
-package com.epitomecl.kmp.cc.interfaces.spi;
+package com.epitomecl.kmp.blockexplorer.interfaces.spi;
 
 import info.blockchain.wallet.ethereum.EthUrls;
 import info.blockchain.wallet.ethereum.data.EthAddressResponseMap;

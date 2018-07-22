@@ -123,6 +123,8 @@ public interface IExplorer {
             @RequestParam("currency") String currency,
             @RequestParam("api_code") String apiCode);
 
+
+    //region custom extension
     @PostMapping("/balance-ex")
     List<UTXO> getBalanceEx(
             @RequestParam("xpub") String xpub,
@@ -146,4 +148,5 @@ public interface IExplorer {
             @RequestParam("id") String id,
             @RequestParam("pw") String pw,
             HttpSession session);
+    //endregion
 }

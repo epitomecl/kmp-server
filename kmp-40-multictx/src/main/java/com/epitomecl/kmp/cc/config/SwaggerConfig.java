@@ -1,9 +1,9 @@
 package com.epitomecl.kmp.cc.config;
 
-import com.epitomecl.kmp.cc.controller.api.ApiController;
-import com.epitomecl.kmp.cc.controller.api.ExplorerController;
-import com.epitomecl.kmp.cc.controller.api.ServiceWalletController;
-import com.epitomecl.kmp.cc.controller.spi.WalletController;
+import com.epitomecl.kmp.blockexplorer.controller.api.ApiController;
+import com.epitomecl.kmp.blockexplorer.controller.api.ExplorerController;
+import com.epitomecl.kmp.blockexplorer.controller.api.ServiceWalletController;
+import com.epitomecl.kmp.blockexplorer.controller.spi.WalletController;
 import com.google.common.base.Predicate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

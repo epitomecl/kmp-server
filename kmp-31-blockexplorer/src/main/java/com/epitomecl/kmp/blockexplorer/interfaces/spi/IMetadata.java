@@ -1,4 +1,4 @@
-package com.epitomecl.kmp.cc.interfaces.spi;
+package com.epitomecl.kmp.blockexplorer.interfaces.spi;
 
 import info.blockchain.wallet.metadata.MetadataUrls;
 import info.blockchain.wallet.metadata.data.*;
