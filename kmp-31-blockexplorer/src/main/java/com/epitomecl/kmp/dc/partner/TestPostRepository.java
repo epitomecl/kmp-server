@@ -1,4 +1,4 @@
-package com.epitomecl.kmp.blockexplorer.config;
+package com.epitomecl.kmp.dc.partner;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,5 +1,6 @@
 package com.epitomecl.kmp.blockexplorer.config;
 
+import com.epitomecl.kmp.dc.primary.entity.Customer;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -38,11 +39,10 @@ public class PrimaryDbConfig {
     //region jpa
     @Bean(name = "entityManagerFactory")
     @Primary
-    public LocalContainerEntityManagerFactoryBean customerEntityManagerFactory(
-            EntityManagerFactoryBuilder builder) {
+    public LocalContainerEntityManagerFactoryBean customerEntityManagerFactory(EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(defaultDataSource())
-                .packages(Input.class)
+                .packages(Customer.class)
                 .persistenceUnit("default")
                 .build();
     }

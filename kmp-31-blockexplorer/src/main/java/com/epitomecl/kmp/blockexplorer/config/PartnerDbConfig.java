@@ -1,5 +1,6 @@
 package com.epitomecl.kmp.blockexplorer.config;
 
+import com.epitomecl.kmp.dc.partner.TestPost;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -46,8 +47,7 @@ public class PartnerDbConfig {
 
     //region jpa
     @Bean(name = "partnerEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean customerEntityManagerFactory(
-            EntityManagerFactoryBuilder builder) {
+    public LocalContainerEntityManagerFactoryBean customerEntityManagerFactory(EntityManagerFactoryBuilder builder) {
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", org.hibernate.dialect.PostgreSQLDialect.class.getName());
 
