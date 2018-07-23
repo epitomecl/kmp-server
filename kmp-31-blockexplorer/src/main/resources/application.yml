@@ -13,5 +13,5 @@ partner:
         type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:postgresql://13.125.250.135:5432/bitcoin_core_testnet
         username: postgres
-        password: "##free@2018.."
+        password: "password"
         driver-class-name: org.postgresql.Driver
