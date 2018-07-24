@@ -1,6 +1,7 @@
 package com.epitomecl.kmp.blockexplorer.dao;
 
 import com.epitomecl.kmp.blockexplorer.domain.UTXO;
+import com.epitomecl.kmp.blockexplorer.domain.UTXORaw;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ public class BlockExplorerDAOImpl {
 
     private static String namespace = "com.epitomecl.kmp.mapper.BlockExplorerMapper";
 
-    public List<UTXO> getBalanceEx(String address) {
+    public List<UTXORaw> getBalanceEx(String address) {
         return session.selectList(namespace + ".getBalance", address);
     }
 

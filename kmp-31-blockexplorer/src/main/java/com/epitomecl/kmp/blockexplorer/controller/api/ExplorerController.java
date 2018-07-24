@@ -1,6 +1,7 @@
 package com.epitomecl.kmp.blockexplorer.controller.api;
 
 import com.epitomecl.kmp.blockexplorer.domain.UTXO;
+import com.epitomecl.kmp.blockexplorer.domain.UTXORaw;
 import com.epitomecl.kmp.blockexplorer.domain.UserVO;
 import com.epitomecl.kmp.blockexplorer.interfaces.api.IExplorer;
 import com.epitomecl.kmp.blockexplorer.service.BlockExplorerServiceImpl;
@@ -13,6 +14,7 @@ import org.bitcoinj.crypto.HDKeyDerivation;
 import org.bitcoinj.params.MainNetParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.spongycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -169,12 +171,19 @@ public class ExplorerController implements IExplorer {
 
                 String address = receiveAddress.toAddress(NetworkParameters.testNet()).toBase58();
 
-                List<UTXO> list = service.getBalanceEx(address);
-//                list.forEach(v -> {
-//                    String hash = v.getHash();
-//                    hash.length();
-//                });
-                return list;
+                List<UTXORaw> list = service.getBalanceEx(address);
+                List<UTXO> result = new ArrayList<>();
+
+                list.forEach(v -> {
+                    UTXO item = new UTXO();
+                    item.setHash(Hex.toHexString(v.getHash()));
+                    item.setIndex(v.getIndex());
+                    item.setValue(v.getValue());
+                    item.setScriptBytes(Hex.toHexString(v.getScriptBytes()));
+                    result.add(item);
+                });
+
+                return result;
             }
         } catch (Exception e) {
             e.printStackTrace();

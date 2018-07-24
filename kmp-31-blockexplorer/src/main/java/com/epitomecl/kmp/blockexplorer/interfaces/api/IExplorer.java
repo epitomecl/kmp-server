@@ -1,6 +1,7 @@
 package com.epitomecl.kmp.blockexplorer.interfaces.api;
 
 import com.epitomecl.kmp.blockexplorer.domain.UTXO;
+import com.epitomecl.kmp.blockexplorer.domain.UTXORaw;
 import com.epitomecl.kmp.blockexplorer.domain.UserVO;
 import info.blockchain.api.data.*;
 import org.springframework.web.bind.annotation.GetMapping;

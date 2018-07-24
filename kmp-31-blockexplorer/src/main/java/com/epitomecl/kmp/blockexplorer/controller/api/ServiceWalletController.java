@@ -42,30 +42,30 @@ public class ServiceWalletController implements IServiceWallet {
     File blockchain;
 
     public ServiceWalletController() {
-        //peer start
-        NetworkParameters netParams = NetworkParameters.testNet();
-        BlockStore bs; //= new MemoryBlockStore(netParams);
-
-        try {
-            blockchain = new File("btc_testnet_blockchain.dat");
-            bs = new SPVBlockStore(netParams, blockchain);
-            BlockChain chain = new BlockChain(netParams, bs);
-
-            peerGroup = new PeerGroup(netParams, chain);
-            peerGroup.setUserAgent("PeerMonitor", "1.0");
-            peerGroup.setMaxConnections(16);
-            peerGroup.addPeerDiscovery(new DnsDiscovery(netParams));
-
-            peerGroup.start();
-            peerGroup.waitForPeers(16).get();
-
-        } catch (BlockStoreException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+//        //peer start
+//        NetworkParameters netParams = NetworkParameters.testNet();
+//        BlockStore bs; //= new MemoryBlockStore(netParams);
+//
+//        try {
+//            blockchain = new File("btc_testnet_blockchain.dat");
+//            bs = new SPVBlockStore(netParams, blockchain);
+//            BlockChain chain = new BlockChain(netParams, bs);
+//
+//            peerGroup = new PeerGroup(netParams, chain);
+//            peerGroup.setUserAgent("PeerMonitor", "1.0");
+//            peerGroup.setMaxConnections(16);
+//            peerGroup.addPeerDiscovery(new DnsDiscovery(netParams));
+//
+//            peerGroup.start();
+//            peerGroup.waitForPeers(16).get();
+//
+//        } catch (BlockStoreException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        }
     }
 
     private boolean verifyGuid(String guid, String password) {

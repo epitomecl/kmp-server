@@ -5,12 +5,12 @@
 
 <mapper namespace="com.epitomecl.kmp.mapper.BlockExplorerMapper">
 
-    <select id="getBalance" resultType="com.epitomecl.kmp.blockexplorer.domain.UTXO">
+    <select id="getBalance" resultType="com.epitomecl.kmp.blockexplorer.domain.UTXORaw">
         select
-  	        encode(hash,'hex') as hash,
+  	        hash,
   	        index,
   	        value,
-  	        encode(scriptbytes,'hex') as scriptbytes
+  	        scriptbytes
         from
 			openoutputs
         where toaddress = #{address}
