@@ -13,7 +13,7 @@ import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -27,21 +27,18 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EntityScan(basePackages = "com.my.test.custom.domain")
-@EnableJpaRepositories(
-        basePackages = "com.my.test.custom.repository",
-        entityManagerFactoryRef = "partnerEntityManagerFactory",
-        transactionManagerRef = "partnerTransactionManager"
-)
 public class PartnerDbConfig {
 
     //region dataSource
     @Bean
+    @Primary
     @ConfigurationProperties("partner.datasource")
     public DataSourceProperties partnerDataSourceProperties() {
         return new DataSourceProperties();
     }
 
     @Bean
+    @Primary
     @ConfigurationProperties("partner.datasource")
     public DataSource partnerDataSource() {
         return partnerDataSourceProperties().initializeDataSourceBuilder().build();
@@ -51,6 +48,7 @@ public class PartnerDbConfig {
 
     //region jpa
     @Bean(name = "partnerEntityManagerFactory")
+    @Primary
     public LocalContainerEntityManagerFactoryBean customerEntityManagerFactory(EntityManagerFactoryBuilder builder) {
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", org.hibernate.dialect.PostgreSQLDialect.class.getName());
@@ -65,6 +63,7 @@ public class PartnerDbConfig {
     }
 
     @Bean(name = "partnerTransactionManager")
+    @Primary
     public JpaTransactionManager db2TransactionManager(@Qualifier("partnerEntityManagerFactory") final EntityManagerFactory emf) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
