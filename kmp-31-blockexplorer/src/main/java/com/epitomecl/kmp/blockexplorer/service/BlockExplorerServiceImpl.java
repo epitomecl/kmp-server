@@ -2,6 +2,7 @@ package com.epitomecl.kmp.blockexplorer.service;
 
 import com.epitomecl.kmp.blockexplorer.dao.BlockExplorerDAOImpl;
 import com.epitomecl.kmp.blockexplorer.domain.UTXO;
+import com.epitomecl.kmp.blockexplorer.domain.UTXORaw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class BlockExplorerServiceImpl {
     @Autowired
     private BlockExplorerDAOImpl dao;
 
-    public List<UTXO> getBalanceEx(String address) {
+    public List<UTXORaw> getBalanceEx(String address) {
         return dao.getBalanceEx(address);
     }
 
