@@ -22,6 +22,9 @@
 - kmp-server 의 핵심 로직 관리 모듈
 - 대부분의 코드가 여기에 있음
 
+### kmp-32-blockstore
+- PostgresFullPrunedBlockStore 구현모듈
+
 ### kmp-35-ui-swing
 - kmp-server 테스트를 위한 swing ui 모듈
 
