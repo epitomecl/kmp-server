@@ -26,6 +26,7 @@
         <module>kmp-00-libs</module>
         <module>kmp-01-core</module>
         <module>kmp-31-blockexplorer</module>
+        <module>kmp-32-blockstore</module>
         <module>kmp-35-ui-swing</module>
 
         <module>kmp-40-multictx</module>
