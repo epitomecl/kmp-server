@@ -22,7 +22,7 @@ logging:
 spring:
     profiles:
         active: dev
-        include: swagger
+        include: swagger, no-liquibase
     devtools:
         restart:
             enabled: true

@@ -1,16 +1,20 @@
 package example.kmp.jh;
 
+import com.epitomecl.kmp.blockexplorer.config.PrimaryDbConfig;
+import com.epitomecl.kmp.blockexplorer.config.SwaggerConfig;
+import com.epitomecl.kmp.blockexplorer.dao.BlockExplorerDAOImpl;
+import com.epitomecl.kmp.blockexplorer.service.BlockExplorerServiceImpl;
+import com.epitomecl.kmp.cc.config.Beans_01_properties;
 import example.kmp.jh.config.ApplicationProperties;
 import example.kmp.jh.config.DefaultProfileUtil;
-
 import io.github.jhipster.config.JHipsterConstants;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
 import javax.annotation.PostConstruct;
@@ -20,6 +24,14 @@ import java.util.Collection;
 
 @SpringBootApplication
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
+@ComponentScan(basePackageClasses = {
+    Beans_01_properties.class,
+    PrimaryDbConfig.class,
+    SwaggerConfig.class,
+    BlockExplorerDAOImpl.class,
+    BlockExplorerServiceImpl.class,
+    KmpjhApp.class
+})
 public class KmpjhApp {
 
     private static final Logger log = LoggerFactory.getLogger(KmpjhApp.class);
