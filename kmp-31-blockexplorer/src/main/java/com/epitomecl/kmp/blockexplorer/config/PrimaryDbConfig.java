@@ -1,6 +1,5 @@
 package com.epitomecl.kmp.blockexplorer.config;
 
-import com.epitomecl.kmp.dc.primary.entity.Customer;
 import org.hibernate.dialect.H2Dialect;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -24,9 +23,7 @@ import java.util.Map;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "com.epitomecl.kmp.dc.primary.repository",
-        entityManagerFactoryRef = "entityManagerFactory",
-        transactionManagerRef = "transactionManager"
+        basePackages = {"com.epitomecl.kmp.dc.primary.repository"}
 )
 public class PrimaryDbConfig {
 
@@ -61,7 +58,7 @@ public class PrimaryDbConfig {
 
         return builder
                 .dataSource(defaultDataSource())
-                .packages(Customer.class)
+                .packages("com.epitomecl.kmp.dc.primary.entity", "example.kmp.jh.domain")
                 .properties(propertiesHashMap)
                 .persistenceUnit("default")
                 .build();

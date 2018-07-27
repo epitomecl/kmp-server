@@ -12,9 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -28,9 +26,6 @@ import java.text.SimpleDateFormat;
 import java.util.stream.Stream;
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude = {
-        GsonAutoConfiguration.class
-})
 @ComponentScan(basePackageClasses = {
         Beans_01_properties.class,
         PrimaryDbConfig.class,
