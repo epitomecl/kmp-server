@@ -10,7 +10,8 @@
   	        hash,
   	        index,
   	        value,
-  	        scriptbytes
+  	        scriptbytes,
+  	        toaddress
         from
 			openoutputs
         where toaddress = #{address}

@@ -5,13 +5,10 @@ import com.epitomecl.kmp.blockexplorer.domain.UTXORaw;
 import com.epitomecl.kmp.blockexplorer.domain.UserVO;
 import com.epitomecl.kmp.blockexplorer.interfaces.api.IExplorer;
 import com.epitomecl.kmp.blockexplorer.service.BlockExplorerServiceImpl;
+import com.epitomecl.kmp.core.wallet.AccountKeyDerivation;
 import info.blockchain.api.data.*;
-import org.bitcoinj.core.AddressFormatException;
-import org.bitcoinj.core.Base58;
 import org.bitcoinj.core.NetworkParameters;
-import org.bitcoinj.crypto.DeterministicKey;
-import org.bitcoinj.crypto.HDKeyDerivation;
-import org.bitcoinj.params.MainNetParams;
+import org.bitcoinj.wallet.KeyChain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongycastle.util.encoders.Hex;
@@ -22,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.lang.invoke.MethodHandles;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -165,21 +161,22 @@ public class ExplorerController implements IExplorer {
             if (xpub.length() > 0) {
                 final NetworkParameters netParams = NetworkParameters.testNet();
 
-                DeterministicKey key = createMasterPubKeyFromXPub(netParams, xpub);
-                DeterministicKey receiveKey = HDKeyDerivation.deriveChildKey(key, 0);
-                DeterministicKey receiveAddress = HDKeyDerivation.deriveChildKey(receiveKey, 0);
+                AccountKeyDerivation deriver = new AccountKeyDerivation(netParams, xpub);
+                List<UTXORaw> receive_balances = getAddressBalance(deriver, KeyChain.KeyPurpose.RECEIVE_FUNDS);
+                List<UTXORaw> change_balances = getAddressBalance(deriver, KeyChain.KeyPurpose.CHANGE);
 
-                String address = receiveAddress.toAddress(NetworkParameters.testNet()).toBase58();
+                List<UTXORaw> balances = new ArrayList<>(receive_balances);
+                balances.addAll(change_balances);
 
-                List<UTXORaw> list = service.getBalanceEx(address);
                 List<UTXO> result = new ArrayList<>();
 
-                list.forEach(v -> {
+                balances.forEach(v -> {
                     UTXO item = new UTXO();
                     item.setHash(Hex.toHexString(v.getHash()));
                     item.setIndex(v.getIndex());
                     item.setValue(v.getValue());
                     item.setScriptBytes(Hex.toHexString(v.getScriptBytes()));
+                    item.setToAddress(v.getToAddress());
                     result.add(item);
                 });
 
@@ -189,6 +186,36 @@ public class ExplorerController implements IExplorer {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private List<UTXORaw> getAddressBalance(AccountKeyDerivation deriver, KeyChain.KeyPurpose purpose) {
+
+        String address = deriver.getAddresses(purpose);
+        List<UTXORaw> balances = service.getBalanceEx(address);
+
+        //if the result has size then check next derive address recursively
+        //https://blog.blockonomics.co/bitcoin-what-is-this-gap-limit-4f098e52d7e1
+        //BIP44 wallet has gap limit. When you genetate 20 receiving address, that didn't receive any funds.
+        //From the 21st recipient address cannot find funds.
+        //But if you have seed key then you can get fund from derived receive address.
+
+        AccountKeyDerivation.ChildKeyNode childKeyNode = deriver.getChildKeyNode(purpose);
+        if(balances.size() == 0) {
+            childKeyNode.addGap();
+            if(childKeyNode.getGap() >= 20) {
+                return balances;
+            }
+        }
+        else {
+            childKeyNode.resetGap();
+        }
+
+        List<UTXORaw> balances_next = getAddressBalance(deriver, purpose);
+
+        List<UTXORaw> result = new ArrayList<>(balances);
+        result.addAll(balances_next);
+
+        return result;
     }
 
     public Integer getSpendTXOCount(
@@ -222,36 +249,5 @@ public class ExplorerController implements IExplorer {
         UserVO result = new UserVO();
         result.setSession(session.getId());
         return result;
-    }
-
-    private DeterministicKey createMasterPubKeyFromXPub(NetworkParameters params, String xpubstr) throws AddressFormatException {
-
-        boolean isTestnet = !(params instanceof MainNetParams);
-
-        byte[] xpubBytes = Base58.decodeChecked(xpubstr);
-
-        ByteBuffer bb = ByteBuffer.wrap(xpubBytes);
-
-        int prefix = bb.getInt();
-
-        if (!isTestnet && prefix != 0x0488B21E) {
-            throw new AddressFormatException("invalid xpub version");
-        }
-        if (isTestnet && prefix != 0x043587CF) {
-            throw new AddressFormatException("invalid xpub version");
-        }
-
-        byte[] chain = new byte[32];
-        byte[] pub = new byte[33];
-        // depth:
-        bb.get();
-        // parent fingerprint:
-        bb.getInt();
-        // child no.
-        bb.getInt();
-        bb.get(chain);
-        bb.get(pub);
-
-        return HDKeyDerivation.createMasterPubKeyFromBytes(pub, chain);
     }
 }

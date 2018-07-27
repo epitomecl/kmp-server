@@ -14,7 +14,7 @@ import org.bitcoinj.core.Transaction;
 import org.bitcoinj.net.discovery.DnsDiscovery;
 import org.bitcoinj.store.BlockStore;
 import org.bitcoinj.store.BlockStoreException;
-import org.bitcoinj.store.SPVBlockStore;
+import org.bitcoinj.store.MemoryBlockStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongycastle.util.encoders.Hex;
@@ -39,33 +39,31 @@ public class ServiceWalletController implements IServiceWallet {
     //todo. for test. fix or remove later
     private Wallet wallet;
     private PeerGroup peerGroup;
-    File blockchain;
 
     public ServiceWalletController() {
-//        //peer start
-//        NetworkParameters netParams = NetworkParameters.testNet();
-//        BlockStore bs; //= new MemoryBlockStore(netParams);
-//
-//        try {
-//            blockchain = new File("btc_testnet_blockchain.dat");
-//            bs = new SPVBlockStore(netParams, blockchain);
-//            BlockChain chain = new BlockChain(netParams, bs);
-//
-//            peerGroup = new PeerGroup(netParams, chain);
-//            peerGroup.setUserAgent("PeerMonitor", "1.0");
-//            peerGroup.setMaxConnections(16);
-//            peerGroup.addPeerDiscovery(new DnsDiscovery(netParams));
-//
-//            peerGroup.start();
-//            peerGroup.waitForPeers(16).get();
-//
-//        } catch (BlockStoreException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        }
+        //peer start
+        NetworkParameters netParams = NetworkParameters.testNet();
+        BlockStore bs;
+
+        try {
+            bs = new MemoryBlockStore(netParams);
+            BlockChain chain = new BlockChain(netParams, bs);
+
+            peerGroup = new PeerGroup(netParams, chain);
+            peerGroup.setUserAgent("PeerMonitor", "1.0");
+            peerGroup.setMaxConnections(16);
+            peerGroup.addPeerDiscovery(new DnsDiscovery(netParams));
+
+            peerGroup.start();
+            peerGroup.waitForPeers(16).get();
+
+        } catch (BlockStoreException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     private boolean verifyGuid(String guid, String password) {

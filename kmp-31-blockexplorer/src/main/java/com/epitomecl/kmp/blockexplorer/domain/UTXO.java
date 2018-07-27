@@ -8,6 +8,7 @@ public class UTXO {
     private int index;
     private BigInteger value;
     private String scriptBytes;
+    private String toaddress;
 
     public String getHash() {
         return hash;
@@ -41,6 +42,14 @@ public class UTXO {
         this.scriptBytes = scriptBytes;
     }
 
+    public String getToAddress() {
+        return toaddress;
+    }
+
+    public void setToAddress(String toaddress) {
+        this.toaddress = toaddress;
+    }
+
     @Override
     public String toString() {
         return "UTXO [" +
@@ -48,6 +57,7 @@ public class UTXO {
                 ", index=" + index +
                 ", value=" + value +
                 ", scriptBytes=" + scriptBytes +
+                ", toaddress=" + toaddress +
                 "]";
     }
 }

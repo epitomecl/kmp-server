@@ -31,14 +31,12 @@ public class PartnerDbConfig {
 
     //region dataSource
     @Bean
-    @Primary
     @ConfigurationProperties("partner.datasource")
     public DataSourceProperties partnerDataSourceProperties() {
         return new DataSourceProperties();
     }
 
-    @Bean
-    @Primary
+    @Bean(name = "partnerDataSource")
     @ConfigurationProperties("partner.datasource")
     public DataSource partnerDataSource() {
         return partnerDataSourceProperties().initializeDataSourceBuilder().build();
@@ -48,7 +46,6 @@ public class PartnerDbConfig {
 
     //region jpa
     @Bean(name = "partnerEntityManagerFactory")
-    @Primary
     public LocalContainerEntityManagerFactoryBean customerEntityManagerFactory(EntityManagerFactoryBuilder builder) {
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", org.hibernate.dialect.PostgreSQLDialect.class.getName());
@@ -63,7 +60,6 @@ public class PartnerDbConfig {
     }
 
     @Bean(name = "partnerTransactionManager")
-    @Primary
     public JpaTransactionManager db2TransactionManager(@Qualifier("partnerEntityManagerFactory") final EntityManagerFactory emf) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);
@@ -84,7 +80,7 @@ public class PartnerDbConfig {
     }
 
     @Bean(name = "sqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+    public SqlSessionFactory sqlSessionFactory(@Qualifier("partnerDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:/mybatis-config.xml"));

@@ -1,7 +1,6 @@
 package com.epitomecl.kmp.blockexplorer.service;
 
 import com.epitomecl.kmp.blockexplorer.dao.BlockExplorerDAOImpl;
-import com.epitomecl.kmp.blockexplorer.domain.UTXO;
 import com.epitomecl.kmp.blockexplorer.domain.UTXORaw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

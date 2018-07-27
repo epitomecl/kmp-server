@@ -8,6 +8,7 @@ public class UTXORaw {
     private int index;
     private BigInteger value;
     private byte[] scriptBytes;
+    private String toaddress;
 
     public byte[] getHash() {
         return hash;
@@ -41,13 +42,22 @@ public class UTXORaw {
         this.scriptBytes = scriptBytes;
     }
 
+    public String getToAddress() {
+        return toaddress;
+    }
+
+    public void setToAddress(String toaddress) {
+        this.toaddress = toaddress;
+    }
+
     @Override
     public String toString() {
-        return "UTXO [" +
+        return "UTXORaw [" +
                 "hash=" + hash +
                 ", index=" + index +
                 ", value=" + value +
                 ", scriptBytes=" + scriptBytes +
+                ", toaddress=" + toaddress +
                 "]";
     }
 }

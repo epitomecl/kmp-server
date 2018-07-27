@@ -1,6 +1,5 @@
 package com.epitomecl.kmp.blockexplorer.dao;
 
-import com.epitomecl.kmp.blockexplorer.domain.UTXO;
 import com.epitomecl.kmp.blockexplorer.domain.UTXORaw;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
