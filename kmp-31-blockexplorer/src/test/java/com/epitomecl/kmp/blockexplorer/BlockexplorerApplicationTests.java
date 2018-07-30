@@ -1,16 +1,50 @@
 package com.epitomecl.kmp.blockexplorer;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.lang.invoke.MethodHandles;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BlockexplorerApplicationTests {
+    private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @Test
-    public void contextLoads() {
+    public void test_01_wallet_create() {
+        logger.info("test_01_wallet_create");
+    }
+
+    @Test
+    public void test_02_wallet_read() {
+        logger.info("test_02_wallet_read");
+    }
+
+    @Test
+    public void test_03_wallet_update() {
+        logger.info("test_03_wallet_update");
+    }
+
+    @Test
+    public void test_04_wallet_delete() {
+        logger.info("test_04_wallet_delete");
+    }
+
+    @Test
+    public void test_05_seed_backup() {
+        logger.info("test_05_seed_backup");
+    }
+
+    @Test
+    public void test_06_seed_restore() {
+        logger.info("test_06_seed_restore");
     }
 
 }
