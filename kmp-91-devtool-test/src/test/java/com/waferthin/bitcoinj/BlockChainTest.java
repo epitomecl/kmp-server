@@ -9,12 +9,11 @@ import org.bitcoinj.crypto.HDKeyDerivation;
 import org.bitcoinj.net.discovery.DnsDiscovery;
 import org.bitcoinj.store.BlockStore;
 import org.bitcoinj.store.BlockStoreException;
-import org.bitcoinj.store.SPVBlockStore;
+import org.bitcoinj.store.MemoryBlockStore;
 import org.bitcoinj.wallet.Wallet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.lang.invoke.MethodHandles;
 import java.util.concurrent.ExecutionException;
 
@@ -31,9 +30,6 @@ public class BlockChainTest {
         String amountToSend = "10";             // milli-BTC. satoshis
         String recipient = "mrY35stqZEtUoym2UQpYsHowNHc3Krzudr";    // Bitcoin address(testnet)
 
-        //BlockChain file
-        File blockchain = new File("btc_testnet_blockchain.dat");
-
         // the Bitcoin network to use
         final NetworkParameters netParams;
 
@@ -46,12 +42,7 @@ public class BlockChainTest {
         }
 
         // data structure for block chain storage
-        BlockStore blockStore = null;//new MemoryBlockStore(netParams);
-        try {
-            blockStore = new SPVBlockStore(netParams, blockchain);
-        } catch (BlockStoreException e) {
-            e.printStackTrace();
-        }
+        BlockStore blockStore = new MemoryBlockStore(netParams);
 
         // declare object to store and understand block chain
         BlockChain chain;
