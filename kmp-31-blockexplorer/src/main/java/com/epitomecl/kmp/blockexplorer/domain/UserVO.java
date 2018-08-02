@@ -14,7 +14,7 @@ public class UserVO {
     @Override
     public String toString() {
         return "UserVO [" +
-                ", session=" + session +
+                "session=" + session +
                 "]";
     }
 }

@@ -1,5 +1,6 @@
 package com.epitomecl.kmp.blockexplorer.controller.api;
 
+import com.epitomecl.kmp.blockexplorer.domain.SendTXResult;
 import com.epitomecl.kmp.blockexplorer.interfaces.api.IServiceWallet;
 import info.blockchain.api.data.*;
 import info.blockchain.wallet.exceptions.HDWalletException;
@@ -7,9 +8,7 @@ import info.blockchain.wallet.exceptions.ServerConnectionException;
 import info.blockchain.wallet.payload.PayloadManager;
 import info.blockchain.wallet.payload.data.Account;
 import info.blockchain.wallet.payload.data.Wallet;
-import org.bitcoinj.core.BlockChain;
-import org.bitcoinj.core.NetworkParameters;
-import org.bitcoinj.core.PeerGroup;
+import org.bitcoinj.core.*;
 import org.bitcoinj.core.Transaction;
 import org.bitcoinj.net.discovery.DnsDiscovery;
 import org.bitcoinj.store.BlockStore;
@@ -328,15 +327,24 @@ public class ServiceWalletController implements IServiceWallet {
     }
 
     @Override
-    public String send(
+    public SendTXResult send(
             @RequestParam("hashtx") String hashtx,
             @RequestParam("api_code") String api_code,
             HttpSession session) {
+        SendTXResult result = new SendTXResult();
 
         byte[] payloadBytes = Hex.decode(hashtx);
         Transaction tx = new Transaction(NetworkParameters.testNet(), payloadBytes);
-        peerGroup.broadcastTransaction(tx);
 
-        return "{ result:ok }";
+        try {
+            tx = peerGroup.broadcastTransaction(tx).broadcast().get();
+            result.setHashtx(Hex.toHexString(tx.bitcoinSerialize()));
+        } catch (ExecutionException e) {
+            logger.error(e.getMessage());
+        } catch (InterruptedException e) {
+            logger.error(e.getMessage());
+        }
+
+        return result;
     }
 }

@@ -1,13 +1,10 @@
 package com.epitomecl.kmp.blockexplorer.interfaces.api;
 
+import com.epitomecl.kmp.blockexplorer.domain.ActiveAddress;
 import com.epitomecl.kmp.blockexplorer.domain.UTXO;
-import com.epitomecl.kmp.blockexplorer.domain.UTXORaw;
 import com.epitomecl.kmp.blockexplorer.domain.UserVO;
 import info.blockchain.api.data.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -128,6 +125,18 @@ public interface IExplorer {
     //region custom extension
     @PostMapping("/balance-ex")
     List<UTXO> getBalanceEx(
+            @RequestParam("xpub") String xpub,
+            @RequestParam("api_code") String apiCode,
+            HttpSession session);
+
+    @PostMapping("/activereceiveaddress")
+    ActiveAddress getActiveReceiveAddress(
+            @RequestParam("xpub") String xpub,
+            @RequestParam("api_code") String apiCode,
+            HttpSession session);
+
+    @PostMapping("/activechangeaddress")
+    ActiveAddress getActiveChangeAddress(
             @RequestParam("xpub") String xpub,
             @RequestParam("api_code") String apiCode,
             HttpSession session);

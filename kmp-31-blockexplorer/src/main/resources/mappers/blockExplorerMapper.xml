@@ -17,6 +17,14 @@
         where toaddress = #{address}
     </select>
 
+    <select id="getUsedTXOCount" resultType="java.lang.Integer">
+        select
+  	        count(1)
+        from
+			openoutputs
+        where toaddress = #{address}
+    </select>
+
     <select id="getSpendTXOCount" resultType="java.lang.Integer">
         select
   	        count(1)

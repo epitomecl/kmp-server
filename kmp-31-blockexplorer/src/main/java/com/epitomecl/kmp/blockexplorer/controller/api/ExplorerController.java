@@ -1,5 +1,6 @@
 package com.epitomecl.kmp.blockexplorer.controller.api;
 
+import com.epitomecl.kmp.blockexplorer.domain.ActiveAddress;
 import com.epitomecl.kmp.blockexplorer.domain.UTXO;
 import com.epitomecl.kmp.blockexplorer.domain.UTXORaw;
 import com.epitomecl.kmp.blockexplorer.domain.UserVO;
@@ -189,13 +190,12 @@ public class ExplorerController implements IExplorer {
     }
 
     private List<UTXORaw> getAddressBalance(AccountKeyDerivation deriver, KeyChain.KeyPurpose purpose) {
-
         String address = deriver.getAddresses(purpose);
         List<UTXORaw> balances = service.getBalanceEx(address);
 
         //if the result has size then check next derive address recursively
         //https://blog.blockonomics.co/bitcoin-what-is-this-gap-limit-4f098e52d7e1
-        //BIP44 wallet has gap limit. When you genetate 20 receiving address, that didn't receive any funds.
+        //BIP44 wallet has gap limit. When you genetate 20 receiving address that didn't receive any funds.
         //From the 21st recipient address cannot find funds.
         //But if you have seed key then you can get fund from derived receive address.
 
@@ -216,6 +216,71 @@ public class ExplorerController implements IExplorer {
         result.addAll(balances_next);
 
         return result;
+    }
+
+    public ActiveAddress getActiveReceiveAddress(
+            @RequestParam("xpub") String xpub,
+            @RequestParam("api_code") String apiCode,
+            HttpSession session) {
+        ActiveAddress result = new ActiveAddress();
+
+        try {
+            if (xpub.length() > 0) {
+                final NetworkParameters netParams = NetworkParameters.testNet();
+                AccountKeyDerivation deriver = new AccountKeyDerivation(netParams, xpub);
+
+                String receiveAddress = findActiveReceiveAddress(deriver, KeyChain.KeyPurpose.RECEIVE_FUNDS);
+                result.setAddress(receiveAddress);
+                return result;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    private String findActiveReceiveAddress(AccountKeyDerivation deriver, KeyChain.KeyPurpose purpose) {
+        String address = deriver.getAddresses(purpose);
+
+        if(!service.isSpendAddress(address)) {
+            return address;
+        }
+
+        String address_next = findActiveReceiveAddress(deriver, purpose);
+        return address_next;
+    }
+
+    public ActiveAddress getActiveChangeAddress(
+            @RequestParam("xpub") String xpub,
+            @RequestParam("api_code") String apiCode,
+            HttpSession session) {
+        ActiveAddress result = new ActiveAddress();
+
+        try {
+            if (xpub.length() > 0) {
+                final NetworkParameters netParams = NetworkParameters.testNet();
+                AccountKeyDerivation deriver = new AccountKeyDerivation(netParams, xpub);
+
+                String changeAddress = findActiveChangeAddress(deriver, KeyChain.KeyPurpose.CHANGE);
+                result.setAddress(changeAddress);
+                return result;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    private String findActiveChangeAddress(AccountKeyDerivation deriver, KeyChain.KeyPurpose purpose) {
+        String address = deriver.getAddresses(purpose);
+        if(!service.isUsedAddress(address) && !service.isSpendAddress(address)) {
+            return address;
+        }
+
+        String address_next = findActiveChangeAddress(deriver, purpose);
+        return address_next;
     }
 
     public Integer getSpendTXOCount(

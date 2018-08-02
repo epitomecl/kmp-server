@@ -23,6 +23,14 @@ public class BlockExplorerServiceImpl {
         return dao.getSpendTXOCount(address);
     }
 
+    public boolean isUsedAddress(String address) {
+        return dao.isUsedAddress(address);
+    }
+
+    public boolean isSpendAddress(String address) {
+        return dao.isSpendAddress(address);
+    }
+
     private void addUTXO(ResultSet rs) throws SQLException {
 //        Sha256Hash hash = Sha256Hash.wrap(rs.getBytes(1));
 //        Coin amount = Coin.valueOf(rs.getLong(2));

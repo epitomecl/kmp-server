@@ -23,4 +23,13 @@ public class BlockExplorerDAOImpl {
         return session.selectOne(namespace + ".getSpendTXOCount", address);
     }
 
+    public boolean isUsedAddress(String address) {
+        int count = session.selectOne(namespace + ".getUsedTXOCount", address);
+        return (count > 0) ? true : false;
+    }
+
+    public boolean isSpendAddress(String address) {
+        int count = session.selectOne(namespace + ".getSpendTXOCount", address);
+        return (count > 0) ? true : false;
+    }
 }

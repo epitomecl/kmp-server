@@ -1,5 +1,6 @@
 package com.epitomecl.kmp.blockexplorer.interfaces.api;
 
+import com.epitomecl.kmp.blockexplorer.domain.SendTXResult;
 import info.blockchain.api.data.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -78,7 +79,7 @@ public interface IServiceWallet {
 
     //region custom extension
     @PostMapping("/send")
-    String send(
+    SendTXResult send(
             @RequestParam("hashtx") String hashtx,
             @RequestParam("api_code") String api_code,
             HttpSession session);
