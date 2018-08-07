@@ -48,18 +48,18 @@ public class PrimaryDbConfig {
     @Bean(name = "entityManagerFactory")
     @Primary
     public LocalContainerEntityManagerFactoryBean customerEntityManagerFactory(EntityManagerFactoryBuilder builder) {
-        Map<String, String> propertiesHashMap = new HashMap<>();
-        propertiesHashMap.put("hibernate.implicit_naming_strategy", SpringImplicitNamingStrategy.class.getName());
-        propertiesHashMap.put("hibernate.physical_naming_strategy", SpringPhysicalNamingStrategy.class.getName());
-        propertiesHashMap.put("hibernate.dialect", H2Dialect.class.getName());
-//        propertiesHashMap.put("hibernate.show_sql", "true");
-//        propertiesHashMap.put("hibernate.format_sql", "true");
-        propertiesHashMap.put("hibernate.hbm2ddl.auto", "update");
+//        Map<String, String> propertiesHashMap = new HashMap<>();
+//        propertiesHashMap.put("hibernate.implicit_naming_strategy", SpringImplicitNamingStrategy.class.getName());
+//        propertiesHashMap.put("hibernate.physical_naming_strategy", SpringPhysicalNamingStrategy.class.getName());
+//        propertiesHashMap.put("hibernate.dialect", H2Dialect.class.getName());
+////        propertiesHashMap.put("hibernate.show_sql", "true");
+////        propertiesHashMap.put("hibernate.format_sql", "true");
+//        propertiesHashMap.put("hibernate.hbm2ddl.auto", "update");
 
         return builder
                 .dataSource(defaultDataSource())
                 .packages("com.epitomecl.kmp.dc.primary.entity", "example.kmp.jh.domain")
-                .properties(propertiesHashMap)
+//                .properties(propertiesHashMap)
                 .persistenceUnit("default")
                 .build();
     }
