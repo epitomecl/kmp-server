@@ -58,7 +58,7 @@ public class PrimaryDbConfig {
 
         return builder
                 .dataSource(defaultDataSource())
-                .packages("com.epitomecl.kmp.dc.primary.entity")
+                .packages("com.epitomecl.kmp.dc.primary.entity", "example.kmp.jh.domain")
                 .properties(propertiesHashMap)
                 .persistenceUnit("default")
                 .build();
