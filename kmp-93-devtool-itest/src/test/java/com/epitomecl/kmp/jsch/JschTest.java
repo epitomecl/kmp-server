@@ -17,7 +17,7 @@ public class JschTest {
 
         String username = "ubuntu";
         String privateKey = System.getProperty("user.home") + "/.ssh/id_rsa";
-        String host = "dev1.epitomecl.com";
+        String host = "kmp.epitomecl.com";
         int port = 22;
 
         // session connect
