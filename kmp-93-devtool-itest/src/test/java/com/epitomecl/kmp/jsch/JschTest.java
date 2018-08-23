@@ -17,7 +17,7 @@ public class JschTest {
 
         String username = "ubuntu";
         String privateKey = System.getProperty("user.home") + "/.ssh/id_rsa";
-        String host = "kmp.epitomecl.com";
+        String host = "dev1.epitomecl.com";
         int port = 22;
 
         // session connect
@@ -50,6 +50,7 @@ public class JschTest {
         // start
         // redirect to /dev/null for ssh with nohup
         jschLib.doExec(session, download_dir + "/bin/linux/start.sh > /dev/null 2>&1");
+        jschLib.doExec(session, "ls -1");
 
         // session disconnect
         session.disconnect();
