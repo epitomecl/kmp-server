@@ -1,7 +1,8 @@
 package com.epitomecl.kmp.blockexplorer.interfaces.api;
 
 import com.epitomecl.kmp.blockexplorer.domain.ActiveAddress;
-import com.epitomecl.kmp.blockexplorer.domain.UTXO;
+import com.epitomecl.kmp.blockexplorer.domain.SendTXResult;
+import com.epitomecl.kmp.core.wallet.UTXO;
 import com.epitomecl.kmp.blockexplorer.domain.UserVO;
 import info.blockchain.api.data.*;
 import org.springframework.web.bind.annotation.*;
@@ -144,6 +145,12 @@ public interface IExplorer {
     @PostMapping("/spendtxo-count")
     Integer getSpendTXOCount(
             @RequestParam("address") String address,
+            @RequestParam("api_code") String apiCode,
+            HttpSession session);
+
+    @PostMapping("/checktx")
+    List<UTXO> checkTX(
+            @RequestParam("txid") String txid,
             @RequestParam("api_code") String apiCode,
             HttpSession session);
 

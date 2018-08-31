@@ -1,4 +1,4 @@
-package com.epitomecl.kmp.blockexplorer.domain;
+package com.epitomecl.kmp.core.wallet;
 
 import java.math.BigInteger;
 

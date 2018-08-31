@@ -1,15 +1,23 @@
 package com.epitomecl.kmp.blockexplorer.controller.api;
 
+import com.epitomecl.kmp.blockexplorer.domain.ActiveAddress;
 import com.epitomecl.kmp.blockexplorer.domain.SendTXResult;
+import com.epitomecl.kmp.core.wallet.*;
 import com.epitomecl.kmp.blockexplorer.interfaces.api.IServiceWallet;
+import com.epitomecl.kmp.core.wallet.UTXO;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import info.blockchain.api.data.*;
 import info.blockchain.wallet.exceptions.HDWalletException;
 import info.blockchain.wallet.exceptions.ServerConnectionException;
 import info.blockchain.wallet.payload.PayloadManager;
 import info.blockchain.wallet.payload.data.Account;
 import info.blockchain.wallet.payload.data.Wallet;
+import org.apache.commons.codec.DecoderException;
 import org.bitcoinj.core.*;
 import org.bitcoinj.core.Transaction;
+import org.bitcoinj.crypto.MnemonicException;
 import org.bitcoinj.net.discovery.DnsDiscovery;
 import org.bitcoinj.store.BlockStore;
 import org.bitcoinj.store.BlockStoreException;
@@ -17,18 +25,21 @@ import org.bitcoinj.store.MemoryBlockStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongycastle.util.encoders.Hex;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 
 @RestController
@@ -39,12 +50,19 @@ public class ServiceWalletController implements IServiceWallet {
     private Wallet wallet;
     private PeerGroup peerGroup;
 
+    private HDWalletData faucet;
+
+    @Autowired
+    private ExplorerController explorerController;
+
     public ServiceWalletController() {
         //peer start
         NetworkParameters netParams = NetworkParameters.testNet();
         BlockStore bs;
 
         try {
+            faucet = (HDWalletData) HDWalletData.restoreFromSeed(CryptoType.BITCOIN_TESTNET, "e1f3906a6f161428fe600f9e646ebc2f", "", "faucet wallet", 5);
+
             bs = new MemoryBlockStore(netParams);
             BlockChain chain = new BlockChain(netParams, bs);
 
@@ -61,6 +79,18 @@ public class ServiceWalletController implements IServiceWallet {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (HDWalletException e) {
+            e.printStackTrace();
+        } catch (MnemonicException.MnemonicChecksumException e) {
+            e.printStackTrace();
+        } catch (MnemonicException.MnemonicWordException e) {
+            e.printStackTrace();
+        } catch (MnemonicException.MnemonicLengthException e) {
+            e.printStackTrace();
+        } catch (DecoderException e) {
             e.printStackTrace();
         }
     }
@@ -347,4 +377,66 @@ public class ServiceWalletController implements IServiceWallet {
 
         return result;
     }
+
+    //region support for integration test
+    @Override
+    public SendTXResult coinFromFaucet(
+            @RequestParam("address") String address,
+            @RequestParam("api_code") String api_code,
+            HttpSession session) {
+        SendTXResult result = new SendTXResult();
+
+        try {
+            AccountData accountData = faucet.getAccount(0);
+
+            String toAddress = address;
+            Long sendSatoshi = 1000000L;
+            ActiveAddress changeAddress = explorerController.getActiveChangeAddress(accountData.getXpub(), api_code, session);
+
+            //get faucet balance
+            List<UTXO> utxos = explorerController.getBalanceEx(accountData.getXpub(), api_code, session);
+
+            //check balance compare to send amount
+            BigInteger balance = BigInteger.ZERO;
+            for(UTXO i : utxos) {
+                balance = balance.add(i.getValue());
+            }
+
+            TXBuilder txBuilder = new TXBuilder();
+
+            String hashtx = txBuilder.makeTx(accountData.getXpriv(), accountData.getXpub(), toAddress, changeAddress.getAddress(), sendSatoshi, utxos);
+
+            byte[] payloadBytes = Hex.decode(hashtx);
+            Transaction tx = new Transaction(NetworkParameters.testNet(), payloadBytes);
+            //tx = peerGroup.broadcastTransaction(tx).broadcast().get();
+            //result.setHashtx(Hex.toHexString(tx.bitcoinSerialize()));
+            peerGroup.broadcastTransaction(tx).broadcast();
+            result.setHashtx(hashtx);
+        }
+        catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+
+        return result;
+    }
+
+    @Override
+    public ActiveAddress addressFaucet(
+            @RequestParam("api_code") String api_code,
+            HttpSession session) {
+        ActiveAddress addressFaucet = new ActiveAddress();
+
+        try {
+            AccountData accountData = faucet.getAccount(0);
+            ActiveAddress changeAddress = explorerController.getActiveReceiveAddress(accountData.getXpub(), api_code, session);
+            addressFaucet.setAddress(changeAddress.getAddress());
+        }
+        catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+
+        return addressFaucet;
+    }
+
+    //endregion
 }

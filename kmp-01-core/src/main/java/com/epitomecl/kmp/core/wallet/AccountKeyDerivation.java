@@ -25,6 +25,11 @@ public class AccountKeyDerivation {
         return address;
     }
 
+    public DeterministicKey getKey(KeyChain.KeyPurpose purpose) {
+        DeterministicKey key = getChildKeyNode(purpose).getChildKey();
+        return key;
+    }
+
     public ChildKeyNode getChildKeyNode(KeyChain.KeyPurpose purpose) {
         ChildKeyNode result;
 

@@ -1,7 +1,8 @@
 package com.epitomecl.kmp.blockexplorer.controller.api;
 
 import com.epitomecl.kmp.blockexplorer.domain.ActiveAddress;
-import com.epitomecl.kmp.blockexplorer.domain.UTXO;
+import com.epitomecl.kmp.blockexplorer.domain.SendTXResult;
+import com.epitomecl.kmp.core.wallet.UTXO;
 import com.epitomecl.kmp.blockexplorer.domain.UTXORaw;
 import com.epitomecl.kmp.blockexplorer.domain.UserVO;
 import com.epitomecl.kmp.blockexplorer.interfaces.api.IExplorer;
@@ -295,6 +296,41 @@ public class ExplorerController implements IExplorer {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    public List<UTXO> checkTX(
+            @RequestParam("txid") String txid,
+            @RequestParam("api_code") String apiCode,
+            HttpSession session) {
+        List<UTXO> result = new ArrayList<>();
+
+        try {
+            byte[] hash = Hex.decode(txid);
+            List<UTXORaw> utxoRawList = service.getTX(hash);
+
+            utxoRawList.forEach(v -> {
+                UTXO item = new UTXO();
+                item.setHash(Hex.toHexString(v.getHash()));
+                item.setIndex(v.getIndex());
+                item.setValue(v.getValue());
+                item.setScriptBytes(Hex.toHexString(v.getScriptBytes()));
+                item.setToAddress(v.getToAddress());
+
+                if(!item.getHash().equals(txid)) {
+                    try {
+                        throw new Exception(String.format("Transaction id not match: source[%s], found[%s]", txid, item.getHash()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                result.add(item);
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     public UserVO postLogin(

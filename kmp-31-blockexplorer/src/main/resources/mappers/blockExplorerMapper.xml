@@ -17,6 +17,18 @@
         where toaddress = #{address}
     </select>
 
+    <select id="getTX" resultType="com.epitomecl.kmp.blockexplorer.domain.UTXORaw">
+        select
+  	        hash,
+  	        index,
+  	        value,
+  	        scriptbytes,
+  	        toaddress
+        from
+			openoutputs
+        where hash = #{hash, typeHandler=org.apache.ibatis.type.ByteArrayTypeHandler}
+    </select>
+
     <select id="getUsedTXOCount" resultType="java.lang.Integer">
         select
   	        count(1)

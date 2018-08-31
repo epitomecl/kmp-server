@@ -19,6 +19,10 @@ public class BlockExplorerServiceImpl {
         return dao.getBalanceEx(address);
     }
 
+    public List<UTXORaw> getTX(byte[] hash) {
+        return dao.getTX(hash);
+    }
+
     public int getSpendTXOCount(String address) {
         return dao.getSpendTXOCount(address);
     }

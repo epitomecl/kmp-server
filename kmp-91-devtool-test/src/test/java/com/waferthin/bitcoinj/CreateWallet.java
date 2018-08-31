@@ -3,6 +3,7 @@ package com.waferthin.bitcoinj;
 import com.epitomecl.kmp.core.common.HomeConfigurator;
 import org.bitcoinj.core.ECKey;
 import org.bitcoinj.core.NetworkParameters;
+import org.bitcoinj.crypto.DeterministicKey;
 import org.bitcoinj.wallet.KeyChain;
 import org.bitcoinj.wallet.Wallet;
 import org.slf4j.Logger;
@@ -44,6 +45,10 @@ public class CreateWallet {
 
         // fetch the first key in the wallet directly from the keychain ArrayList
         ECKey firstKey = wallet.getActiveKeyChain().getKey(KeyChain.KeyPurpose.AUTHENTICATION);
+        String seed = wallet.getKeyChainSeed().toHexString();
+
+        DeterministicKey receiveKey = wallet.getActiveKeyChain().getKey(KeyChain.KeyPurpose.RECEIVE_FUNDS);
+        String xpub = receiveKey.serializePubB58(NetworkParameters.testNet());
 
         // output key
         logger.info("First key in the wallet:\n" + firstKey);

@@ -1,6 +1,8 @@
 package com.epitomecl.kmp.blockexplorer.interfaces.api;
 
+import com.epitomecl.kmp.blockexplorer.domain.ActiveAddress;
 import com.epitomecl.kmp.blockexplorer.domain.SendTXResult;
+import com.epitomecl.kmp.core.wallet.UTXO;
 import info.blockchain.api.data.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -81,6 +83,19 @@ public interface IServiceWallet {
     @PostMapping("/send")
     SendTXResult send(
             @RequestParam("hashtx") String hashtx,
+            @RequestParam("api_code") String api_code,
+            HttpSession session);
+    //endregion
+
+    //region support for integration test
+    @PostMapping("/coinfromfaucet")
+    SendTXResult coinFromFaucet(
+            @RequestParam("address") String address,
+            @RequestParam("api_code") String api_code,
+            HttpSession session);
+
+    @PostMapping("/addressfaucet")
+    ActiveAddress addressFaucet(
             @RequestParam("api_code") String api_code,
             HttpSession session);
     //endregion
