@@ -13,10 +13,13 @@ import info.blockchain.wallet.payload.PayloadManager;
 import info.blockchain.wallet.payload.data.Account;
 import info.blockchain.wallet.payload.data.Wallet;
 import org.apache.commons.codec.DecoderException;
-import org.bitcoinj.core.*;
+import org.bitcoinj.core.BlockChain;
+import org.bitcoinj.core.NetworkParameters;
+import org.bitcoinj.core.PeerGroup;
 import org.bitcoinj.core.Transaction;
 import org.bitcoinj.crypto.MnemonicException;
 import org.bitcoinj.net.discovery.DnsDiscovery;
+import org.bitcoinj.params.TestNet3Params;
 import org.bitcoinj.store.BlockStore;
 import org.bitcoinj.store.BlockStoreException;
 import org.bitcoinj.store.MemoryBlockStore;
@@ -31,13 +34,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 
 @RestController
@@ -55,7 +55,7 @@ public class ServiceWalletController implements IServiceWallet {
 
     public ServiceWalletController() {
         //peer start
-        NetworkParameters netParams = NetworkParameters.testNet();
+        TestNet3Params netParams = TestNet3Params.get();
         BlockStore bs;
 
         try {
@@ -362,15 +362,18 @@ public class ServiceWalletController implements IServiceWallet {
         SendTXResult result = new SendTXResult();
 
         byte[] payloadBytes = Hex.decode(hashtx);
-        Transaction tx = new Transaction(NetworkParameters.testNet(), payloadBytes);
+        Transaction tx = new Transaction(TestNet3Params.get(), payloadBytes);
 
         try {
             tx = peerGroup.broadcastTransaction(tx).broadcast().get();
             result.setHashtx(Hex.toHexString(tx.bitcoinSerialize()));
         } catch (ExecutionException e) {
             logger.error(e.getMessage());
+            result.setError(e.getMessage());
+
         } catch (InterruptedException e) {
             logger.error(e.getMessage());
+            result.setError(e.getMessage());
         }
 
         return result;
@@ -405,13 +408,14 @@ public class ServiceWalletController implements IServiceWallet {
             String hashtx = txBuilder.makeTx(accountData.getXpriv(), accountData.getXpub(), toAddress, changeAddress.getAddress(), sendSatoshi, utxos);
 
             byte[] payloadBytes = Hex.decode(hashtx);
-            Transaction tx = new Transaction(NetworkParameters.testNet(), payloadBytes);
+            Transaction tx = new Transaction(TestNet3Params.get(), payloadBytes);
             //tx = peerGroup.broadcastTransaction(tx).broadcast().get();
             //result.setHashtx(Hex.toHexString(tx.bitcoinSerialize()));
             peerGroup.broadcastTransaction(tx).broadcast();
             result.setHashtx(hashtx);
         }
         catch (Exception e) {
+            result.setError(e.getMessage());
             logger.error(e.getMessage());
         }
 

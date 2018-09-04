@@ -3,6 +3,7 @@ package com.epitomecl.kmp.blockexplorer.domain;
 public class SendTXResult {
 
     private String hashtx;
+    private String error;
 
     public String getHashtx() {
         return hashtx;
@@ -12,10 +13,19 @@ public class SendTXResult {
         this.hashtx = hashtx;
     }
 
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
     @Override
     public String toString() {
         return "SendTXResult [" +
                 "hashtx=" + hashtx +
+                "error=" + error +
                 "]";
     }
 }
