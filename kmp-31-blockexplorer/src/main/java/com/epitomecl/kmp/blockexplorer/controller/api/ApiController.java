@@ -1,13 +1,17 @@
 package com.epitomecl.kmp.blockexplorer.controller.api;
 
+import com.epitomecl.kmp.blockexplorer.domain.UserVO;
 import com.epitomecl.kmp.blockexplorer.interfaces.api.IApi;
+import com.epitomecl.kmp.blockexplorer.service.KmpServiceImpl;
 import info.blockchain.api.data.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +21,9 @@ import java.util.TreeMap;
 @RestController
 public class ApiController implements IApi {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+
+    @Autowired
+    private KmpServiceImpl service;
 
     public ApiController() {
 
@@ -139,5 +146,40 @@ public class ApiController implements IApi {
             @RequestParam("tx") String hash,
             @RequestParam("api_code") String apiCode) {
         return "ok";
+    }
+
+    public UserVO postLogin(
+            @RequestParam("id") String id,
+            @RequestParam("pw") String pw,
+            HttpSession session) {
+        UserVO result = new UserVO();
+
+        UserVO userVO = service.getUserData(id, pw);
+        if(userVO != null) {
+            result = userVO;
+            result.setSession(session.getId());
+        }
+
+        return result;
+    }
+
+    public UserVO postRegist(
+            @RequestParam("id") String id,
+            @RequestParam("pw") String pw,
+            HttpSession session) {
+        UserVO result = new UserVO();
+
+        UserVO userVO = service.getUserData(id, pw);
+        if(userVO == null) {
+            service.setUserData(id, pw);
+            result = service.getUserData(id, pw);
+            result.setSession(session.getId());
+        }
+        else {
+            result = userVO;
+            result.setSession(session.getId());
+        }
+
+        return result;
     }
 }

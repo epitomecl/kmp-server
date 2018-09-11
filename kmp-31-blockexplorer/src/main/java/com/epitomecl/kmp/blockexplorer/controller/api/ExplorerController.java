@@ -1,10 +1,8 @@
 package com.epitomecl.kmp.blockexplorer.controller.api;
 
 import com.epitomecl.kmp.blockexplorer.domain.ActiveAddress;
-import com.epitomecl.kmp.blockexplorer.domain.SendTXResult;
 import com.epitomecl.kmp.core.wallet.UTXO;
 import com.epitomecl.kmp.blockexplorer.domain.UTXORaw;
-import com.epitomecl.kmp.blockexplorer.domain.UserVO;
 import com.epitomecl.kmp.blockexplorer.interfaces.api.IExplorer;
 import com.epitomecl.kmp.blockexplorer.service.BlockExplorerServiceImpl;
 import com.epitomecl.kmp.core.wallet.AccountKeyDerivation;
@@ -333,22 +331,4 @@ public class ExplorerController implements IExplorer {
         return result;
     }
 
-    public UserVO postLogin(
-            @RequestParam("id") String id,
-            @RequestParam("pw") String pw,
-            HttpSession session) {
-        UserVO result = new UserVO();
-        result.setSession(session.getId());
-
-        return result;
-    }
-
-    public UserVO postRegist(
-            @RequestParam("id") String id,
-            @RequestParam("pw") String pw,
-            HttpSession session) {
-        UserVO result = new UserVO();
-        result.setSession(session.getId());
-        return result;
-    }
 }

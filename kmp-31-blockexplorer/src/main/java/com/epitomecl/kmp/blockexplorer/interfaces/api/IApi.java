@@ -1,11 +1,13 @@
 package com.epitomecl.kmp.blockexplorer.interfaces.api;
 
+import com.epitomecl.kmp.blockexplorer.domain.UserVO;
 import info.blockchain.api.data.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 
@@ -115,4 +117,15 @@ public interface IApi {
             @RequestParam("tx") String hash,
             @RequestParam("api_code") String apiCode);
 
+    @PostMapping("/login")
+    UserVO postLogin(
+            @RequestParam("id") String id,
+            @RequestParam("pw") String pw,
+            HttpSession session);
+
+    @PostMapping("/regist")
+    UserVO postRegist(
+            @RequestParam("id") String id,
+            @RequestParam("pw") String pw,
+            HttpSession session);
 }

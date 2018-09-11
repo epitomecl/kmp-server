@@ -22,15 +22,51 @@ public class PartnerDbConfig {
 
     //region dataSource
     @Bean
-    @ConfigurationProperties("partner.datasource")
-    public DataSourceProperties partnerDataSourceProperties() {
+    @ConfigurationProperties("partner.datasource-one")
+    public DataSourceProperties partnerDataSourceOneProperties() {
         return new DataSourceProperties();
     }
 
-    @Bean(name = "partnerDataSource")
-    @ConfigurationProperties("partner.datasource")
-    public DataSource partnerDataSource() {
-        return partnerDataSourceProperties().initializeDataSourceBuilder().build();
+    @Bean(name = "partnerDataSourceOne")
+    @ConfigurationProperties("partner.datasource-one")
+    public DataSource partnerDataSourceOne() {
+        return partnerDataSourceOneProperties().initializeDataSourceBuilder().build();
+    }
+
+    @Bean
+    @ConfigurationProperties("partner.datasource-two")
+    public DataSourceProperties partnerDataSourceTwoProperties() {
+        return new DataSourceProperties();
+    }
+
+    @Bean(name = "partnerDataSourceTwo")
+    @ConfigurationProperties("partner.datasource-two")
+    public DataSource partnerDataSourceTwo() {
+        return partnerDataSourceTwoProperties().initializeDataSourceBuilder().build();
+    }
+
+    @Bean
+    @ConfigurationProperties("partner.datasource-three")
+    public DataSourceProperties partnerDataSourceThreeProperties() {
+        return new DataSourceProperties();
+    }
+
+    @Bean(name = "partnerDataSourceThree")
+    @ConfigurationProperties("partner.datasource-three")
+    public DataSource partnerDataSourceThree() {
+        return partnerDataSourceThreeProperties().initializeDataSourceBuilder().build();
+    }
+
+    @Bean
+    @ConfigurationProperties("partner.datasource-four")
+    public DataSourceProperties partnerDataSourceFourProperties() {
+        return new DataSourceProperties();
+    }
+
+    @Bean(name = "partnerDataSourceFour")
+    @ConfigurationProperties("partner.datasource-four")
+    public DataSource partnerDataSourceFour() {
+        return partnerDataSourceFourProperties().initializeDataSourceBuilder().build();
     }
     //endregion
 
@@ -65,26 +101,88 @@ public class PartnerDbConfig {
     @Autowired
     private ApplicationContext applicationContext;
 
-    @Bean(name = "partnerPlatformTransactionManager")
-    public PlatformTransactionManager transactionManager() {
-        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(partnerDataSource());
+    //region datasource-one
+    @Bean(name = "partnerPlatformTransactionManagerOne")
+    public PlatformTransactionManager transactionManagerOne() {
+        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(partnerDataSourceOne());
         transactionManager.setGlobalRollbackOnParticipationFailure(false);
         return transactionManager;
     }
 
-    @Bean(name = "partnerSqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("partnerDataSource") DataSource dataSource) throws Exception {
+    @Bean(name = "partnerSqlSessionFactoryOne")
+    public SqlSessionFactory sqlSessionFactoryOne(@Qualifier("partnerDataSourceOne") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:/mybatis-config.xml"));
-        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mappers/**/*Mapper.xml"));
+        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mappers/blockExplorerMapper.xml"));
         return sqlSessionFactoryBean.getObject();
     }
 
-    @Bean(name = "partnerSqlSessionTemplate")
-    public SqlSessionTemplate sqlSession(@Qualifier("partnerSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
+    @Bean(name = "partnerSqlSessionTemplateOne")
+    public SqlSessionTemplate sqlSessionOne(@Qualifier("partnerSqlSessionFactoryOne") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
     //endregion
 
+    //region datasource-two
+    @Bean(name = "partnerPlatformTransactionManagerTwo")
+    public PlatformTransactionManager transactionManagerTwo() {
+        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(partnerDataSourceTwo());
+        transactionManager.setGlobalRollbackOnParticipationFailure(false);
+        return transactionManager;
+    }
+
+    @Bean(name = "partnerSqlSessionFactoryTwo")
+    public SqlSessionFactory sqlSessionFactoryTwo(@Qualifier("partnerDataSourceTwo") DataSource dataSource) throws Exception {
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(dataSource);
+        sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:/mybatis-config.xml"));
+        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mappers/secretShareMapper.xml"));
+        return sqlSessionFactoryBean.getObject();
+    }
+
+    @Bean(name = "partnerSqlSessionTemplateTwo")
+    public SqlSessionTemplate sqlSessionTwo(@Qualifier("partnerSqlSessionFactoryTwo") SqlSessionFactory sqlSessionFactory) {
+        return new SqlSessionTemplate(sqlSessionFactory);
+    }
+    //endregion
+
+    //region datasource-three
+    @Bean(name = "partnerPlatformTransactionManagerThree")
+    public PlatformTransactionManager transactionManagerThree() {
+        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(partnerDataSourceThree());
+        transactionManager.setGlobalRollbackOnParticipationFailure(false);
+        return transactionManager;
+    }
+
+    @Bean(name = "partnerSqlSessionFactoryThree")
+    public SqlSessionFactory sqlSessionFactoryThree(@Qualifier("partnerDataSourceThree") DataSource dataSource) throws Exception {
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(dataSource);
+        sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:/mybatis-config.xml"));
+        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mappers/secretShareMapper.xml"));
+        return sqlSessionFactoryBean.getObject();
+    }
+
+    @Bean(name = "partnerSqlSessionTemplateThree")
+    public SqlSessionTemplate sqlSessionThree(@Qualifier("partnerSqlSessionFactoryThree") SqlSessionFactory sqlSessionFactory) {
+        return new SqlSessionTemplate(sqlSessionFactory);
+    }
+
+    @Bean(name = "partnerSqlSessionFactoryFour")
+    public SqlSessionFactory sqlSessionFactoryFour(@Qualifier("partnerDataSourceFour") DataSource dataSource) throws Exception {
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(dataSource);
+        sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:/mybatis-config.xml"));
+        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mappers/kmpMapper.xml"));
+        return sqlSessionFactoryBean.getObject();
+    }
+
+    @Bean(name = "partnerSqlSessionTemplateFour")
+    public SqlSessionTemplate sqlSessionFour(@Qualifier("partnerSqlSessionFactoryFour") SqlSessionFactory sqlSessionFactory) {
+        return new SqlSessionTemplate(sqlSessionFactory);
+    }
+    //endregion
+
+    //endregion
 }

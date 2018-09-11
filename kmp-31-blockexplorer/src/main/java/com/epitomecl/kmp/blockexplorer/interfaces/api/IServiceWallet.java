@@ -1,8 +1,9 @@
 package com.epitomecl.kmp.blockexplorer.interfaces.api;
 
 import com.epitomecl.kmp.blockexplorer.domain.ActiveAddress;
+import com.epitomecl.kmp.blockexplorer.domain.SecretSharingResult;
+import com.epitomecl.kmp.blockexplorer.domain.SecretSharingVO;
 import com.epitomecl.kmp.blockexplorer.domain.SendTXResult;
-import com.epitomecl.kmp.core.wallet.UTXO;
 import info.blockchain.api.data.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * source from - info.blockchain.api.interfaces.ServiceWalletInterface
@@ -85,6 +87,38 @@ public interface IServiceWallet {
             @RequestParam("hashtx") String hashtx,
             @RequestParam("api_code") String api_code,
             HttpSession session);
+
+    @PostMapping("/sharingdatalist")
+    List<String> getSharingDataList(
+            @RequestParam("index") int index,
+            @RequestParam("api_code") String api_code,
+            HttpSession session);
+
+    @PostMapping("/sharingdataone")
+    SecretSharingVO getSharingDataOne(@RequestParam("index") int index,
+                                      @RequestParam("label") String label,
+                                      @RequestParam("api_code") String api_code,
+                                      HttpSession session);
+
+    @PostMapping("/sharingdatatwo")
+    SecretSharingVO getSharingDataTwo(@RequestParam("index") int index,
+                                      @RequestParam("label") String label,
+                                      @RequestParam("api_code") String api_code,
+                                      HttpSession session);
+
+    @PostMapping("/backupsharingdataone")
+    SecretSharingResult backupSharingDataOne(@RequestParam("index") int index,
+                                             @RequestParam("label") String label,
+                                             @RequestParam("shareddata") String shareddata,
+                                             @RequestParam("api_code") String api_code,
+                                             HttpSession session);
+
+    @PostMapping("/backupsharingdatatwo")
+    SecretSharingResult backupSharingDataTwo(@RequestParam("index") int index,
+                                             @RequestParam("label") String label,
+                                             @RequestParam("shareddata") String shareddata,
+                                             @RequestParam("api_code") String api_code,
+                                             HttpSession session);
     //endregion
 
     //region support for integration test

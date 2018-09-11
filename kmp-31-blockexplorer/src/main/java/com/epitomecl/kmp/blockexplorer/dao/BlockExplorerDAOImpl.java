@@ -3,6 +3,7 @@ package com.epitomecl.kmp.blockexplorer.dao;
 import com.epitomecl.kmp.blockexplorer.domain.UTXORaw;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.Map;
 public class BlockExplorerDAOImpl {
 
     @Autowired
+    @Qualifier("partnerSqlSessionTemplateOne")
     private SqlSessionTemplate session;
 
     private static String namespace = "com.epitomecl.kmp.mapper.BlockExplorerMapper";

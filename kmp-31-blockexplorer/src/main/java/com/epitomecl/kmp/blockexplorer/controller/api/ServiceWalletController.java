@@ -1,7 +1,10 @@
 package com.epitomecl.kmp.blockexplorer.controller.api;
 
 import com.epitomecl.kmp.blockexplorer.domain.ActiveAddress;
+import com.epitomecl.kmp.blockexplorer.domain.SecretSharingResult;
+import com.epitomecl.kmp.blockexplorer.domain.SecretSharingVO;
 import com.epitomecl.kmp.blockexplorer.domain.SendTXResult;
+import com.epitomecl.kmp.blockexplorer.service.SecretShareServiceImpl;
 import com.epitomecl.kmp.core.wallet.*;
 import com.epitomecl.kmp.blockexplorer.interfaces.api.IServiceWallet;
 import com.epitomecl.kmp.core.wallet.UTXO;
@@ -44,6 +47,9 @@ import java.util.concurrent.ExecutionException;
 public class ServiceWalletController implements IServiceWallet {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
+    @Autowired
+    private SecretShareServiceImpl service;
+
     //todo. for test. fix or remove later
     private Wallet wallet;
     private PeerGroup peerGroup;
@@ -55,7 +61,7 @@ public class ServiceWalletController implements IServiceWallet {
 
     public ServiceWalletController() {
         //peer start
-        TestNet3Params netParams = TestNet3Params.get();
+        NetworkParameters netParams = TestNet3Params.get();
         BlockStore bs;
 
         try {
@@ -376,6 +382,67 @@ public class ServiceWalletController implements IServiceWallet {
             result.setError(e.getMessage());
         }
 
+        return result;
+    }
+
+    @Override
+    public List<String> getSharingDataList(
+            @RequestParam("index") int index,
+            @RequestParam("api_code") String api_code,
+            HttpSession session) {
+        List<String> result = service.getSharingDataList(index);
+        return result;
+    }
+
+    @Override
+    public SecretSharingVO getSharingDataOne(@RequestParam("index") int index,
+                                      @RequestParam("label") String label,
+                                      @RequestParam("api_code") String api_code,
+                                      HttpSession session) {
+        SecretSharingVO result = service.getSharingDataOne(index, label);
+        return result;
+    }
+
+    @Override
+    public SecretSharingVO getSharingDataTwo(@RequestParam("index") int index,
+                                      @RequestParam("label") String label,
+                                      @RequestParam("api_code") String api_code,
+                                      HttpSession session) {
+        SecretSharingVO result = service.getSharingDataTwo(index, label);
+        return result;
+    }
+
+    @Override
+    public SecretSharingResult backupSharingDataOne(@RequestParam("index") int index,
+                                             @RequestParam("label") String label,
+                                             @RequestParam("shareddata") String shareddata,
+                                             @RequestParam("api_code") String api_code,
+                                             HttpSession session) {
+        SecretSharingResult result = new SecretSharingResult();
+        try {
+            service.backupSharingDataOne(index, label, shareddata);
+            result.setResult("ok");
+        } catch (Exception e) {
+            result.setResult("fail");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
+    public SecretSharingResult backupSharingDataTwo(@RequestParam("index") int index,
+                                             @RequestParam("label") String label,
+                                             @RequestParam("shareddata") String shareddata,
+                                             @RequestParam("api_code") String api_code,
+                                             HttpSession session) {
+        SecretSharingResult result = new SecretSharingResult();
+        try {
+            service.backupSharingDataTwo(index, label, shareddata);
+            result.setResult("ok");
+        } catch (Exception e) {
+            result.setResult("fail");
+            e.printStackTrace();
+        }
         return result;
     }
 

@@ -1,9 +1,7 @@
 package com.epitomecl.kmp.blockexplorer.interfaces.api;
 
 import com.epitomecl.kmp.blockexplorer.domain.ActiveAddress;
-import com.epitomecl.kmp.blockexplorer.domain.SendTXResult;
 import com.epitomecl.kmp.core.wallet.UTXO;
-import com.epitomecl.kmp.blockexplorer.domain.UserVO;
 import info.blockchain.api.data.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -154,16 +152,5 @@ public interface IExplorer {
             @RequestParam("api_code") String apiCode,
             HttpSession session);
 
-    @PostMapping("/login")
-    UserVO postLogin(
-            @RequestParam("id") String id,
-            @RequestParam("pw") String pw,
-            HttpSession session);
-
-    @PostMapping("/regist")
-    UserVO postRegist(
-            @RequestParam("id") String id,
-            @RequestParam("pw") String pw,
-            HttpSession session);
     //endregion
 }
