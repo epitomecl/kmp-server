@@ -31,4 +31,21 @@
 			id = #{id} and pw = #{pw}
 	</update>
 
+	<insert id="setEncrypted">
+		insert into encrypted_data (
+			index, label, encrypted
+		)
+		values(
+			#{index}, #{label}, #{encrypted}
+		)
+	</insert>
+
+	<select id="getEncrypted" resultType="java.lang.String">
+        select
+        	encrypted
+        from
+			encrypted_data
+        where index = #{index} and label = #{label}
+    </select>
+
 </mapper>

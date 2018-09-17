@@ -22,4 +22,13 @@ public class KmpServiceImpl {
     public void setPassword(String id, String pw) {
         dao.setPassword(id, pw);
     }
+
+    public void setEncrypted(int index, String label, String encrypted) {
+        dao.setEncrypted(index, label, encrypted);
+    }
+
+    public String getEncrypted(int index, String label) {
+        return dao.getEncrypted(index, label);
+    }
+
 }

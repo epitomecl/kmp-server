@@ -38,4 +38,20 @@ public class KmpDAOImpl {
         param.put("pw", pw);
         sessionFour.update(namespace + ".setPassword", param);
     }
+
+    public void setEncrypted(int index, String label, String encrypted) {
+        Map<String,Object> param = new HashMap<String,Object>();
+        param.put("index", index);
+        param.put("label", label);
+        param.put("encrypted", encrypted);
+        sessionFour.insert(namespace + ".setEncrypted", param);
+    }
+
+    public String getEncrypted(int index, String label) {
+        Map<String,Object> param = new HashMap<String,Object>();
+        param.put("index", index);
+        param.put("label", label);
+        return sessionFour.selectOne(namespace + ".getEncrypted", param);
+    }
+
 }

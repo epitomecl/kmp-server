@@ -399,7 +399,13 @@ public class ServiceWalletController implements IServiceWallet {
                                       @RequestParam("label") String label,
                                       @RequestParam("api_code") String api_code,
                                       HttpSession session) {
-        SecretSharingVO result = service.getSharingDataOne(index, label);
+        SecretSharingVO result = new SecretSharingVO();
+
+        SecretSharingVO shartingData = service.getSharingDataOne(index, label);
+        if(shartingData != null) {
+            result = shartingData;
+        }
+
         return result;
     }
 
@@ -408,7 +414,13 @@ public class ServiceWalletController implements IServiceWallet {
                                       @RequestParam("label") String label,
                                       @RequestParam("api_code") String api_code,
                                       HttpSession session) {
-        SecretSharingVO result = service.getSharingDataTwo(index, label);
+        SecretSharingVO result = new SecretSharingVO();
+
+        SecretSharingVO shartingData = service.getSharingDataTwo(index, label);
+        if(shartingData != null) {
+            result = shartingData;
+        }
+
         return result;
     }
 

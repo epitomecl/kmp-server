@@ -9,7 +9,7 @@ public class SecretSharingVO {
         return userIndex;
     }
 
-    public void setUserIndex(int user_index) {
+    public void setUserIndex(int userIndex) {
         this.userIndex = userIndex;
     }
 
@@ -25,7 +25,7 @@ public class SecretSharingVO {
         return sharedData;
     }
 
-    public void setSharedData(String shared_data) {
+    public void setSharedData(String sharedData) {
         this.sharedData = sharedData;
     }
 

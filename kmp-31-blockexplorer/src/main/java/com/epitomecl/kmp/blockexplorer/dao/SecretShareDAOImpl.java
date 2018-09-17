@@ -1,8 +1,6 @@
 package com.epitomecl.kmp.blockexplorer.dao;
 
-import com.epitomecl.kmp.blockexplorer.domain.SecretSharingResult;
 import com.epitomecl.kmp.blockexplorer.domain.SecretSharingVO;
-import com.epitomecl.kmp.blockexplorer.domain.UTXORaw;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

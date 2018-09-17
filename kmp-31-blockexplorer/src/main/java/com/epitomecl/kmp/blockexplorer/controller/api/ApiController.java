@@ -1,5 +1,6 @@
 package com.epitomecl.kmp.blockexplorer.controller.api;
 
+import com.epitomecl.kmp.blockexplorer.domain.EncryptedResult;
 import com.epitomecl.kmp.blockexplorer.domain.UserVO;
 import com.epitomecl.kmp.blockexplorer.interfaces.api.IApi;
 import com.epitomecl.kmp.blockexplorer.service.KmpServiceImpl;
@@ -178,6 +179,38 @@ public class ApiController implements IApi {
         else {
             result = userVO;
             result.setSession(session.getId());
+        }
+
+        return result;
+    }
+
+    public EncryptedResult setEncrypted(
+            @RequestParam("index") int index,
+            @RequestParam("label") String label,
+            @RequestParam("encrypted") String encrypted,
+            HttpSession session) {
+        EncryptedResult result = new EncryptedResult();
+
+        try {
+            service.setEncrypted(index, label, encrypted);
+            result.setResult("ok");
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public EncryptedResult getEncrypted(
+            @RequestParam("index") int index,
+            @RequestParam("label") String label,
+            HttpSession session) {
+        EncryptedResult result = new EncryptedResult();
+
+        try {
+            result.setResult(service.getEncrypted(index, label));
+        }catch (Exception e) {
+            e.printStackTrace();
         }
 
         return result;
