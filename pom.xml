@@ -30,7 +30,7 @@ https://mvnrepository.com/artifact/org.hibernate/hibernate-core/${hibernate.vers
         <module>kmp-00-install</module>
         <module>kmp-00-libs</module>
         <module>kmp-01-core</module>
-        <module>kmp-31-blockexplorer</module>
+        <module>kmp-31-api</module>
         <module>kmp-32-blockstore</module>
         <module>kmp-35-ui-swing</module>
 
@@ -145,7 +145,7 @@ https://mvnrepository.com/artifact/org.hibernate/hibernate-core/${hibernate.vers
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>kmp-31-blockexplorer</artifactId>
+                <artifactId>kmp-31-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

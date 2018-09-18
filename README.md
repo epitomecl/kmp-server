@@ -18,7 +18,7 @@
 - kmp-wallet, kmp-server 등에서 공통으로 사용하는 클래스 관리 모듈
 - 대표적으로 HDWalletData 클래스 등...
 
-### kmp-31-blockexplorer
+### kmp-31-api
 - kmp-server 의 핵심 로직 관리 모듈
 - 대부분의 코드가 여기에 있음
 
