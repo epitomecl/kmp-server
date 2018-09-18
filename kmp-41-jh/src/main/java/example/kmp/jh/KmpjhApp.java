@@ -1,9 +1,9 @@
 package example.kmp.jh;
 
-import com.epitomecl.kmp.blockexplorer.config.PrimaryDbConfig;
-import com.epitomecl.kmp.blockexplorer.config.SwaggerConfig;
-import com.epitomecl.kmp.blockexplorer.dao.BlockExplorerDAOImpl;
-import com.epitomecl.kmp.blockexplorer.service.BlockExplorerServiceImpl;
+import com.epitomecl.kmp.api.config.PrimaryDbConfig;
+import com.epitomecl.kmp.api.config.SwaggerConfig;
+import com.epitomecl.kmp.api.dao.BlockExplorerDAOImpl;
+import com.epitomecl.kmp.api.service.BlockExplorerServiceImpl;
 import com.epitomecl.kmp.cc.config.Beans_01_properties;
 import example.kmp.jh.config.ApplicationProperties;
 import example.kmp.jh.config.DefaultProfileUtil;

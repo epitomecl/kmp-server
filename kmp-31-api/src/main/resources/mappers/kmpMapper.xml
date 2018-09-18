@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.epitomecl.kmp.mapper.KmpMapper">
+
+    <insert id="setUserData">
+		insert into user_account (
+			id, pw
+		)
+		values(
+			#{id}, #{pw}
+		)
+	</insert>
+
+    <select id="getUserData" resultType="com.epitomecl.kmp.api.domain.UserVO">
+        select
+        	index,
+  	        id
+        from
+			user_account
+        where id = #{id} and pw = #{pw}
+    </select>
+
+	<update id="setPassword">
+		update user_account
+		SET
+			pw = #{pw}
+		WHERE
+			id = #{id} and pw = #{pw}
+	</update>
+
+	<insert id="setEncrypted">
+		insert into encrypted_data (
+			index, label, encrypted
+		)
+		values(
+			#{index}, #{label}, #{encrypted}
+		)
+	</insert>
+
+	<select id="getEncrypted" resultType="java.lang.String">
+        select
+        	encrypted
+        from
+			encrypted_data
+        where index = #{index} and label = #{label}
+    </select>
+
+</mapper>
