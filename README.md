@@ -25,9 +25,6 @@
 ### kmp-32-blockstore
 - PostgresFullPrunedBlockStore 구현모듈
 
-### kmp-35-ui-swing
-- kmp-server 테스트를 위한 swing ui 모듈
-
 ### kmp-40-multictx
 - 최종 서비스 모듈
 
