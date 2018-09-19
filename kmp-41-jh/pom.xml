@@ -344,12 +344,7 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-messaging</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.epitomecl.kmp</groupId>
-            <artifactId>kmp-31-api</artifactId>
-            <version>2.0.0</version>
-            <scope>compile</scope>
-        </dependency>
+
         <!-- jhipster-needle-maven-add-dependency -->
     </dependencies>
 
