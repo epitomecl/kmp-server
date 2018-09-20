@@ -2716,8 +2716,8 @@ public final class Protos {
                 boolean done = false;
                 block16 : while (!done) {
                     int tag = input.readTag();
+                    ByteString bs;
                     switch (tag) {
-                        ByteString bs;
                         case 0: {
                             done = true;
                             continue block16;
