@@ -27,7 +27,7 @@ https://mvnrepository.com/artifact/org.hibernate/hibernate-core/${hibernate.vers
 
 
     <modules>
-        <module>kmp-00-install</module>
+        <!--<module>kmp-00-install</module>-->
         <module>kmp-00-libs</module>
         <module>kmp-01-core</module>
         <module>kmp-31-api</module>
