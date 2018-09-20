@@ -7,13 +7,6 @@
         <artifactId>kmp-server</artifactId>
         <version>2.0.0</version>
     </parent>
-    <artifactId>kmp-00-libs</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>api-client</module>
-        <module>bitcoinj-custom</module>
-        <module>MyWalletHD</module>
-    </modules>
+    <artifactId>bitcoinj-custom</artifactId>
 
 </project>
