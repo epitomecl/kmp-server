@@ -198,7 +198,7 @@ extends Message {
     public synchronized FilteredBlock applyAndUpdate(Block block) {
         List<Transaction> txns = block.getTransactions();
         ArrayList<Sha256Hash> txHashes = new ArrayList<Sha256Hash>(txns.size());
-        ArrayList matched = Lists.newArrayList();
+        ArrayList<Transaction> matched = Lists.newArrayList();
         byte[] bits = new byte[(int)Math.ceil((double)txns.size() / 8.0)];
         for (int i = 0; i < txns.size(); ++i) {
             Transaction tx = txns.get(i);
