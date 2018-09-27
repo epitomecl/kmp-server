@@ -215,7 +215,7 @@ extends ECKey {
 
     private BigInteger derivePrivateKeyDownwards(DeterministicKey cursor, byte[] parentalPrivateKeyBytes) {
         DeterministicKey downCursor = new DeterministicKey(cursor.childNumberPath, cursor.chainCode, cursor.pub, new BigInteger(1, parentalPrivateKeyBytes), cursor.parent);
-        ImmutableList path = this.childNumberPath.subList(cursor.getPath().size(), this.childNumberPath.size());
+        ImmutableList<ChildNumber> path = this.childNumberPath.subList(cursor.getPath().size(), this.childNumberPath.size());
         for (ChildNumber num : path) {
             downCursor = HDKeyDerivation.deriveChildKey(downCursor, num);
         }
@@ -281,7 +281,7 @@ extends ECKey {
     }
 
     public static DeterministicKey deserialize(NetworkParameters params, byte[] serializedKey, @Nullable DeterministicKey parent) {
-        Object path;
+        ImmutableList<ChildNumber> path;
         ByteBuffer buffer = ByteBuffer.wrap(serializedKey);
         int header = buffer.getInt();
         if (header != params.getBip32HeaderPriv() && header != params.getBip32HeaderPub()) {
@@ -304,7 +304,7 @@ extends ECKey {
                 throw new IllegalArgumentException("Depth does not match");
             }
         } else {
-            path = depth >= 1 ? ImmutableList.of((Object)childNumber) : ImmutableList.of();
+            path = depth >= 1 ? ImmutableList.of(childNumber) : ImmutableList.of();
         }
         byte[] chainCode = new byte[32];
         buffer.get(chainCode);

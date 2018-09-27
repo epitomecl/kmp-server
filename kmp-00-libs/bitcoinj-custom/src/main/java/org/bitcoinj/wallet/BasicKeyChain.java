@@ -89,7 +89,7 @@ implements KeyChain {
     }
 
     public /* varargs */ int importKeys(ECKey ... keys) {
-        return this.importKeys((List<? extends ECKey>)ImmutableList.copyOf((Object[])keys));
+        return this.importKeys((List<? extends ECKey>)ImmutableList.copyOf(keys));
     }
 
     /*
@@ -242,8 +242,9 @@ implements KeyChain {
                 if (keyTime <= timeSecs || oldest != null && oldest.getCreationTimeSeconds() <= keyTime) continue;
                 oldest = key;
             }
-            Iterator<ECKey> iterator = oldest;
-            return iterator;
+            //Iterator<ECKey> iterator = oldest;
+            //return iterator;
+            return oldest;
         }
         finally {
             this.lock.unlock();

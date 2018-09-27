@@ -489,7 +489,7 @@ public final class Protos {
                 int from_bitField0_ = this.bitField0_;
                 int to_bitField0_ = 0;
                 if ((from_bitField0_ & 1) == 1) {
-                    to_bitField0_ |= true;
+                    to_bitField0_ |= 1;
                 }
                 result.code_ = this.code_;
                 if ((from_bitField0_ & 2) == 2) {
@@ -1059,7 +1059,7 @@ public final class Protos {
                 int from_bitField0_ = this.bitField0_;
                 int to_bitField0_ = 0;
                 if ((from_bitField0_ & 1) == 1) {
-                    to_bitField0_ |= true;
+                    to_bitField0_ |= 1;
                 }
                 result.tx_ = this.tx_;
                 result.bitField0_ = to_bitField0_;
@@ -1423,7 +1423,7 @@ public final class Protos {
                 int from_bitField0_ = this.bitField0_;
                 int to_bitField0_ = 0;
                 if ((from_bitField0_ & 1) == 1) {
-                    to_bitField0_ |= true;
+                    to_bitField0_ |= 1;
                 }
                 result.info_ = this.info_;
                 result.bitField0_ = to_bitField0_;
@@ -1846,7 +1846,7 @@ public final class Protos {
                 int from_bitField0_ = this.bitField0_;
                 int to_bitField0_ = 0;
                 if ((from_bitField0_ & 1) == 1) {
-                    to_bitField0_ |= true;
+                    to_bitField0_ |= 1;
                 }
                 result.clientChangeValue_ = this.clientChangeValue_;
                 if ((from_bitField0_ & 2) == 2) {
@@ -2370,7 +2370,7 @@ public final class Protos {
                 int from_bitField0_ = this.bitField0_;
                 int to_bitField0_ = 0;
                 if ((from_bitField0_ & 1) == 1) {
-                    to_bitField0_ |= true;
+                    to_bitField0_ |= 1;
                 }
                 result.tx_ = this.tx_;
                 if ((from_bitField0_ & 2) == 2) {
@@ -2493,7 +2493,7 @@ public final class Protos {
                     this.initialPayment_ = value;
                     this.onChanged();
                 } else {
-                    this.initialPaymentBuilder_.setMessage((GeneratedMessage)value);
+                    this.initialPaymentBuilder_.setMessage(value);
                 }
                 this.bitField0_ |= 2;
                 return this;
@@ -2504,7 +2504,7 @@ public final class Protos {
                     this.initialPayment_ = builderForValue.build();
                     this.onChanged();
                 } else {
-                    this.initialPaymentBuilder_.setMessage((GeneratedMessage)builderForValue.build());
+                    this.initialPaymentBuilder_.setMessage(builderForValue.build());
                 }
                 this.bitField0_ |= 2;
                 return this;
@@ -2515,7 +2515,7 @@ public final class Protos {
                     this.initialPayment_ = (this.bitField0_ & 2) == 2 && this.initialPayment_ != UpdatePayment.getDefaultInstance() ? UpdatePayment.newBuilder(this.initialPayment_).mergeFrom(value).buildPartial() : value;
                     this.onChanged();
                 } else {
-                    this.initialPaymentBuilder_.mergeFrom((GeneratedMessage)value);
+                    this.initialPaymentBuilder_.mergeFrom(value);
                 }
                 this.bitField0_ |= 2;
                 return this;
@@ -2881,7 +2881,7 @@ public final class Protos {
                 int from_bitField0_ = this.bitField0_;
                 int to_bitField0_ = 0;
                 if ((from_bitField0_ & 1) == 1) {
-                    to_bitField0_ |= true;
+                    to_bitField0_ |= 1;
                 }
                 result.signature_ = this.signature_;
                 result.bitField0_ = to_bitField0_;
@@ -3280,7 +3280,7 @@ public final class Protos {
                 int from_bitField0_ = this.bitField0_;
                 int to_bitField0_ = 0;
                 if ((from_bitField0_ & 1) == 1) {
-                    to_bitField0_ |= true;
+                    to_bitField0_ |= 1;
                 }
                 result.multisigKey_ = this.multisigKey_;
                 if ((from_bitField0_ & 2) == 2) {
@@ -3782,7 +3782,7 @@ public final class Protos {
                 int from_bitField0_ = this.bitField0_;
                 int to_bitField0_ = 0;
                 if ((from_bitField0_ & 1) == 1) {
-                    to_bitField0_ |= true;
+                    to_bitField0_ |= 1;
                 }
                 result.multisigKey_ = this.multisigKey_;
                 if ((from_bitField0_ & 2) == 2) {
@@ -4291,7 +4291,7 @@ public final class Protos {
                 int from_bitField0_ = this.bitField0_;
                 int to_bitField0_ = 0;
                 if ((from_bitField0_ & 1) == 1) {
-                    to_bitField0_ |= true;
+                    to_bitField0_ |= 1;
                 }
                 result.major_ = this.major_;
                 if ((from_bitField0_ & 2) == 2) {
@@ -4772,7 +4772,7 @@ public final class Protos {
                 int from_bitField0_ = this.bitField0_;
                 int to_bitField0_ = 0;
                 if ((from_bitField0_ & 1) == 1) {
-                    to_bitField0_ |= true;
+                    to_bitField0_ |= 1;
                 }
                 result.major_ = this.major_;
                 if ((from_bitField0_ & 2) == 2) {
@@ -5742,7 +5742,7 @@ public final class Protos {
                 int from_bitField0_ = this.bitField0_;
                 int to_bitField0_ = 0;
                 if ((from_bitField0_ & 1) == 1) {
-                    to_bitField0_ |= true;
+                    to_bitField0_ |= 1;
                 }
                 result.type_ = this.type_;
                 if ((from_bitField0_ & 2) == 2) {
@@ -5975,7 +5975,7 @@ public final class Protos {
                     this.clientVersion_ = value;
                     this.onChanged();
                 } else {
-                    this.clientVersionBuilder_.setMessage((GeneratedMessage)value);
+                    this.clientVersionBuilder_.setMessage(value);
                 }
                 this.bitField0_ |= 2;
                 return this;
@@ -5986,7 +5986,7 @@ public final class Protos {
                     this.clientVersion_ = builderForValue.build();
                     this.onChanged();
                 } else {
-                    this.clientVersionBuilder_.setMessage((GeneratedMessage)builderForValue.build());
+                    this.clientVersionBuilder_.setMessage(builderForValue.build());
                 }
                 this.bitField0_ |= 2;
                 return this;
@@ -5997,7 +5997,7 @@ public final class Protos {
                     this.clientVersion_ = (this.bitField0_ & 2) == 2 && this.clientVersion_ != ClientVersion.getDefaultInstance() ? ClientVersion.newBuilder(this.clientVersion_).mergeFrom(value).buildPartial() : value;
                     this.onChanged();
                 } else {
-                    this.clientVersionBuilder_.mergeFrom((GeneratedMessage)value);
+                    this.clientVersionBuilder_.mergeFrom(value);
                 }
                 this.bitField0_ |= 2;
                 return this;
@@ -6057,7 +6057,7 @@ public final class Protos {
                     this.serverVersion_ = value;
                     this.onChanged();
                 } else {
-                    this.serverVersionBuilder_.setMessage((GeneratedMessage)value);
+                    this.serverVersionBuilder_.setMessage(value);
                 }
                 this.bitField0_ |= 4;
                 return this;
@@ -6068,7 +6068,7 @@ public final class Protos {
                     this.serverVersion_ = builderForValue.build();
                     this.onChanged();
                 } else {
-                    this.serverVersionBuilder_.setMessage((GeneratedMessage)builderForValue.build());
+                    this.serverVersionBuilder_.setMessage(builderForValue.build());
                 }
                 this.bitField0_ |= 4;
                 return this;
@@ -6079,7 +6079,7 @@ public final class Protos {
                     this.serverVersion_ = (this.bitField0_ & 4) == 4 && this.serverVersion_ != ServerVersion.getDefaultInstance() ? ServerVersion.newBuilder(this.serverVersion_).mergeFrom(value).buildPartial() : value;
                     this.onChanged();
                 } else {
-                    this.serverVersionBuilder_.mergeFrom((GeneratedMessage)value);
+                    this.serverVersionBuilder_.mergeFrom(value);
                 }
                 this.bitField0_ |= 4;
                 return this;
@@ -6139,7 +6139,7 @@ public final class Protos {
                     this.initiate_ = value;
                     this.onChanged();
                 } else {
-                    this.initiateBuilder_.setMessage((GeneratedMessage)value);
+                    this.initiateBuilder_.setMessage(value);
                 }
                 this.bitField0_ |= 8;
                 return this;
@@ -6150,7 +6150,7 @@ public final class Protos {
                     this.initiate_ = builderForValue.build();
                     this.onChanged();
                 } else {
-                    this.initiateBuilder_.setMessage((GeneratedMessage)builderForValue.build());
+                    this.initiateBuilder_.setMessage(builderForValue.build());
                 }
                 this.bitField0_ |= 8;
                 return this;
@@ -6161,7 +6161,7 @@ public final class Protos {
                     this.initiate_ = (this.bitField0_ & 8) == 8 && this.initiate_ != Initiate.getDefaultInstance() ? Initiate.newBuilder(this.initiate_).mergeFrom(value).buildPartial() : value;
                     this.onChanged();
                 } else {
-                    this.initiateBuilder_.mergeFrom((GeneratedMessage)value);
+                    this.initiateBuilder_.mergeFrom(value);
                 }
                 this.bitField0_ |= 8;
                 return this;
@@ -6221,7 +6221,7 @@ public final class Protos {
                     this.provideRefund_ = value;
                     this.onChanged();
                 } else {
-                    this.provideRefundBuilder_.setMessage((GeneratedMessage)value);
+                    this.provideRefundBuilder_.setMessage(value);
                 }
                 this.bitField0_ |= 16;
                 return this;
@@ -6232,7 +6232,7 @@ public final class Protos {
                     this.provideRefund_ = builderForValue.build();
                     this.onChanged();
                 } else {
-                    this.provideRefundBuilder_.setMessage((GeneratedMessage)builderForValue.build());
+                    this.provideRefundBuilder_.setMessage(builderForValue.build());
                 }
                 this.bitField0_ |= 16;
                 return this;
@@ -6243,7 +6243,7 @@ public final class Protos {
                     this.provideRefund_ = (this.bitField0_ & 16) == 16 && this.provideRefund_ != ProvideRefund.getDefaultInstance() ? ProvideRefund.newBuilder(this.provideRefund_).mergeFrom(value).buildPartial() : value;
                     this.onChanged();
                 } else {
-                    this.provideRefundBuilder_.mergeFrom((GeneratedMessage)value);
+                    this.provideRefundBuilder_.mergeFrom(value);
                 }
                 this.bitField0_ |= 16;
                 return this;
@@ -6303,7 +6303,7 @@ public final class Protos {
                     this.returnRefund_ = value;
                     this.onChanged();
                 } else {
-                    this.returnRefundBuilder_.setMessage((GeneratedMessage)value);
+                    this.returnRefundBuilder_.setMessage(value);
                 }
                 this.bitField0_ |= 32;
                 return this;
@@ -6314,7 +6314,7 @@ public final class Protos {
                     this.returnRefund_ = builderForValue.build();
                     this.onChanged();
                 } else {
-                    this.returnRefundBuilder_.setMessage((GeneratedMessage)builderForValue.build());
+                    this.returnRefundBuilder_.setMessage(builderForValue.build());
                 }
                 this.bitField0_ |= 32;
                 return this;
@@ -6325,7 +6325,7 @@ public final class Protos {
                     this.returnRefund_ = (this.bitField0_ & 32) == 32 && this.returnRefund_ != ReturnRefund.getDefaultInstance() ? ReturnRefund.newBuilder(this.returnRefund_).mergeFrom(value).buildPartial() : value;
                     this.onChanged();
                 } else {
-                    this.returnRefundBuilder_.mergeFrom((GeneratedMessage)value);
+                    this.returnRefundBuilder_.mergeFrom(value);
                 }
                 this.bitField0_ |= 32;
                 return this;
@@ -6385,7 +6385,7 @@ public final class Protos {
                     this.provideContract_ = value;
                     this.onChanged();
                 } else {
-                    this.provideContractBuilder_.setMessage((GeneratedMessage)value);
+                    this.provideContractBuilder_.setMessage(value);
                 }
                 this.bitField0_ |= 64;
                 return this;
@@ -6396,7 +6396,7 @@ public final class Protos {
                     this.provideContract_ = builderForValue.build();
                     this.onChanged();
                 } else {
-                    this.provideContractBuilder_.setMessage((GeneratedMessage)builderForValue.build());
+                    this.provideContractBuilder_.setMessage(builderForValue.build());
                 }
                 this.bitField0_ |= 64;
                 return this;
@@ -6407,7 +6407,7 @@ public final class Protos {
                     this.provideContract_ = (this.bitField0_ & 64) == 64 && this.provideContract_ != ProvideContract.getDefaultInstance() ? ProvideContract.newBuilder(this.provideContract_).mergeFrom(value).buildPartial() : value;
                     this.onChanged();
                 } else {
-                    this.provideContractBuilder_.mergeFrom((GeneratedMessage)value);
+                    this.provideContractBuilder_.mergeFrom(value);
                 }
                 this.bitField0_ |= 64;
                 return this;
@@ -6467,7 +6467,7 @@ public final class Protos {
                     this.updatePayment_ = value;
                     this.onChanged();
                 } else {
-                    this.updatePaymentBuilder_.setMessage((GeneratedMessage)value);
+                    this.updatePaymentBuilder_.setMessage(value);
                 }
                 this.bitField0_ |= 128;
                 return this;
@@ -6478,7 +6478,7 @@ public final class Protos {
                     this.updatePayment_ = builderForValue.build();
                     this.onChanged();
                 } else {
-                    this.updatePaymentBuilder_.setMessage((GeneratedMessage)builderForValue.build());
+                    this.updatePaymentBuilder_.setMessage(builderForValue.build());
                 }
                 this.bitField0_ |= 128;
                 return this;
@@ -6489,7 +6489,7 @@ public final class Protos {
                     this.updatePayment_ = (this.bitField0_ & 128) == 128 && this.updatePayment_ != UpdatePayment.getDefaultInstance() ? UpdatePayment.newBuilder(this.updatePayment_).mergeFrom(value).buildPartial() : value;
                     this.onChanged();
                 } else {
-                    this.updatePaymentBuilder_.mergeFrom((GeneratedMessage)value);
+                    this.updatePaymentBuilder_.mergeFrom(value);
                 }
                 this.bitField0_ |= 128;
                 return this;
@@ -6549,7 +6549,7 @@ public final class Protos {
                     this.paymentAck_ = value;
                     this.onChanged();
                 } else {
-                    this.paymentAckBuilder_.setMessage((GeneratedMessage)value);
+                    this.paymentAckBuilder_.setMessage(value);
                 }
                 this.bitField0_ |= 256;
                 return this;
@@ -6560,7 +6560,7 @@ public final class Protos {
                     this.paymentAck_ = builderForValue.build();
                     this.onChanged();
                 } else {
-                    this.paymentAckBuilder_.setMessage((GeneratedMessage)builderForValue.build());
+                    this.paymentAckBuilder_.setMessage(builderForValue.build());
                 }
                 this.bitField0_ |= 256;
                 return this;
@@ -6571,7 +6571,7 @@ public final class Protos {
                     this.paymentAck_ = (this.bitField0_ & 256) == 256 && this.paymentAck_ != PaymentAck.getDefaultInstance() ? PaymentAck.newBuilder(this.paymentAck_).mergeFrom(value).buildPartial() : value;
                     this.onChanged();
                 } else {
-                    this.paymentAckBuilder_.mergeFrom((GeneratedMessage)value);
+                    this.paymentAckBuilder_.mergeFrom(value);
                 }
                 this.bitField0_ |= 256;
                 return this;
@@ -6631,7 +6631,7 @@ public final class Protos {
                     this.settlement_ = value;
                     this.onChanged();
                 } else {
-                    this.settlementBuilder_.setMessage((GeneratedMessage)value);
+                    this.settlementBuilder_.setMessage(value);
                 }
                 this.bitField0_ |= 512;
                 return this;
@@ -6642,7 +6642,7 @@ public final class Protos {
                     this.settlement_ = builderForValue.build();
                     this.onChanged();
                 } else {
-                    this.settlementBuilder_.setMessage((GeneratedMessage)builderForValue.build());
+                    this.settlementBuilder_.setMessage(builderForValue.build());
                 }
                 this.bitField0_ |= 512;
                 return this;
@@ -6653,7 +6653,7 @@ public final class Protos {
                     this.settlement_ = (this.bitField0_ & 512) == 512 && this.settlement_ != Settlement.getDefaultInstance() ? Settlement.newBuilder(this.settlement_).mergeFrom(value).buildPartial() : value;
                     this.onChanged();
                 } else {
-                    this.settlementBuilder_.mergeFrom((GeneratedMessage)value);
+                    this.settlementBuilder_.mergeFrom(value);
                 }
                 this.bitField0_ |= 512;
                 return this;
@@ -6713,7 +6713,7 @@ public final class Protos {
                     this.error_ = value;
                     this.onChanged();
                 } else {
-                    this.errorBuilder_.setMessage((GeneratedMessage)value);
+                    this.errorBuilder_.setMessage(value);
                 }
                 this.bitField0_ |= 1024;
                 return this;
@@ -6724,7 +6724,7 @@ public final class Protos {
                     this.error_ = builderForValue.build();
                     this.onChanged();
                 } else {
-                    this.errorBuilder_.setMessage((GeneratedMessage)builderForValue.build());
+                    this.errorBuilder_.setMessage(builderForValue.build());
                 }
                 this.bitField0_ |= 1024;
                 return this;
@@ -6735,7 +6735,7 @@ public final class Protos {
                     this.error_ = (this.bitField0_ & 1024) == 1024 && this.error_ != Error.getDefaultInstance() ? Error.newBuilder(this.error_).mergeFrom(value).buildPartial() : value;
                     this.onChanged();
                 } else {
-                    this.errorBuilder_.mergeFrom((GeneratedMessage)value);
+                    this.errorBuilder_.mergeFrom(value);
                 }
                 this.bitField0_ |= 1024;
                 return this;

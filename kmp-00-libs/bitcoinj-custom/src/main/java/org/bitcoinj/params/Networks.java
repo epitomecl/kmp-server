@@ -19,14 +19,14 @@ import org.bitcoinj.params.BitcoinMainNetParams;
 import org.bitcoinj.params.BitcoinTestNet3Params;
 
 public class Networks {
-    private static Set<? extends NetworkParameters> networks = ImmutableSet.of((Object)BitcoinTestNet3Params.get(), (Object)BitcoinMainNetParams.get(), (Object)BitcoinCashTestNet3Params.get(), (Object)BitcoinCashMainNetParams.get());
+    private static Set<? extends NetworkParameters> networks = ImmutableSet.of(BitcoinTestNet3Params.get(), BitcoinMainNetParams.get(), BitcoinCashTestNet3Params.get(), BitcoinCashMainNetParams.get());
 
     public static Set<? extends NetworkParameters> get() {
         return networks;
     }
 
     public static void register(NetworkParameters network) {
-        Networks.register(Lists.newArrayList((Object[])new NetworkParameters[]{network}));
+        register((Collection)Lists.newArrayList(new NetworkParameters[]{network}));
     }
 
     public static void register(Collection<? extends NetworkParameters> networks) {

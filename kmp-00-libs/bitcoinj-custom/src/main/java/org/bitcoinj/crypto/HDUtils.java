@@ -71,11 +71,11 @@ public final class HDUtils {
     }
 
     public static ImmutableList<ChildNumber> append(List<ChildNumber> path, ChildNumber childNumber) {
-        return ImmutableList.builder().addAll(path).add((Object)childNumber).build();
+        return ImmutableList.<ChildNumber>builder().addAll(path).add(childNumber).build();
     }
 
     public static ImmutableList<ChildNumber> concat(List<ChildNumber> path, List<ChildNumber> path2) {
-        return ImmutableList.builder().addAll(path).addAll(path2).build();
+        return ImmutableList.<ChildNumber>builder().addAll(path).addAll(path2).build();
     }
 
     public static String formatPath(List<ChildNumber> path) {

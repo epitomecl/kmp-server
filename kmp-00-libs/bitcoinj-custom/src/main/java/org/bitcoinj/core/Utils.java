@@ -454,12 +454,12 @@ public class Utils {
             return 0;
         }
         items = Ordering.natural().reverse().sortedCopy(items);
-        LinkedList pairs = Lists.newLinkedList();
-        pairs.add(new Pair((Integer)items.get(0), 0));
+        LinkedList<Pair> pairs = Lists.newLinkedList();
+        pairs.add(new Pair(items.get(0), 0));
         Iterator iterator = items.iterator();
         while (iterator.hasNext()) {
             int item = (Integer)iterator.next();
-            Object pair = (Pair)pairs.getLast();
+            Pair pair = pairs.getLast();
             if (pair.item != item) {
                 pair = new Pair(item, 0);
                 pairs.add(pair);
@@ -467,8 +467,8 @@ public class Utils {
             ++pair.count;
         }
         Collections.sort(pairs);
-        int maxCount = ((Pair)pairs.getFirst()).count;
-        int maxItem = ((Pair)pairs.getFirst()).item;
+        int maxCount = (pairs.getFirst()).count;
+        int maxItem = (pairs.getFirst()).item;
         for (Pair pair : pairs) {
             if (pair.count != maxCount) break;
             maxItem = Math.max(maxItem, pair.item);

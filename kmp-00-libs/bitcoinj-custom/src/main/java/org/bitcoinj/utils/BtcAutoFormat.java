@@ -19,7 +19,7 @@ import org.bitcoinj.utils.BtcFormat;
 public final class BtcAutoFormat
 extends BtcFormat {
     protected BtcAutoFormat(Locale locale, Style style, int fractionPlaces) {
-        super((DecimalFormat)NumberFormat.getCurrencyInstance(locale), fractionPlaces, (List<Integer>)ImmutableList.of());
+        super((DecimalFormat)NumberFormat.getCurrencyInstance(locale), fractionPlaces, ImmutableList.of());
         style.apply(this.numberFormat);
     }
 

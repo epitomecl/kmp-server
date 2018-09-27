@@ -437,7 +437,7 @@ public final class PeerSeedProtos {
                 int from_bitField0_ = this.bitField0_;
                 int to_bitField0_ = 0;
                 if ((from_bitField0_ & 1) == 1) {
-                    to_bitField0_ |= true;
+                    to_bitField0_ |= 1;
                 }
                 result.peerSeeds_ = this.peerSeeds_;
                 if ((from_bitField0_ & 2) == 2) {
@@ -1006,7 +1006,7 @@ public final class PeerSeedProtos {
                     result.seed_ = this.seedBuilder_.build();
                 }
                 if ((from_bitField0_ & 2) == 2) {
-                    to_bitField0_ |= true;
+                    to_bitField0_ |= 1;
                 }
                 result.timestamp_ = this.timestamp_;
                 if ((from_bitField0_ & 4) == 4) {
@@ -1135,7 +1135,7 @@ public final class PeerSeedProtos {
                     this.seed_.set(index, value);
                     this.onChanged();
                 } else {
-                    this.seedBuilder_.setMessage(index, (GeneratedMessage)value);
+                    this.seedBuilder_.setMessage(index, value);
                 }
                 return this;
             }
@@ -1146,7 +1146,7 @@ public final class PeerSeedProtos {
                     this.seed_.set(index, builderForValue.build());
                     this.onChanged();
                 } else {
-                    this.seedBuilder_.setMessage(index, (GeneratedMessage)builderForValue.build());
+                    this.seedBuilder_.setMessage(index, builderForValue.build());
                 }
                 return this;
             }
@@ -1160,7 +1160,7 @@ public final class PeerSeedProtos {
                     this.seed_.add(value);
                     this.onChanged();
                 } else {
-                    this.seedBuilder_.addMessage((GeneratedMessage)value);
+                    this.seedBuilder_.addMessage(value);
                 }
                 return this;
             }
@@ -1174,7 +1174,7 @@ public final class PeerSeedProtos {
                     this.seed_.add(index, value);
                     this.onChanged();
                 } else {
-                    this.seedBuilder_.addMessage(index, (GeneratedMessage)value);
+                    this.seedBuilder_.addMessage(index, value);
                 }
                 return this;
             }
@@ -1185,7 +1185,7 @@ public final class PeerSeedProtos {
                     this.seed_.add(builderForValue.build());
                     this.onChanged();
                 } else {
-                    this.seedBuilder_.addMessage((GeneratedMessage)builderForValue.build());
+                    this.seedBuilder_.addMessage(builderForValue.build());
                 }
                 return this;
             }
@@ -1196,7 +1196,7 @@ public final class PeerSeedProtos {
                     this.seed_.add(index, builderForValue.build());
                     this.onChanged();
                 } else {
-                    this.seedBuilder_.addMessage(index, (GeneratedMessage)builderForValue.build());
+                    this.seedBuilder_.addMessage(index, builderForValue.build());
                 }
                 return this;
             }
@@ -1255,11 +1255,11 @@ public final class PeerSeedProtos {
             }
 
             public PeerSeedData.Builder addSeedBuilder() {
-                return (PeerSeedData.Builder)this.getSeedFieldBuilder().addBuilder((GeneratedMessage)PeerSeedData.getDefaultInstance());
+                return (PeerSeedData.Builder)this.getSeedFieldBuilder().addBuilder(PeerSeedData.getDefaultInstance());
             }
 
             public PeerSeedData.Builder addSeedBuilder(int index) {
-                return (PeerSeedData.Builder)this.getSeedFieldBuilder().addBuilder(index, (GeneratedMessage)PeerSeedData.getDefaultInstance());
+                return (PeerSeedData.Builder)this.getSeedFieldBuilder().addBuilder(index, PeerSeedData.getDefaultInstance());
             }
 
             public List<PeerSeedData.Builder> getSeedBuilderList() {
@@ -1744,7 +1744,7 @@ public final class PeerSeedProtos {
                 int from_bitField0_ = this.bitField0_;
                 int to_bitField0_ = 0;
                 if ((from_bitField0_ & 1) == 1) {
-                    to_bitField0_ |= true;
+                    to_bitField0_ |= 1;
                 }
                 result.ipAddress_ = this.ipAddress_;
                 if ((from_bitField0_ & 2) == 2) {

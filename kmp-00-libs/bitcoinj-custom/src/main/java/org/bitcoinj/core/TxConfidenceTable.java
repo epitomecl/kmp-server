@@ -44,7 +44,8 @@ public class TxConfidenceTable {
     private void cleanTable() {
         this.lock.lock();
         try {
-            Reference<TransactionConfidence> ref;
+            //Reference<TransactionConfidence> ref;
+            Reference<?> ref;
             while ((ref = this.referenceQueue.poll()) != null) {
                 WeakConfidenceReference txRef = (WeakConfidenceReference)ref;
                 this.table.remove(txRef.hash);

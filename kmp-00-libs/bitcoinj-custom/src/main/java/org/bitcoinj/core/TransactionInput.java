@@ -127,7 +127,7 @@ extends ChildMessage {
     }
 
     public void setScriptSig(Script scriptSig) {
-        this.scriptSig = new WeakReference<Object>(Preconditions.checkNotNull((Object)scriptSig));
+        this.scriptSig = new WeakReference<>(Preconditions.checkNotNull(scriptSig));
         this.setScriptBytes(scriptSig.getProgram());
     }
 

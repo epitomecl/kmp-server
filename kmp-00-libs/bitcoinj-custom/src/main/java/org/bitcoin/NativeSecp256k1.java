@@ -20,7 +20,7 @@ public class NativeSecp256k1 {
     private static final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
     private static final Lock r = rwl.readLock();
     private static final Lock w = rwl.writeLock();
-    private static ThreadLocal<ByteBuffer> nativeECDSABuffer = new ThreadLocal<T>();
+    private static ThreadLocal<ByteBuffer> nativeECDSABuffer = new ThreadLocal<>();
 
     /*
      * WARNING - Removed try catching itself - possible behaviour change.

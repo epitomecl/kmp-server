@@ -50,23 +50,23 @@ implements KeyBag {
     private final EnumMap<KeyChain.KeyPurpose, Address> currentAddresses;
 
     public KeyChainGroup(NetworkParameters params) {
-        this(params, null, new ArrayList<DeterministicKeyChain>(1), null);
+        this(params, (BasicKeyChain)null, new ArrayList(1), (EnumMap)null);
     }
 
     public KeyChainGroup(NetworkParameters params, DeterministicSeed seed) {
-        this(params, null, (List<DeterministicKeyChain>)ImmutableList.of((Object)new DeterministicKeyChain(seed)), null);
+        this(params, (BasicKeyChain)null, ImmutableList.of(new DeterministicKeyChain(seed)), (EnumMap)null);
     }
 
     public KeyChainGroup(NetworkParameters params, DeterministicSeed seed, ImmutableList<ChildNumber> accountPath) {
-        this(params, null, (List<DeterministicKeyChain>)ImmutableList.of((Object)new DeterministicKeyChain(seed, accountPath)), null);
+        this(params, (BasicKeyChain)null, ImmutableList.of(new DeterministicKeyChain(seed, accountPath)), (EnumMap)null);
     }
 
     public KeyChainGroup(NetworkParameters params, DeterministicKey watchKey) {
-        this(params, null, (List<DeterministicKeyChain>)ImmutableList.of((Object)DeterministicKeyChain.watch(watchKey)), null);
+        this(params, (BasicKeyChain)null, ImmutableList.of(DeterministicKeyChain.watch(watchKey)), (EnumMap)null);
     }
 
     public KeyChainGroup(NetworkParameters params, DeterministicKey watchKey, ImmutableList<ChildNumber> accountPath) {
-        this(params, null, (List<DeterministicKeyChain>)ImmutableList.of((Object)DeterministicKeyChain.watch(watchKey, accountPath)), null);
+        this(params, (BasicKeyChain)null, ImmutableList.of(DeterministicKeyChain.watch(watchKey, accountPath)), (EnumMap)null);
     }
 
     private KeyChainGroup(NetworkParameters params, @Nullable BasicKeyChain basicKeyChain, List<DeterministicKeyChain> chains, @Nullable EnumMap<KeyChain.KeyPurpose, DeterministicKey> currentKeys) {
@@ -88,8 +88,8 @@ implements KeyBag {
         return this.basic.importKeys(keys);
     }
 
-    public /* varargs */ int importKeys(ECKey ... keys) {
-        return this.importKeys((List<ECKey>)ImmutableList.copyOf((Object[])keys));
+    public int importKeys(ECKey... keys) {
+        return this.importKeys((List)ImmutableList.copyOf(keys));
     }
 
     @Nullable

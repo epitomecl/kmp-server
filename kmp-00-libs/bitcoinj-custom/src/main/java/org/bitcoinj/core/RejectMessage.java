@@ -102,15 +102,15 @@ extends Message {
     }
 
     public static enum RejectCode {
-        MALFORMED(1),
-        INVALID(16),
-        OBSOLETE(17),
-        DUPLICATE(18),
-        NONSTANDARD(64),
-        DUST(65),
-        INSUFFICIENTFEE(66),
-        CHECKPOINT(67),
-        OTHER(-1);
+        MALFORMED((byte)1),
+        INVALID((byte)16),
+        OBSOLETE((byte)17),
+        DUPLICATE((byte)18),
+        NONSTANDARD((byte)64),
+        DUST((byte)65),
+        INSUFFICIENTFEE((byte)66),
+        CHECKPOINT((byte)67),
+        OTHER((byte)-1);
         
         byte code;
 

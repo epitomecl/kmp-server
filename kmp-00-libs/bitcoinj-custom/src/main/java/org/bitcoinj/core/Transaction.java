@@ -906,7 +906,7 @@ extends ChildMessage {
     }
 
     public boolean isFinal(int height, long blockTimeSeconds) {
-        long time;
+        long time = 0;
         return time < ((time = this.getLockTime()) < 500000000L ? (long)height : blockTimeSeconds) || !this.isTimeLocked();
     }
 

@@ -58,10 +58,10 @@ implements KeyChain {
     private DeterministicSeed seed;
     @Nullable
     private ImmutableList<ChildNumber> accountPath;
-    public static final ImmutableList<ChildNumber> ACCOUNT_ZERO_PATH = ImmutableList.of((Object)ChildNumber.ZERO_HARDENED);
-    public static final ImmutableList<ChildNumber> BIP44_ACCOUNT_ZERO_PATH = ImmutableList.of((Object)new ChildNumber(44, true), (Object)ChildNumber.ZERO_HARDENED, (Object)ChildNumber.ZERO_HARDENED);
-    public static final ImmutableList<ChildNumber> EXTERNAL_SUBPATH = ImmutableList.of((Object)ChildNumber.ZERO);
-    public static final ImmutableList<ChildNumber> INTERNAL_SUBPATH = ImmutableList.of((Object)ChildNumber.ONE);
+    public static final ImmutableList<ChildNumber> ACCOUNT_ZERO_PATH = ImmutableList.of(ChildNumber.ZERO_HARDENED);
+    public static final ImmutableList<ChildNumber> BIP44_ACCOUNT_ZERO_PATH = ImmutableList.of(new ChildNumber(44, true), ChildNumber.ZERO_HARDENED, ChildNumber.ZERO_HARDENED);
+    public static final ImmutableList<ChildNumber> EXTERNAL_SUBPATH = ImmutableList.of(ChildNumber.ZERO);
+    public static final ImmutableList<ChildNumber> INTERNAL_SUBPATH = ImmutableList.of(ChildNumber.ONE);
     private static final int LAZY_CALCULATE_LOOKAHEAD = -1;
     protected int lookaheadSize = 100;
     protected int lookaheadThreshold = this.calcDefaultLookaheadThreshold();
@@ -317,7 +317,7 @@ implements KeyChain {
     }
 
     protected /* varargs */ DeterministicKey getKeyByPath(ChildNumber ... path) {
-        return this.getKeyByPath((List<ChildNumber>)ImmutableList.copyOf((Object[])path));
+        return this.getKeyByPath((List<ChildNumber>)ImmutableList.copyOf(path));
     }
 
     protected DeterministicKey getKeyByPath(List<ChildNumber> path) {

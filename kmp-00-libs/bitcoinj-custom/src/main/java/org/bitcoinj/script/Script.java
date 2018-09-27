@@ -156,7 +156,8 @@ public class Script {
                 if (dataToRead > (long)bis.available()) {
                     throw new ScriptException(ScriptError.SCRIPT_ERR_BAD_OPCODE, "Push of data element that is larger than remaining data");
                 }
-                ScriptChunk[] data = new byte[(int)dataToRead];
+                //ScriptChunk[] data = new byte[(int)dataToRead];
+                byte[] data = new byte[(int)dataToRead];
                 Preconditions.checkState((boolean)(dataToRead == 0L || (long)bis.read((byte[])data, 0, (int)dataToRead) == dataToRead));
                 chunk = new ScriptChunk(opcode, (byte[])data, startLocationInProgram);
             }
