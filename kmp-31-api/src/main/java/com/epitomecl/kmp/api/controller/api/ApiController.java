@@ -30,124 +30,124 @@ public class ApiController implements IApi {
 
     }
 
-    public Chart getChart(@PathVariable("chart-type") String chartType,
-                          @RequestParam("timespan") String timespan,
-                          @RequestParam("rollingAverage") String rollingAverage,
-                          @RequestParam("format") String format,
-                          @RequestParam("api_code") String apiCode) {
-        return new Chart();
-    }
-
-    public Stats getStats(@RequestParam("api_code") String apiCode) {
-        return new Stats();
-    }
-
-    public HashMap<String, Integer> getPools(
-            @RequestParam("timespan") String timespan,
-            @RequestParam("api_code") String apiCode) {
-        return new HashMap<String, Integer>();
-    }
-
-    public ReceivePayment receive(
-            @RequestParam("xpub") String xpub,
-            @RequestParam("callback") String callbackUrl,
-            @RequestParam("gap_limit") Integer gapLimit,
-            @RequestParam("index") Integer index,
-            @RequestParam("key") String key) {
-        return new ReceivePayment();
-    }
-
-    public XpubGap checkGap(
-            @RequestParam("xpub") String xpub,
-            @RequestParam("key") String key) {
-        return new XpubGap();
-    }
-
-    public List<CallbackLog> callbackLog(
-            @RequestParam("callback") String callbackUrl,
-            @RequestParam("key") String key) {
-        List<CallbackLog> result = new ArrayList<CallbackLog>();
-        return result;
-    }
-
-    public Ticker getBtcTicker(
-            @RequestParam("api_code") String apiCode) {
-        return new Ticker();
-    }
-
-    public TreeMap<String, TickerItem> getBtcTickerMap(
-            @RequestParam("api_code") String apiCode) {
-        return new TreeMap<String, TickerItem>();
-    }
-
-    public TreeMap<String, TickerItem> getEthTickerMap(
-            @RequestParam("base") String base,
-            @RequestParam("api_code") String apiCode) {
-        return new TreeMap<String, TickerItem>();
-    }
-
-    public Double toBTC(
-            @RequestParam("currency") String currency,
-            @RequestParam("value") Double value,
-            @RequestParam("api_code") String apiCode) {
-        return 0.0;
-    }
-
-    public Double fromBTC(
-            @RequestParam("currency") String currency,
-            @RequestParam("value") Long value,
-            @RequestParam("api_code") String apiCode) {
-        return 0.0;
-    }
-
-    public Double toETH(
-            @RequestParam("currency") String currency,
-            @RequestParam("value") Double value,
-            @RequestParam("api_code") String apiCode) {
-        return 0.0;
-    }
-
-    public Double fromETH(
-            @RequestParam("currency") String currency,
-            @RequestParam("value") String value,
-            @RequestParam("api_code") String apiCode) {
-        return 0.0;
-    }
-
-    public MultiAddress getMultiAddress(
-            @PathVariable("coin") String coin,
-            @RequestParam("active") String active,
-            @RequestParam("n") Integer limit,
-            @RequestParam("offset") Integer offset,
-            @RequestParam("filter") Integer filter,
-            @RequestParam("onlyShow") String context,
-            @RequestParam("api_code") String apiCode) {
-        return new MultiAddress();
-    }
-
-    public UnspentOutputs getUnspent(
-            @PathVariable("coin") String coin,
-            @RequestParam("active") String active,
-            @RequestParam("confirmations") Integer confirmations,
-            @RequestParam("limit") Integer limit,
-            @RequestParam("api_code") String apiCode) {
-        return new UnspentOutputs();
-    }
-
-    public HashMap<String, Balance> getBalance(
-            @PathVariable("coin") String coin,
-            @RequestParam("active") String active,
-            @RequestParam("filter") Integer filter,
-            @RequestParam("api_code") String apiCode) {
-        return new HashMap<String, Balance>();
-    }
-
-    public String pushTx(
-            @PathVariable("coin") String coin,
-            @RequestParam("tx") String hash,
-            @RequestParam("api_code") String apiCode) {
-        return "ok";
-    }
+//    public Chart getChart(@PathVariable("chart-type") String chartType,
+//                          @RequestParam("timespan") String timespan,
+//                          @RequestParam("rollingAverage") String rollingAverage,
+//                          @RequestParam("format") String format,
+//                          @RequestParam("api_code") String apiCode) {
+//        return new Chart();
+//    }
+//
+//    public Stats getStats(@RequestParam("api_code") String apiCode) {
+//        return new Stats();
+//    }
+//
+//    public HashMap<String, Integer> getPools(
+//            @RequestParam("timespan") String timespan,
+//            @RequestParam("api_code") String apiCode) {
+//        return new HashMap<String, Integer>();
+//    }
+//
+//    public ReceivePayment receive(
+//            @RequestParam("xpub") String xpub,
+//            @RequestParam("callback") String callbackUrl,
+//            @RequestParam("gap_limit") Integer gapLimit,
+//            @RequestParam("index") Integer index,
+//            @RequestParam("key") String key) {
+//        return new ReceivePayment();
+//    }
+//
+//    public XpubGap checkGap(
+//            @RequestParam("xpub") String xpub,
+//            @RequestParam("key") String key) {
+//        return new XpubGap();
+//    }
+//
+//    public List<CallbackLog> callbackLog(
+//            @RequestParam("callback") String callbackUrl,
+//            @RequestParam("key") String key) {
+//        List<CallbackLog> result = new ArrayList<CallbackLog>();
+//        return result;
+//    }
+//
+//    public Ticker getBtcTicker(
+//            @RequestParam("api_code") String apiCode) {
+//        return new Ticker();
+//    }
+//
+//    public TreeMap<String, TickerItem> getBtcTickerMap(
+//            @RequestParam("api_code") String apiCode) {
+//        return new TreeMap<String, TickerItem>();
+//    }
+//
+//    public TreeMap<String, TickerItem> getEthTickerMap(
+//            @RequestParam("base") String base,
+//            @RequestParam("api_code") String apiCode) {
+//        return new TreeMap<String, TickerItem>();
+//    }
+//
+//    public Double toBTC(
+//            @RequestParam("currency") String currency,
+//            @RequestParam("value") Double value,
+//            @RequestParam("api_code") String apiCode) {
+//        return 0.0;
+//    }
+//
+//    public Double fromBTC(
+//            @RequestParam("currency") String currency,
+//            @RequestParam("value") Long value,
+//            @RequestParam("api_code") String apiCode) {
+//        return 0.0;
+//    }
+//
+//    public Double toETH(
+//            @RequestParam("currency") String currency,
+//            @RequestParam("value") Double value,
+//            @RequestParam("api_code") String apiCode) {
+//        return 0.0;
+//    }
+//
+//    public Double fromETH(
+//            @RequestParam("currency") String currency,
+//            @RequestParam("value") String value,
+//            @RequestParam("api_code") String apiCode) {
+//        return 0.0;
+//    }
+//
+//    public MultiAddress getMultiAddress(
+//            @PathVariable("coin") String coin,
+//            @RequestParam("active") String active,
+//            @RequestParam("n") Integer limit,
+//            @RequestParam("offset") Integer offset,
+//            @RequestParam("filter") Integer filter,
+//            @RequestParam("onlyShow") String context,
+//            @RequestParam("api_code") String apiCode) {
+//        return new MultiAddress();
+//    }
+//
+//    public UnspentOutputs getUnspent(
+//            @PathVariable("coin") String coin,
+//            @RequestParam("active") String active,
+//            @RequestParam("confirmations") Integer confirmations,
+//            @RequestParam("limit") Integer limit,
+//            @RequestParam("api_code") String apiCode) {
+//        return new UnspentOutputs();
+//    }
+//
+//    public HashMap<String, Balance> getBalance(
+//            @PathVariable("coin") String coin,
+//            @RequestParam("active") String active,
+//            @RequestParam("filter") Integer filter,
+//            @RequestParam("api_code") String apiCode) {
+//        return new HashMap<String, Balance>();
+//    }
+//
+//    public String pushTx(
+//            @PathVariable("coin") String coin,
+//            @RequestParam("tx") String hash,
+//            @RequestParam("api_code") String apiCode) {
+//        return "ok";
+//    }
 
     public UserVO postLogin(
             @RequestParam("id") String id,
