@@ -366,12 +366,14 @@ public class ServiceWalletController implements IServiceWallet {
             @RequestParam("api_code") String api_code,
             HttpSession session) {
         SendTXResult result = new SendTXResult();
+        result.setHashtx(hashtx);
+        result.setError("ok");
 
         byte[] payloadBytes = Hex.decode(hashtx);
         Transaction tx = new Transaction(TestNet3Params.get(), payloadBytes);
 
         try {
-            tx = peerGroup.broadcastTransaction(tx).broadcast().get();
+            peerGroup.broadcastTransaction(tx).broadcast().get();
             result.setHashtx(Hex.toHexString(tx.bitcoinSerialize()));
         } catch (ExecutionException e) {
             logger.error(e.getMessage());
