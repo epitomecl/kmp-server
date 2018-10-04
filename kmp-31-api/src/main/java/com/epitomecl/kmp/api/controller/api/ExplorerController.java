@@ -191,6 +191,7 @@ public class ExplorerController implements IExplorer {
     private List<UTXORaw> getAddressBalance(AccountKeyDerivation deriver, KeyChain.KeyPurpose purpose) {
         String address = deriver.getAddresses(purpose);
         List<UTXORaw> balances = service.getBalanceEx(address);
+        int spentTxoCount = service.getSpendTXOCount(address);
 
         //if the result has size then check next derive address recursively
         //https://blog.blockonomics.co/bitcoin-what-is-this-gap-limit-4f098e52d7e1
@@ -199,7 +200,7 @@ public class ExplorerController implements IExplorer {
         //But if you have seed key then you can get fund from derived receive address.
 
         AccountKeyDerivation.ChildKeyNode childKeyNode = deriver.getChildKeyNode(purpose);
-        if(balances.size() == 0) {
+        if((balances.size() == 0) && (spentTxoCount == 0)) {
             childKeyNode.addGap();
             if(childKeyNode.getGap() >= 20) {
                 return balances;
