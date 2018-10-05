@@ -484,7 +484,7 @@ public class ServiceWalletController implements IServiceWallet {
                 balance = balance.add(i.getValue());
             }
 
-            TXBuilder txBuilder = new TXBuilder();
+            TXBuilder txBuilder = new TXBuilder(explorerController);
 
             String hashtx = txBuilder.makeTx(accountData.getXpriv(), accountData.getXpub(), toAddress, changeAddress.getAddress(), sendSatoshi, utxos);
 

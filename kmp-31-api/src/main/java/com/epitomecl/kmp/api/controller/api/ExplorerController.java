@@ -1,6 +1,7 @@
 package com.epitomecl.kmp.api.controller.api;
 
 import com.epitomecl.kmp.api.domain.ActiveAddress;
+import com.epitomecl.kmp.core.wallet.IAPIManager;
 import com.epitomecl.kmp.core.wallet.UTXO;
 import com.epitomecl.kmp.api.domain.UTXORaw;
 import com.epitomecl.kmp.api.interfaces.api.IExplorer;
@@ -24,7 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-public class ExplorerController implements IExplorer {
+public class ExplorerController implements IExplorer, IAPIManager {
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @Autowired
@@ -295,6 +296,11 @@ public class ExplorerController implements IExplorer {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    @Override
+    public int spendTXOCount(String address) {
+        return getSpendTXOCount(address, "api_code", null);
     }
 
     public List<UTXO> checkTX(
