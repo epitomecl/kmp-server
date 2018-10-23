@@ -1,16 +1,16 @@
 # KMP-Server setting
----
-## 준비하기
-### Server  info
 
+## 준비하기
+---
+### Server  info
 |  <center>구분</center> |  <center>설명</center> |
-|:--------------------|-------------------:|
+|:--------------------:|:-------------------:|
 | <center>**운영체제**</center> | <center>Ubuntu 16.04.5 LTS</center> |
 |**<center>기술스택</center>** | <center>Java(openJDK11), kotlin, springframework5, jHipster</center> |
 |**<center>DB</center>** | <center>postgresql</center> |
 
-### 설치방법
 ---
+### 설치방법
 #### openJDK11 설치
 ~~~
 $ sudo apt-get update
@@ -26,16 +26,16 @@ $ sudo apt-get install postgresql
 $ dpkg -l | grep postgres
 ~~~
 
-
+---
 ### DB info
-
 |  <center>DB이름</center> |  <center>관련정보</center> |
-|:--------------------|-------------------:|
+|:--------------------:|:-------------------:|
 | <center>bitcoin_core_testnet</center> | <center>bitcoin-core 블록&트랜젝션 정보 </center> |
 |<center>kmp</center> | <center>kmp  서비스를 위한  account 정보</center> |
 |<center>secret_share_first</center> | <center>암호화된 wallet seed를 복호화 하기위한 key를 비밀 분산 방식으로 저장(1저장소)</center> |
 |<center>secret_share_second</center> | <center>암호화된 wallet seed를 복호화 하기위한 key를 비밀 분산 방식으로 저장(2저장소)</center> |
 
+---
 #### bitcoin_core_testnet db스키마
 <table>
   <thead>
@@ -183,6 +183,7 @@ $ dpkg -l | grep postgres
   </tbody>
 </table>
 
+---
 #### kmp db스키마
 <table>
   <thead>
@@ -228,6 +229,7 @@ $ dpkg -l | grep postgres
   </tbody>
 </table>
 
+---
 #### secret_share_first & secret_share_second db스키마
 <table>
   <thead>

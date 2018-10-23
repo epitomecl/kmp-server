@@ -5,20 +5,17 @@
 ~~~
 .
 ├── README.md
+├── KMP_Structure_diagram.pdf
 └── KMPServer_Document.md
 ~~~
 
 문서 | 설명
 ---|---
 [README.md](README.md) |  최상위 도움말
+[KMP_Structure_diagram.pdf](KMP_Structure_diagram.pdf) |  KMP 구조 다이어그램
 [KMPServer_Document.md](KMPServer_Document.md) | kmp-server 관련 도움말
 
 ## 모듈설명
-
-### kmp-00-install
-- 소스코드가 없는 라이브러리 설치 모듈
-- 부득이한 경우만 사용하고, 가능한 최소화 해야함
-- bitcoinj-core-custom-0.15-SNAPSHOT.jar
 
 ### kmp-00-libs
 - https://github.com/blockchain/api-v1-client-java
