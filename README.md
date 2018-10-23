@@ -1,5 +1,18 @@
 # kmp
 
+# 도움말 찾기
+
+~~~
+.
+├── README.md
+└── KMPServer_Document.md
+~~~
+
+문서 | 설명
+---|---
+[README.md](README.md) |  최상위 도움말
+[KMPServer_Document.md](KMPServer_Document.md) | kmp-server 관련 도움말
+
 ## 모듈설명
 
 ### kmp-00-install
