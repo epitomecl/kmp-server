@@ -27,7 +27,7 @@ $ dpkg -l | grep postgres
 ~~~
 
 ---
-### DB info
+#### DB 정보
 |  <center>DB이름</center> |  <center>관련정보</center> |
 |:--------------------:|:-------------------:|
 | <center>bitcoin_core_testnet</center> | <center>bitcoin-core 블록&트랜젝션 정보 </center> |
@@ -183,6 +183,109 @@ $ dpkg -l | grep postgres
   </tbody>
 </table>
 
+##### Create query
+~~~
+CREATE TABLE public.headers
+(
+    hash bytea NOT NULL,
+    chainwork bytea NOT NULL,
+    height integer NOT NULL,
+    header bytea NOT NULL,
+    wasundoable boolean NOT NULL,
+    CONSTRAINT headers_pk PRIMARY KEY (hash)
+)
+~~~
+~~~
+CREATE TABLE public.openoutputs
+(
+    hash bytea NOT NULL,
+    index integer NOT NULL,
+    height integer NOT NULL,
+    value bigint NOT NULL,
+    scriptbytes bytea NOT NULL,
+    toaddress character varying(35) COLLATE pg_catalog."default",
+    addresstargetable smallint,
+    coinbase boolean,
+    CONSTRAINT openoutputs_pk PRIMARY KEY (hash, index)
+)
+
+CREATE INDEX openoutputs_addresstargetable_idx
+    ON public.openoutputs USING btree
+    (addresstargetable)
+
+CREATE INDEX openoutputs_hash_idx
+    ON public.openoutputs USING btree
+    (hash)
+
+CREATE INDEX openoutputs_hash_index_num_height_toaddress_idx
+    ON public.openoutputs USING btree
+    (hash, index, height, toaddress COLLATE pg_catalog."default")
+
+CREATE INDEX openoutputs_toaddress_idx
+    ON public.openoutputs USING btree
+    (toaddress COLLATE pg_catalog."default")
+
+CREATE TRIGGER "REMOVE_UTXO"
+    AFTER DELETE
+    ON public.openoutputs
+    FOR EACH ROW
+    EXECUTE PROCEDURE public."REMOVE_UTXO"();
+~~~
+
+~~~
+CREATE TABLE public.openoutputs_used
+(
+    hash bytea NOT NULL,
+    index integer NOT NULL,
+    height integer NOT NULL,
+    value bigint NOT NULL,
+    scriptbytes bytea NOT NULL,
+    toaddress character varying(35) COLLATE pg_catalog."default",
+    addresstargetable smallint,
+    coinbase boolean,
+    CONSTRAINT openoutputs_used_pk PRIMARY KEY (hash, index)
+)
+
+CREATE INDEX openoutputs_used_addresstargetable_idx
+    ON public.openoutputs_used USING btree
+    (addresstargetable)
+
+CREATE INDEX openoutputs_used_hash_idx
+    ON public.openoutputs_used USING btree
+    (hash)
+
+CREATE INDEX openoutputs_used_hash_index_num_height_toaddress_idx
+    ON public.openoutputs_used USING btree
+    (hash, index, height, toaddress COLLATE pg_catalog."default")
+
+CREATE INDEX openoutputs_used_toaddress_idx
+    ON public.openoutputs_used USING btree
+    (toaddress COLLATE pg_catalog."default")
+~~~
+
+~~~
+CREATE TABLE public.settings
+(
+    name character varying(32) COLLATE pg_catalog."default" NOT NULL,
+    value bytea,
+    CONSTRAINT setting_pk PRIMARY KEY (name)
+)
+~~~
+
+~~~
+CREATE TABLE public.undoableblocks
+(
+    hash bytea NOT NULL,
+    height integer NOT NULL,
+    txoutchanges bytea,
+    transactions bytea,
+    CONSTRAINT undoableblocks_pk PRIMARY KEY (hash)
+)
+
+CREATE INDEX undoableblocks_height_idx
+    ON public.undoableblocks USING btree
+    (height)
+~~~
 ---
 #### kmp db스키마
 <table>
@@ -229,6 +332,25 @@ $ dpkg -l | grep postgres
   </tbody>
 </table>
 
+##### Create query
+~~~
+CREATE TABLE public.user_account
+(
+    index integer NOT NULL DEFAULT nextval('user_account_index_seq'::regclass),
+    id character(32) COLLATE pg_catalog."default" NOT NULL,
+    pw character(32) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT user_account_pkey PRIMARY KEY (index),
+    CONSTRAINT user_account_id_key UNIQUE (id)
+)
+
+CREATE TABLE public.encrypted_data
+(
+    index integer NOT NULL,
+    label text COLLATE pg_catalog."default" NOT NULL,
+    encrypted text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT encrypted_data_index_label_key UNIQUE (index, label)
+)
+~~~
 ---
 #### secret_share_first & secret_share_second db스키마
 <table>
@@ -242,7 +364,7 @@ $ dpkg -l | grep postgres
       <td rowspan=5><center>sharing_data</center></td>
     </tr>
     <tr>
-      <td>index</td><td>integer</td><td>user_account pk</td>
+      <td>index</td><td>integer</td><td>pk</td>
     </tr>
     <tr>
       <td>userindex</td><td>integer</td><td>kmp db user_account pk</td>
@@ -255,3 +377,20 @@ $ dpkg -l | grep postgres
     </tr>
   </tbody>
 </table>
+
+##### Create query
+~~~
+CREATE TABLE public.sharing_data
+(
+    index integer NOT NULL DEFAULT nextval('sharing_data_index_seq'::regclass),
+    userindex integer NOT NULL,
+    label text COLLATE pg_catalog."default" NOT NULL,
+    shareddata text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT sharing_data_pkey PRIMARY KEY (index),
+    CONSTRAINT sharing_data_userindex_label_key UNIQUE (userindex, label)
+)
+
+CREATE INDEX userindex_idx
+    ON public.sharing_data USING btree
+    (userindex)
+~~~

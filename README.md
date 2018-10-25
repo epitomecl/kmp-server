@@ -6,6 +6,7 @@
 .
 ├── README.md
 ├── KMP_Structure_diagram.pdf
+├── KMPServer_Develop.md
 └── KMPServer_Document.md
 ~~~
 
@@ -13,7 +14,8 @@
 ---|---
 [README.md](README.md) |  최상위 도움말
 [KMP_Structure_diagram.pdf](KMP_Structure_diagram.pdf) |  KMP 구조 다이어그램
-[KMPServer_Document.md](KMPServer_Document.md) | kmp-server 관련 도움말
+[KMPServer_Develop.md](KMPServer_Develop.md) | kmp-server 빌드, 개발 관련 도움말
+[KMPServer_Document.md](KMPServer_Document.md) | kmp-server 설치 관련 도움말
 
 ## 모듈설명
 
