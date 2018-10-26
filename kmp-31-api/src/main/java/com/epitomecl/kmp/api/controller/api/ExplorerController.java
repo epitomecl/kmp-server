@@ -7,7 +7,6 @@ import com.epitomecl.kmp.api.domain.UTXORaw;
 import com.epitomecl.kmp.api.interfaces.api.IExplorer;
 import com.epitomecl.kmp.api.service.BlockExplorerServiceImpl;
 import com.epitomecl.kmp.core.wallet.AccountKeyDerivation;
-import info.blockchain.api.data.*;
 import org.bitcoinj.core.NetworkParameters;
 import org.bitcoinj.wallet.KeyChain;
 import org.slf4j.Logger;

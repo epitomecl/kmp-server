@@ -3,7 +3,6 @@ package com.epitomecl.kmp.api.config;
 import com.epitomecl.kmp.api.controller.api.ApiController;
 import com.epitomecl.kmp.api.controller.api.ExplorerController;
 import com.epitomecl.kmp.api.controller.api.ServiceWalletController;
-import com.epitomecl.kmp.api.controller.spi.WalletController;
 import com.google.common.base.Predicate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,7 +25,6 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @Configuration
 @ComponentScan(basePackageClasses = {
         ServiceWalletController.class,
-        WalletController.class,
         ApiController.class,
         ExplorerController.class
 })

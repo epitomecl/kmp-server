@@ -1,7 +1,7 @@
 package com.epitomecl.kmp.core.common;
 
 import com.codahale.shamir.Scheme;
-import info.blockchain.wallet.crypto.AESUtil;
+import com.epitomecl.kmp.core.wallet.AESUtil;
 import org.bitcoinj.core.ECKey;
 import org.spongycastle.crypto.InvalidCipherTextException;
 

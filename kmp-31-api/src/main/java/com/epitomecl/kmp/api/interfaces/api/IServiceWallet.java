@@ -4,7 +4,6 @@ import com.epitomecl.kmp.api.domain.ActiveAddress;
 import com.epitomecl.kmp.api.domain.SecretSharingResult;
 import com.epitomecl.kmp.api.domain.SecretSharingVO;
 import com.epitomecl.kmp.api.domain.SendTXResult;
-import info.blockchain.api.data.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -2,7 +2,6 @@ package com.epitomecl.kmp.api.interfaces.api;
 
 import com.epitomecl.kmp.api.domain.ActiveAddress;
 import com.epitomecl.kmp.core.wallet.UTXO;
-import info.blockchain.api.data.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;

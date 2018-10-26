@@ -1,4 +1,0 @@
-Summary for ..\kmp-00-install\lib\m2repository\org\bitcoinj\bitcoinj-core-custom\0.15-SNAPSHOT\bitcoinj-core-custom-0.15-SNAPSHOT.jar
-Decompiled with CFR 0_132
-
-Classes with case insensitive name clashes seen, and your FS appears to be case insensitive - consider using --caseinsensitivefs true

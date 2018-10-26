@@ -5,10 +5,8 @@ import com.epitomecl.kmp.core.wallet.AccountData;
 import com.epitomecl.kmp.core.wallet.CryptoType;
 import com.epitomecl.kmp.core.wallet.HDWalletData;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import info.blockchain.wallet.bip44.HDWallet;
-import info.blockchain.wallet.bip44.HDWalletFactory;
-import info.blockchain.wallet.ethereum.EthereumWallet;
-import info.blockchain.wallet.exceptions.HDWalletException;
+import com.epitomecl.kmp.core.wallet.bip44.HDWallet;
+import com.epitomecl.kmp.core.wallet.bip44.HDWalletFactory;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.io.FileUtils;
 import org.bitcoinj.crypto.MnemonicException;
@@ -80,7 +78,9 @@ public class WalletTest {
             json = String.join("", Files.readAllLines(Paths.get(faucetWalletEthFileName)));
             faucetWallets.put(CryptoType.ETHEREUM_TESTNET, HDWalletData.fromJson(json));
 
-        } catch (IOException | MnemonicException.MnemonicWordException | DecoderException | MnemonicException.MnemonicLengthException | MnemonicException.MnemonicChecksumException | HDWalletException e) {
+        } catch (IOException | MnemonicException.MnemonicWordException | DecoderException | MnemonicException.MnemonicLengthException | MnemonicException.MnemonicChecksumException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -185,14 +185,6 @@ public class WalletTest {
                 Assert.assertEquals(changeAddr, changeAddr.length(), 34);
 
                 break;
-            case ETHEREUM:
-                //Create etherium wallet code from <== EthereumWalletTest.java
-                EthereumWallet subject = new EthereumWallet(wallet.getMasterKey(), label);
-
-                //etherium wallet has single account and one address
-                receiveAddr = subject.getAccount().getAddress();
-                Assert.assertEquals(receiveAddr.length(), 42);
-                break;
         }
     }
 
@@ -265,7 +257,9 @@ public class WalletTest {
             Assert.assertEquals(key.xpriv, xpriv);
             Assert.assertEquals(key.xpub, xpub);
 
-        } catch (IOException | HDWalletException | MnemonicException.MnemonicChecksumException | MnemonicException.MnemonicWordException | MnemonicException.MnemonicLengthException | DecoderException e) {
+        } catch (IOException | MnemonicException.MnemonicChecksumException | MnemonicException.MnemonicWordException | MnemonicException.MnemonicLengthException | DecoderException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

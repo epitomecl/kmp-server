@@ -94,19 +94,10 @@
         </dependency>
 
         <dependency>
-            <groupId>info.blockchain</groupId>
-            <artifactId>MyWalletHD</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>info.blockchain</groupId>
-            <artifactId>api-client</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.bitcoinj</groupId>
             <artifactId>bitcoinj-core</artifactId>
             <version>0.14.7</version>
         </dependency>
-
 
     </dependencies>
 

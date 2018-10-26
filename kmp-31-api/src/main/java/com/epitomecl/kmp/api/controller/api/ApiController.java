@@ -4,7 +4,6 @@ import com.epitomecl.kmp.api.domain.EncryptedResult;
 import com.epitomecl.kmp.api.domain.UserVO;
 import com.epitomecl.kmp.api.interfaces.api.IApi;
 import com.epitomecl.kmp.api.service.KmpServiceImpl;
-import info.blockchain.api.data.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

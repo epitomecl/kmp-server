@@ -9,12 +9,6 @@ import com.epitomecl.kmp.core.wallet.*;
 import com.epitomecl.kmp.api.interfaces.api.IServiceWallet;
 import com.epitomecl.kmp.core.wallet.UTXO;
 import com.epitomecl.kmp.core.wallet.TXBuilder;
-import info.blockchain.api.data.*;
-import info.blockchain.wallet.exceptions.HDWalletException;
-import info.blockchain.wallet.exceptions.ServerConnectionException;
-import info.blockchain.wallet.payload.PayloadManager;
-import info.blockchain.wallet.payload.data.Account;
-import info.blockchain.wallet.payload.data.Wallet;
 import org.apache.commons.codec.DecoderException;
 import org.bitcoinj.core.BlockChain;
 import org.bitcoinj.core.NetworkParameters;
@@ -61,7 +55,7 @@ public class ServiceWalletController implements IServiceWallet {
 
     public ServiceWalletController() {
         //peer start
-        NetworkParameters netParams = TestNet3Params.get();
+        TestNet3Params netParams = TestNet3Params.get();
         BlockStore bs;
 
         try {
@@ -86,8 +80,6 @@ public class ServiceWalletController implements IServiceWallet {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (HDWalletException e) {
-            e.printStackTrace();
         } catch (MnemonicException.MnemonicChecksumException e) {
             e.printStackTrace();
         } catch (MnemonicException.MnemonicWordException e) {
@@ -95,6 +87,8 @@ public class ServiceWalletController implements IServiceWallet {
         } catch (MnemonicException.MnemonicLengthException e) {
             e.printStackTrace();
         } catch (DecoderException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

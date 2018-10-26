@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import info.blockchain.wallet.payload.data.AddressLabel;
-import info.blockchain.wallet.payload.data.Cache;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -93,9 +91,9 @@ public class AccountData {
         this.addressLabels = addressLabels;
     }
 
-    public static info.blockchain.wallet.payload.data.Account fromJson(String json) throws IOException {
-        return new ObjectMapper().readValue(json, info.blockchain.wallet.payload.data.Account.class);
-    }
+//    public static info.blockchain.wallet.payload.data.Account fromJson(String json) throws IOException {
+//        return new ObjectMapper().readValue(json, info.blockchain.wallet.payload.data.Account.class);
+//    }
 
     public String toJson() throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(this);
