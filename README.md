@@ -19,13 +19,6 @@
 
 ## 모듈설명
 
-### kmp-00-libs
-- https://github.com/blockchain/api-v1-client-java
-- https://github.com/blockchain/My-Wallet-V3-Android
-- 소스코드가 있는 라이브러리 설치 모듈
-- api-client
-- MyWalletHD (AGPLv3 라이선스, kmp-00-install로 옮겨야 함)
-
 ### kmp-01-core
 - kmp-wallet, kmp-server 등에서 공통으로 사용하는 클래스 관리 모듈
 - 대표적으로 HDWalletData 클래스 등...
