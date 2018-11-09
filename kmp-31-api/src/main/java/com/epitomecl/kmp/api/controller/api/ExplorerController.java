@@ -174,7 +174,7 @@ public class ExplorerController implements IExplorer, IAPIManager {
                     UTXO item = new UTXO();
                     item.setHash(Hex.toHexString(v.getHash()));
                     item.setIndex(v.getIndex());
-                    item.setValue(v.getValue());
+                    item.setValue(Long.valueOf(v.getValue().toString()));
                     item.setScriptBytes(Hex.toHexString(v.getScriptBytes()));
                     item.setToAddress(v.getToAddress());
                     result.add(item);
@@ -316,7 +316,7 @@ public class ExplorerController implements IExplorer, IAPIManager {
                 UTXO item = new UTXO();
                 item.setHash(Hex.toHexString(v.getHash()));
                 item.setIndex(v.getIndex());
-                item.setValue(v.getValue());
+                item.setValue(Long.valueOf(v.getValue().toString()));
                 item.setScriptBytes(Hex.toHexString(v.getScriptBytes()));
                 item.setToAddress(v.getToAddress());
 

@@ -59,7 +59,7 @@ public class ServiceWalletController implements IServiceWallet {
         BlockStore bs;
 
         try {
-            faucet = (HDWalletData) HDWalletData.restoreFromSeed(CryptoType.BITCOIN_TESTNET, "e1f3906a6f161428fe600f9e646ebc2f", "", "faucet wallet", 5);
+            faucet = (HDWalletData) HDWalletData.restoreFromSeed(CryptoType.BITCOIN_TESTNET, "e1f3906a6f161428fe600f9e646ebc2f", "", "faucet wallet", 5, null);
 
             bs = new MemoryBlockStore(netParams);
             BlockChain chain = new BlockChain(netParams, bs);
@@ -475,7 +475,7 @@ public class ServiceWalletController implements IServiceWallet {
             //check balance compare to send amount
             BigInteger balance = BigInteger.ZERO;
             for(UTXO i : utxos) {
-                balance = balance.add(i.getValue());
+                balance = balance.add(BigInteger.valueOf(i.getValue()));
             }
 
             TXBuilder txBuilder = new TXBuilder(explorerController);

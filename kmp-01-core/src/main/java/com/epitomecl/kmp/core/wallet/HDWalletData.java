@@ -360,23 +360,23 @@ public class HDWalletData {
         return accountBody;
     }
 
-    public static HDWalletData recoverFromMnemonic(CryptoType crytoType, String mnemonic, String defaultAccountName)
+    public static HDWalletData recoverFromMnemonic(CryptoType crytoType, String mnemonic, String defaultAccountName, IAPIManager api)
             throws Exception {
-        return recoverFromMnemonic(crytoType, mnemonic, "", defaultAccountName, 0);
+        return recoverFromMnemonic(crytoType, mnemonic, "", defaultAccountName, 0, api);
     }
 
     public static HDWalletData recoverFromMnemonic(CryptoType crytoType, String mnemonic, String defaultAccountName,
-                                                   int accountSize) throws Exception {
-        return recoverFromMnemonic(crytoType, mnemonic, "", defaultAccountName, accountSize);
+                                                   int accountSize, IAPIManager api) throws Exception {
+        return recoverFromMnemonic(crytoType, mnemonic, "", defaultAccountName, accountSize, api);
     }
 
     public static HDWalletData recoverFromMnemonic(CryptoType crytoType, String mnemonic, String passphrase,
-                                                   String defaultAccountName) throws Exception {
-        return recoverFromMnemonic(crytoType, mnemonic, passphrase, defaultAccountName, 0);
+                                                   String defaultAccountName, IAPIManager api) throws Exception {
+        return recoverFromMnemonic(crytoType, mnemonic, passphrase, defaultAccountName, 0, api);
     }
 
     public static HDWalletData recoverFromMnemonic(CryptoType cryptoType, String mnemonic, String passphrase,
-                                                   String defaultAccountName, int walletSize) throws Exception {
+                                                   String defaultAccountName, int walletSize, IAPIManager api) throws Exception {
         NetworkParameters param = getNetworkParameters(cryptoType);
 
         //Start with initial wallet size of 1.
@@ -389,7 +389,7 @@ public class HDWalletData {
         hdWalletData.setAccounts(new ArrayList<AccountData>());
 
         if (walletSize <= 0) {
-            walletSize = getDeterminedSizeFromServer(1, 5, 0, bip44Wallet);
+            walletSize = getDeterminedSizeFromServer(1, 5, 0, bip44Wallet, api);
         }
 
         bip44Wallet = HDWalletFactory
@@ -418,7 +418,7 @@ public class HDWalletData {
         return hdWalletData;
     }
 
-    public static HDWalletData restoreFromSeed(CryptoType cryptoType, String seedHex, String passphrase, String label, int accountNum)
+    public static HDWalletData restoreFromSeed(CryptoType cryptoType, String seedHex, String passphrase, String label, int accountNum, IAPIManager api)
             throws MnemonicException.MnemonicWordException, MnemonicException.MnemonicLengthException,
             IOException, Exception, MnemonicException.MnemonicChecksumException, DecoderException {
         NetworkParameters param = getNetworkParameters(cryptoType);
@@ -442,7 +442,7 @@ public class HDWalletData {
 
         //Determine size of wallet accounts
         if (accountNum <= 0) {
-            accountNum = getDeterminedSizeFromServer(1, 5, 0, bip44Wallet);
+            accountNum = getDeterminedSizeFromServer(1, 5, 0, bip44Wallet, api);
         }
         bip44Wallet = new HDWallet(mc, param, seed, passphrase, accountNum);
 
@@ -481,7 +481,7 @@ public class HDWalletData {
         return 0;
     }
 
-    private static int getDeterminedSizeFromServer(int walletSize, int trySize, int currentGap, HDWallet bip44Wallet) {
+    private static int getDeterminedSizeFromServer(int walletSize, int trySize, int currentGap, HDWallet bip44Wallet, IAPIManager api) {
         //Todo: determine size of wallet accounts from the result of request with the server
 
 //        LinkedList<String> xpubs = new LinkedList<>();
@@ -503,8 +503,10 @@ public class HDWalletData {
 
         HashMap<String, Integer> map = new HashMap<>();
         for (String xpub : xpubs) {
-            //int s = APIManager.INSTANCE.spendTXOCount("","");
-            //map.put(xpub, s);
+            if(api != null) {
+                int s = api.spendTXOCount("");
+                map.put(xpub, s);
+            }
         }
 
         final int lookAheadTotal = 10;
@@ -524,7 +526,7 @@ public class HDWalletData {
             }
         }
 
-        return getDeterminedSizeFromServer(walletSize, trySize * 2, currentGap, bip44Wallet);
+        return getDeterminedSizeFromServer(walletSize, trySize * 2, currentGap, bip44Wallet, api);
     }
 
 //    public static boolean hasTransactions(BlockExplorer blockExplorer, String xpub)

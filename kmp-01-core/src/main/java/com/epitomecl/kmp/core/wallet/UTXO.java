@@ -6,7 +6,7 @@ public class UTXO {
 
     private String hash;
     private int index;
-    private BigInteger value;
+    private Long value;
     private String scriptBytes;
     private String toaddress;
 
@@ -26,11 +26,11 @@ public class UTXO {
         this.index = index;
     }
 
-    public BigInteger getValue() {
+    public Long getValue() {
         return value;
     }
 
-    public void setValue(BigInteger value) {
+    public void setValue(Long value) {
         this.value = value;
     }
 

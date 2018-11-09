@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,9 @@ public class AccountData {
 
     @JsonProperty("address_labels")
     private List<AddressLabel> addressLabels;
+
+    @JsonProperty("balance")
+    private List<UTXO> utxos;
 
     public String getLabel() {
         return label;
@@ -89,6 +93,22 @@ public class AccountData {
     public void setAddressLabels(
             List<AddressLabel> addressLabels) {
         this.addressLabels = addressLabels;
+    }
+
+    public List<UTXO> getUtxos() {
+        return utxos;
+    }
+
+    public void setUtxos(List<UTXO> utxos) {
+        this.utxos = utxos;
+    }
+
+    public BigInteger getBalance() {
+        Long balance = 0L;
+        for(UTXO utxo : utxos) {
+            balance += utxo.getValue();
+        }
+        return BigInteger.valueOf(balance);
     }
 
 //    public static info.blockchain.wallet.payload.data.Account fromJson(String json) throws IOException {
