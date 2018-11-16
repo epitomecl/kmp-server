@@ -8,7 +8,7 @@
 ├── KMP_Structure_diagram.pdf
 ├── KMPServer_Develop.md
 ├── KMPServer_Document.md
-└── KMPWallet_Develop.md
+└── KMPWallet_Develop.md, HDWallet.md
 ~~~
 
 문서 | 설명
@@ -18,6 +18,7 @@
 [KMPServer_Develop.md](KMPServer_Develop.md) | kmp-server 빌드, 개발 관련 도움말
 [KMPServer_Document.md](KMPServer_Document.md) | kmp-server 설치 관련 도움말
 [KMPWallet_Develop.md](KMPWallet_Develop.md) | kmp-wallet 빌드, 개발 관련 도움말
+[HDWallet.md](https://github.com/epitomecl/kmp-wallet/blob/master/README.md) | HD Wallet과 관련된 BIP들의 내용 소개
 
 ## 모듈설명
 
