@@ -30,7 +30,7 @@ spring:
         url: jdbc:mysql://localhost:3306/kmpjh?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
         password: secret
-        driver-class-name: com.mysql.jdbc.Driver
+        dataSourceClassName: com.mysql.jdbc.jdbc2.optional.MysqlDataSource
         hikari:
             data-source-properties:
                 cachePrepStmts: true
